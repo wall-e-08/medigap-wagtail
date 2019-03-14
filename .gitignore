@@ -16,7 +16,6 @@ __pycache__/
 core/settings/local.py
 dump.rdb
 celerybeat-schedule
-static/
 media/
 Dockerfile
 db/config.sh
