@@ -1,0 +1,17 @@
+#!/bin/bash
+
+set -e
+
+DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null && pwd )"
+source $DIR/config.sh
+
+DOKKU_CMD=$HOME/.dokku/contrib/dokku_client.sh
+
+export DOKKU_HOST=dev.concitus.com
+
+
+$DOKKU_CMD ps:stop $DOKKU_APPNAME
+$DOKKU_CMD postgres:unlink $DOKKU_DBNAME $DOKKU_APPNAME
+$DOKKU_CMD postgres:destroy $DOKKU_DBNAME -f
+$DOKKU_CMD postgres:create $DOKKU_DBNAME
+$DOKKU_CMD postgres:link $DOKKU_DBNAME $DOKKU_APPNAME

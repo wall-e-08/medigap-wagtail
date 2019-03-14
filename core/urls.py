@@ -1,5 +1,8 @@
+import re
+
 from django.conf import settings
-from django.conf.urls import include, url
+from django.conf.urls import include, url, re_path
+from django.conf.urls.static import serve
 from django.contrib import admin
 
 from wagtail.admin import urls as wagtailadmin_urls
@@ -7,6 +10,16 @@ from wagtail.core import urls as wagtail_urls
 from wagtail.documents import urls as wagtaildocs_urls
 
 from search import views as search_views
+
+
+def static(prefix, view=serve, **kwargs):
+    """
+    Return a URL pattern for serving files in debug mode.
+    """
+    return [
+        re_path(r'^%s(?P<path>.*)$' % re.escape(prefix.lstrip('/')), view, kwargs=kwargs),
+    ]
+
 
 urlpatterns = [
     url(r'^django-admin/', admin.site.urls),
@@ -24,7 +37,7 @@ urlpatterns = [
     # Alternatively, if you want Wagtail pages to be served from a subpath
     # of your site, rather than the site root:
     #    url(r'^pages/', include(wagtail_urls)),
-]
+] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 
 
 if settings.DEBUG:

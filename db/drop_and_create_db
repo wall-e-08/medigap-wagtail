@@ -1,0 +1,17 @@
+#!/bin/bash
+
+set -e
+
+DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null && pwd )"
+source $DIR/config.sh
+
+OS="$(uname -s)"
+
+
+if [ $OS == "Darwin" ]; then
+    dropdb $DBNAME && createdb -O $DBUSER $DBNAME
+else
+sudo -u postgres bash << EOF
+    psql -c "drop database $DBNAME" && createdb -O $DBUSER $DBNAME
+EOF
+fi
