@@ -2,5 +2,924 @@
 {% load static %}
 
 {% block content %}
-    
+    <!-- Modal -->
+    <div class="modal fade" id="quote-modal" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h3 class="modal-title p-15">Get your preferable quote</h3>
+                </div>
+                <div class="modal-body">
+                    <div class="section-content bg-white p-15">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <form class="form-animated-field">
+                                    <div class="row">
+                                        <div class="col-sm-6">
+                                            <div class="form-group mb-10">
+                                                <input name="quote_f_name" id="quote_f_name" class="form-control required" type="text" required="required" aria-required="true">
+                                                <label for="quote_f_name">First Name</label>
+                                            </div>
+                                        </div> <!--first name-->
+                                        <div class="col-sm-6">
+                                            <div class="form-group mb-10">
+                                                <input name="quote_l_name" id="quote_l_name" class="form-control required" type="text" required="required" aria-required="true">
+                                                <label for="quote_l_name">Last Name</label>
+                                            </div>
+                                        </div> <!--last name-->
+                                        <div class="col-sm-6">
+                                            <div class="form-group mb-10">
+                                                <input name="quote_email" id="quote_email" class="form-control required email" type="text" required="required" aria-required="true">
+                                                <label for="quote_email">Your Email</label>
+                                            </div>
+                                        </div> <!--email-->
+                                        <div class="col-sm-6">
+                                            <div class="form-group mb-10">
+                                                <input name="quote_phone" id="quote_phone" class="form-control required" required="required" type="tel" aria-required="true">
+                                                <label for="quote_phone">Phone number</label>
+                                            </div>
+                                        </div> <!--phone number-->
+                                        <div class="col-sm-6">
+                                            <div class="form-group mb-10">
+                                                <input name="quote_zip" id="quote_zip" class="form-control required" required="required" type="tel" aria-required="true">
+                                                <label for="quote_zip">Zip code</label>
+                                            </div>
+                                        </div> <!--zip code-->
+                                        <div class="col-sm-6">
+                                            <div class="form-group mb-10">
+                                                <input name="quote_eff_date" id="quote_eff_date" class="form-control required date-picker" required="required" type="text" aria-required="true">
+                                                <label for="quote_eff_date">Effective Date</label>
+                                            </div>
+                                        </div> <!--effective date-->
+                                        <div class="col-sm-12">
+                                            <div class="form-group mb-10">
+                                                <textarea id="quote_address" name="form_message" class="form-control required" required="required" rows="5" aria-required="true"></textarea>
+                                                <label for="quote_address">Your Address</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">See Quote</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Start main-content -->
+    <div class="main-content">
+        <!-- Section: home -->
+        <section id="home" class="divider parallax overlay-img-bg" data-stellar-background-ratio="0.5" data-bg-img="{% static 'images/bg/bg3.jpg' %}" style="min-height: 70vh;">
+            <div class="display-table">
+                <div class="display-table-cell">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-xs-12 mb-40 mt-50">
+                                <h1 class="text-white hidden-xs hidden-sm line-height-1 text-center font-dois banner-heading">FIND THE RIGHT HEALTH INSURANCE AND START IMMEDIATELY</h1>
+                            </div>
+                            <div class="col-md-6 col-md-offset-3">
+                                <div class="p-25 pb-40 banner-zip-form-wrapper">
+                                    <h3 class="m-0 mb-30 text-center">
+                                        <span class="text-theme-colored2">Get a</span>
+                                        <span class="text-theme-colored">Quote</span>
+                                    </h3>
+                                    <form id="home_appointment_form">
+                                        <div class="input-group">
+                                            <input type="text" placeholder="Enter Zip code" class="form-control input-lg font-16" style="height: 45px;">
+                                            <span class="input-group-btn">
+                                                <button class="btn btn-colored btn-theme-colored btn-xs m-0 font-14 pl-60 pr-60" type="button"
+                                                        data-toggle="modal" data-target="#quote-modal" style="height: 45px;">Quote</button>
+                                            </span>
+                                        </div>
+                                    </form>
+                                    <p class="text-center text-black-777">Quick Compare Insurance Plans and Save Money!</p>
+                                    <!--<script type="text/javascript">
+                                        $("#home_appointment_form").validate({
+                                            submitHandler: function(form) {
+                                                var form_btn = $(form).find('button[type="submit"]');
+                                                var form_result_div = '#form-result';
+                                                $(form_result_div).remove();
+                                                form_btn.before('<div id="form-result" class="alert alert-success" role="alert" style="display: none;"></div>');
+                                                var form_btn_old_msg = form_btn.html();
+                                                form_btn.html(form_btn.prop('disabled', true).data("loading-text"));
+                                                $(form).ajaxSubmit({
+                                                    dataType:  'json',
+                                                    success: function(data) {
+                                                        if( data.status == 'true' ) {
+                                                            $(form).find('.form-control').val('');
+                                                        }
+                                                        form_btn.prop('disabled', false).html(form_btn_old_msg);
+                                                        $(form_result_div).html(data.message).fadeIn('slow');
+                                                        setTimeout(function(){ $(form_result_div).fadeOut('slow') }, 6000);
+                                                    }
+                                                });
+                                            }
+                                        });
+                                    </script>-->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section: about -->
+        <section id="about">
+            <div class="container pb-0">
+                <div class="row">
+                    <div class="col-md-8 wow fadeInLeft animation-delay1">
+                        <h2 class="mt-0">In Search Of A Good And <span class="text-theme-colored2">Health Insurance</span> right now?</h2>
+                        <h3 class="mt-0">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</h3>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Atque commodi molestiae autem fugit consectetur dolor ullam illo ipsa numquam, quod iusto enim ipsum amet iusto
+                            amet consec utem fugit consllo ipsa numquam dolor ullam illo, quod iusto enim ipsum amet iusto amet consec.</p>
+                        <div class="row mt-20 mb-sm-30">
+                            <div class="col-sm-6">
+                                <div class="service-icon-box"><a href="#" class="icon pull-left mr-20"><i class="flaticon-medical-ambulance14"></i></a>
+                                    <div>
+                                        <h4 class="mt-0 mb-0">Lorem Ipsum</h4>
+                                        <p class="">Lorem ipsum dolor sit amet consec tetur elit</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="service-icon-box"><a href="#" class="icon pull-left mr-20"><i class="flaticon-medical-illness"></i></a>
+                                    <div>
+                                        <h4 class="mt-0 mb-0">Lorem Ipsum 2</h4>
+                                        <p class="">Lorem ipsum dolor sit amet consec tetur elit</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="service-icon-box"><a href="#" class="icon pull-left mr-20"><i class="flaticon-medical-stethoscope10"></i></a>
+                                    <div>
+                                        <h4 class="mt-0 mb-0">Lorem Ipsum 3</h4>
+                                        <p class="">Lorem ipsum dolor sit amet consec tetur elit</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="service-icon-box"><a href="#" class="icon pull-left mr-20"><i class="flaticon-medical-medical51"></i></a>
+                                    <div>
+                                        <h4 class="mt-0 mb-0">Lorem Ipsum 4</h4>
+                                        <p class="">Lorem ipsum dolor sit amet consec tetur elit</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 wow fadeInRight animation-delay4">
+                        <img src="{% static 'images/about/dc2.png' %}" alt="">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section: Services -->
+        <section id="services" class="bg-silver-light">
+            <div class="container pb-40">
+                <div class="section-title text-center">
+                    <div class="row">
+                        <div class="col-md-8 col-md-offset-2">
+                            <h2 class="text-uppercase mt-0 line-height-1">Our <span class="text-theme-colored2">Services</span></h2>
+                            <div class="title-icon">
+                                <img class="mb-10" src="{% static 'images/title-icon.png' %}" alt="">
+                            </div>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Rem autem<br> voluptatem obcaecati!</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="section-content">
+                    <div class="row" style="display: flex; flex-wrap: wrap;">
+                        <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4">
+                            <div class="icon-box text-center bg-white bg-hover-theme-colored2 mb-30 p-30">
+                                <i class="fa fa-user-md font-weight-600 text-theme-colored2 font-38"></i>
+                                <h3 class="mt-20">Qualified Doctors</h3>
+                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Mollitia quasiqui invent cumque nulla!</p>
+                            </div>
+                        </div>
+                        <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4">
+                            <div class="icon-box text-center bg-white bg-hover-theme-colored2 mb-30 p-30">
+                                <i class="fa fa-medkit font-weight-600 text-theme-colored font-38"></i>
+                                <h3 class="mt-20">Advanced Technology</h3>
+                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Mollitia quasiqui invent cumque nulla!</p>
+                            </div>
+                        </div>
+                        <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4">
+                            <div class="icon-box text-center bg-white bg-hover-theme-colored2 mb-30 p-30">
+                                <i class="flaticon-medical-hospital36 font-weight-600 text-theme-colored2 font-38"></i>
+                                <h3 class="mt-20">Lorem Ipsum</h3>
+                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Mollitia quasiqui invent cumque nulla!</p>
+                            </div>
+                        </div>
+                        <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4">
+                            <div class="icon-box text-center bg-white bg-hover-theme-colored2 mb-30 p-30">
+                                <i class="flaticon-medical-hospital15 font-weight-600 text-theme-colored font-38"></i>
+                                <h3 class="mt-20">Daily Cheakups</h3>
+                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Mollitia quasiqui invent cumque nulla!</p>
+                            </div>
+                        </div>
+                        <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4">
+                            <div class="icon-box text-center bg-white bg-hover-theme-colored2 mb-30 p-30">
+                                <i class="flaticon-medical-hospital16 font-weight-600 text-theme-colored2 font-38"></i>
+                                <h3 class="mt-20">Online Service</h3>
+                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Mollitia quasiqui invent cumque nulla!</p>
+                            </div>
+                        </div>
+                        <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4">
+                            <div class="icon-box text-center bg-white bg-hover-theme-colored2 mb-30 p-30">
+                                <i class="flaticon-medical-hospital37 font-weight-600 text-theme-colored font-38"></i>
+                                <h3 class="mt-20">General Medical</h3>
+                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Mollitia quasiqui invent cumque nulla!</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Divider: Funfact -->
+        <section class="divider parallax layer-overlay overlay-theme-colored2-9" data-bg-img="{% static 'images/bg/bg5.jpg' %}" data-parallax-ratio="0.7">
+            <div class="container pt-60 pb-60">
+                <div class="row">
+                    <div class="col-xs-6 col-sm-6 col-md-3 mb-md-50">
+                        <div class="funfact text-center">
+                            <i class="pe-7s-smile mt-5 text-white"></i>
+                            <h2 data-animation-duration="2000" data-value="9751" class="animate-number text-white font-42 font-weight-500">0</h2>
+                            <h5 class="text-white text-uppercase font-weight-600">Happy Customer</h5>
+                        </div>
+                    </div>
+                    <div class="col-xs-6 col-sm-6 col-md-3 mb-md-50">
+                        <div class="funfact text-center">
+                            <i class="pe-7s-rocket mt-5 text-white"></i>
+                            <h2 data-animation-duration="2000" data-value="844" class="animate-number text-white font-42 font-weight-500">0</h2>
+                            <h5 class="text-white text-uppercase font-weight-600">Insurance Coverage</h5>
+                        </div>
+                    </div>
+                    <div class="col-xs-6 col-sm-6 col-md-3 mb-md-50">
+                        <div class="funfact text-center">
+                            <i class="pe-7s-add-user mt-5 text-white"></i>
+                            <h2 data-animation-duration="2000" data-value="121" class="animate-number text-white font-42 font-weight-500">0</h2>
+                            <h5 class="text-white text-uppercase font-weight-600">Our Agents</h5>
+                        </div>
+                    </div>
+                    <div class="col-xs-6 col-sm-6 col-md-3 mb-md-50">
+                        <div class="funfact text-center">
+                            <i class="pe-7s-global mt-5 text-white"></i>
+                            <h2 data-animation-duration="2000" data-value="24" class="animate-number text-white font-42 font-weight-500">0</h2>
+                            <h5 class="text-white text-uppercase font-weight-600">Service Points</h5>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section: Departments -->
+        <section id="depertments" class="bg-silver-light">
+            <div class="container">
+                <div class="section-title text-center">
+                    <div class="row">
+                        <div class="col-md-8 col-md-offset-2">
+                            <h2 class="mt-0 line-height-1 text-uppercase">Insurance <span class="text-theme-colored2">Policies</span></h2>
+                            <div class="title-icon">
+                                <img class="mb-10" src="{% static 'images/title-icon.png' %}" alt="">
+                            </div>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Rem autem<br> voluptatem obcaecati!</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="section-centent">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="horizontal-tab-centered">
+                                <div class="text-center">
+                                    <ul class="nav nav-pills mb-10">
+                                        <li class="active"><a href="#tab11" class="" data-toggle="tab" aria-expanded="false"> STM</a></li>
+                                        <li class=""><a href="#tab12" data-toggle="tab" aria-expanded="false"> Limited</a></li>
+                                        <li class=""><a href="#tab13" data-toggle="tab" aria-expanded="true"> Anciliary</a></li>
+                                        <li class=""><a href="#tab14" data-toggle="tab" aria-expanded="false"> Dental</a></li>
+                                    </ul>
+                                </div>
+                                <div class="tab-content bg-white">
+                                    <div class="tab-pane fade in active" id="tab11">
+                                        <div class="row">
+                                            <div class="col-md-7">
+                                                <div class="service-content ml-10 ml-sm-0">
+                                                    <h2 class="">STM</h2>
+                                                    <p class="lead">One Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quaerat, iste, architecto ullam tenetur quia nemo ratione tempora
+                                                        consectetur quos minus ut quo nulla ipsa aliquid molestias.</p>
+                                                    <p>One Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quaerat, iste, architecto ullam tenetur quia nemo ratione tempora consectetur quos
+                                                        minus ut quo nulla ipsa aliquid neque molestias et qui sunt. Odit, molestiae.</p>
+                                                    <div class="row mt-20 mb-sm-30">
+                                                        <div class="col-sm-6">
+                                                            <div class="service-icon-box"><a href="#" class="icon pull-left mr-20"><i class="flaticon-medical-ambulance14"></i></a>
+                                                                <div>
+                                                                    <h4 class="mt-0 mb-0">Lorem Ipsum</h4>
+                                                                    <p class="">Lorem ipsum dolor sit amet consec tetur elit</p>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-sm-6">
+                                                            <div class="service-icon-box"><a href="#" class="icon pull-left mr-20"><i class="flaticon-medical-illness"></i></a>
+                                                                <div>
+                                                                    <h4 class="mt-0 mb-0">Lorem Ipsum 2</h4>
+                                                                    <p class="">Lorem ipsum dolor sit amet consec tetur elit</p>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-sm-6">
+                                                            <div class="service-icon-box"><a href="#" class="icon pull-left mr-20"><i class="flaticon-medical-stethoscope10"></i></a>
+                                                                <div>
+                                                                    <h4 class="mt-0 mb-0">Lorem Ipsum 3</h4>
+                                                                    <p class="">Lorem ipsum dolor sit amet consec tetur elit</p>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-sm-6">
+                                                            <div class="service-icon-box"><a href="#" class="icon pull-left mr-20"><i class="flaticon-medical-medical51"></i></a>
+                                                                <div>
+                                                                    <h4 class="mt-0 mb-0">Lorem Ipsum 4</h4>
+                                                                    <p class="">Lorem ipsum dolor sit amet consec tetur elit</p>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-5">
+                                                <div class="thumb mt-20">
+                                                    <img class="img-fullwidth" src="{% static 'images/service-1.jpg' %}" alt="">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="tab-pane fade" id="tab12">
+                                        <div class="row">
+                                            <div class="col-md-7">
+                                                <div class="service-content ml-10 ml-sm-0">
+                                                    <h2 class="">Limited</h2>
+                                                    <p class="lead">One Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quaerat, iste, architecto ullam tenetur quia nemo ratione tempora
+                                                        consectetur quos minus ut quo nulla ipsa aliquid molestias.</p>
+                                                    <p>One Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quaerat, iste, architecto ullam tenetur quia nemo ratione tempora consectetur quos
+                                                        minus ut quo nulla ipsa aliquid neque molestias et qui sunt. Odit, molestiae.</p>
+                                                    <div class="row mt-20 mb-sm-30">
+                                                        <div class="col-sm-6">
+                                                            <div class="service-icon-box"><a href="#" class="icon pull-left mr-20"><i class="flaticon-medical-ambulance14"></i></a>
+                                                                <div>
+                                                                    <h4 class="mt-0 mb-0">Lorem Ipsum</h4>
+                                                                    <p class="">Lorem ipsum dolor sit amet consec tetur elit</p>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-sm-6">
+                                                            <div class="service-icon-box"><a href="#" class="icon pull-left mr-20"><i class="flaticon-medical-illness"></i></a>
+                                                                <div>
+                                                                    <h4 class="mt-0 mb-0">Lorem Ipsum 2</h4>
+                                                                    <p class="">Lorem ipsum dolor sit amet consec tetur elit</p>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-sm-6">
+                                                            <div class="service-icon-box"><a href="#" class="icon pull-left mr-20"><i class="flaticon-medical-stethoscope10"></i></a>
+                                                                <div>
+                                                                    <h4 class="mt-0 mb-0">Lorem Ipsum 3</h4>
+                                                                    <p class="">Lorem ipsum dolor sit amet consec tetur elit</p>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-sm-6">
+                                                            <div class="service-icon-box"><a href="#" class="icon pull-left mr-20"><i class="flaticon-medical-medical51"></i></a>
+                                                                <div>
+                                                                    <h4 class="mt-0 mb-0">Lorem Ipsum 4</h4>
+                                                                    <p class="">Lorem ipsum dolor sit amet consec tetur elit</p>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-5">
+                                                <div class="thumb mt-20">
+                                                    <img class="img-fullwidth" src="{% static 'images/service-1.jpg' %}" alt="">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="tab-pane fade" id="tab13">
+                                        <div class="row">
+                                            <div class="col-md-7">
+                                                <div class="service-content ml-10 ml-sm-0">
+                                                    <h2 class="">Anciliary</h2>
+                                                    <p class="lead">One Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quaerat, iste, architecto ullam tenetur quia nemo ratione tempora
+                                                        consectetur quos minus ut quo nulla ipsa aliquid molestias.</p>
+                                                    <p>One Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quaerat, iste, architecto ullam tenetur quia nemo ratione tempora consectetur quos
+                                                        minus ut quo nulla ipsa aliquid neque molestias et qui sunt. Odit, molestiae.</p>
+                                                    <div class="row mt-20 mb-sm-30">
+                                                        <div class="col-sm-6">
+                                                            <div class="service-icon-box"><a href="#" class="icon pull-left mr-20"><i class="flaticon-medical-ambulance14"></i></a>
+                                                                <div>
+                                                                    <h4 class="mt-0 mb-0">Lorem Ipsum</h4>
+                                                                    <p class="">Lorem ipsum dolor sit amet consec tetur elit</p>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-sm-6">
+                                                            <div class="service-icon-box"><a href="#" class="icon pull-left mr-20"><i class="flaticon-medical-illness"></i></a>
+                                                                <div>
+                                                                    <h4 class="mt-0 mb-0">Lorem Ipsum 2</h4>
+                                                                    <p class="">Lorem ipsum dolor sit amet consec tetur elit</p>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-sm-6">
+                                                            <div class="service-icon-box"><a href="#" class="icon pull-left mr-20"><i class="flaticon-medical-stethoscope10"></i></a>
+                                                                <div>
+                                                                    <h4 class="mt-0 mb-0">Lorem Ipsum 3</h4>
+                                                                    <p class="">Lorem ipsum dolor sit amet consec tetur elit</p>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-sm-6">
+                                                            <div class="service-icon-box"><a href="#" class="icon pull-left mr-20"><i class="flaticon-medical-medical51"></i></a>
+                                                                <div>
+                                                                    <h4 class="mt-0 mb-0">Lorem Ipsum 4</h4>
+                                                                    <p class="">Lorem ipsum dolor sit amet consec tetur elit</p>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-5">
+                                                <div class="thumb mt-20">
+                                                    <img class="img-fullwidth" src="{% static 'images/service-1.jpg' %}" alt="">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="tab-pane fade" id="tab14">
+                                        <div class="row">
+                                            <div class="col-md-7">
+                                                <div class="service-content ml-10 ml-sm-0">
+                                                    <h2 class="">Dental</h2>
+                                                    <p class="lead">One Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quaerat, iste, architecto ullam tenetur quia nemo ratione tempora
+                                                        consectetur quos minus ut quo nulla ipsa aliquid molestias.</p>
+                                                    <p>One Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quaerat, iste, architecto ullam tenetur quia nemo ratione tempora consectetur quos
+                                                        minus ut quo nulla ipsa aliquid neque molestias et qui sunt. Odit, molestiae.</p>
+                                                    <div class="row mt-20 mb-sm-30">
+                                                        <div class="col-sm-6">
+                                                            <div class="service-icon-box"><a href="#" class="icon pull-left mr-20"><i class="flaticon-medical-ambulance14"></i></a>
+                                                                <div>
+                                                                    <h4 class="mt-0 mb-0">Lorem Ipsum</h4>
+                                                                    <p class="">Lorem ipsum dolor sit amet consec tetur elit</p>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-sm-6">
+                                                            <div class="service-icon-box"><a href="#" class="icon pull-left mr-20"><i class="flaticon-medical-illness"></i></a>
+                                                                <div>
+                                                                    <h4 class="mt-0 mb-0">Lorem Ipsum 2</h4>
+                                                                    <p class="">Lorem ipsum dolor sit amet consec tetur elit</p>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-sm-6">
+                                                            <div class="service-icon-box"><a href="#" class="icon pull-left mr-20"><i class="flaticon-medical-stethoscope10"></i></a>
+                                                                <div>
+                                                                    <h4 class="mt-0 mb-0">Lorem Ipsum 3</h4>
+                                                                    <p class="">Lorem ipsum dolor sit amet consec tetur elit</p>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-sm-6">
+                                                            <div class="service-icon-box"><a href="#" class="icon pull-left mr-20"><i class="flaticon-medical-medical51"></i></a>
+                                                                <div>
+                                                                    <h4 class="mt-0 mb-0">Lorem Ipsum 4</h4>
+                                                                    <p class="">Lorem ipsum dolor sit amet consec tetur elit</p>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-5">
+                                                <div class="thumb mt-20">
+                                                    <img class="img-fullwidth" src="{% static 'images/service-1.jpg' %}" alt="">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+{% comment %}
+
+        <!-- Section: Pricing -->
+        <!--<section id="pricing">
+            <div class="container pb-50">
+                <div class="section-title text-center mb-60">
+                    <div class="row">
+                        <div class="col-md-8 col-md-offset-2">
+                            <h2 class="mt-0 line-height-1 text-uppercase">Our <span class="text-theme-colored2">Pricing</span></h2>
+                            <div class="title-icon">
+                                <img class="mb-10" src="images/title-icon.png" alt="">
+                            </div>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Rem autem<br> voluptatem obcaecati!</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="section-content mt-20">
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-6 col-md-4 hvr-float-shadow mb-sm-30 wow fadeInLeft animation-delay1">
+                            <div class="pricing-table style1 bg-white-light text-center">
+                                <div class="pricing-icon">
+                                    <i class="flaticon-medical-medical51"></i>
+                                </div>
+                                <div class="p-40 bg-white">
+                                    <h3 class="package-type mt-0 font-24 text-uppercase">Dental Care</h3>
+                                    <h1 class="price text-theme-colored mb-10 font-60">24<span class="font-24">%</span></h1>
+                                    <h4 class="discount">Discount</h4>
+                                    <p>Lorem ipsum dolor sit amet conse ctetur adipi sicing elit. Rem autem voluptatem obcaecati! </p>
+                                    <a class="btn btn-colored btn-theme-colored2 text-uppercase mt-30" href="#">Get Offer!</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xs-12 col-sm-6 col-md-4 hvr-float-shadow mb-sm-30 wow fadeInUp animation-delay1">
+                            <div class="pricing-table style1 bg-white-light text-center">
+                                <div class="pricing-icon">
+                                    <i class="flaticon-medical-hospital35"></i>
+                                </div>
+                                <div class="p-40 bg-white">
+                                    <h3 class="package-type mt-0 font-24 text-uppercase">Blood Test</h3>
+                                    <h1 class="price text-theme-colored mb-10 font-60">15<span class="font-24">%</span></h1>
+                                    <h4 class="discount">Discount</h4>
+                                    <p>Lorem ipsum dolor sit amet conse ctetur adipi sicing elit. Rem autem voluptatem obcaecati! </p>
+                                    <a class="btn btn-colored btn-theme-colored2 text-uppercase mt-30" href="#">Get Offer!</a><br>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xs-12 col-sm-6 col-md-4 hvr-float-shadow mb-sm-30 wow fadeInRight animation-delay1">
+                            <div class="pricing-table style1 bg-white-light text-center">
+                                <div class="pricing-icon">
+                                    <i class="flaticon-medical-stethoscope10"></i>
+                                </div>
+                                <div class="p-40 bg-white">
+                                    <h3 class="package-type mt-0 font-24 text-uppercase">Medical Checkup</h3>
+                                    <h1 class="price text-theme-colored mb-10 font-60">30<span class="font-24">%</span></h1>
+                                    <h4 class="discount">Discount</h4>
+                                    <p>Lorem ipsum dolor sit amet conse ctetur adipi sicing elit. Rem autem voluptatem obcaecati! </p>
+                                    <a class="btn btn-colored btn-theme-colored2 text-uppercase mt-30" href="#">Get Offer!</a><br>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>-->
+{% endcomment %}
+
+        <!-- Section: Features -->
+        <section>
+            <div class="container-fluid pt-0 pb-0">
+                <div class="row equal-height">
+                    <div class="col-md-6 bg-theme-colored2 sm-height-auto">
+                        <div class="p-50 p-sm-0 p-sm-0 pt-sm-30 pb-sm-30">
+                            <h2 class="text-white">In Search Of A Good And Quality Health Insurance, 100+ agents are waiting for you.</h2>
+                            <p class="text-white">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Atque commodi molestiae autem fugit consectetur dolor ullam illo ipsa numquam, quod iusto
+                                enim ipsum amet iusto amet consec utem fugit consllo ipsa numquam dolor ullam illo, quod iusto enim ipsum amet iusto amet consec.</p>
+                            <a href="#" class="btn btn-default btn-circled mt-10">view details</a>
+                        </div>
+                    </div>
+                    <div class="col-md-6 bg-img-cover sm-height-auto overlay-img-bg overlay-img-bg-theme2" data-bg-img="{% static 'images/bg/bg29.jpg' %}">
+                        <div class="p-50 p-sm-0 p-sm-0 pt-sm-30 pb-sm-30">
+                            <form>
+                                <h3 class="mt-0 line-bottom mb-30">Quote <span class="text-theme-colored font-weight-600">Now!</span></h3>
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <div class="form-group mb-30">
+                                            <input placeholder="First Name" type="text" name="f_name" required="required" class="form-control">
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="form-group mb-30">
+                                            <input placeholder="Last Name" type="text" name="l_name" required="required" class="form-control">
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="form-group mb-30">
+                                            <input placeholder="Email" type="text" name="email" class="form-control" required="">
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="form-group mb-30">
+                                            <input placeholder="Phone" type="text" name="phone" class="form-control" required="">
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="form-group mb-30">
+                                            <div class="styled-select">
+                                                <select name="car_select" class="form-control" required="">
+                                                    <option value="">- Select Your Services -</option>
+                                                    <option value="stm">STM</option>
+                                                    <option value="lim">Limited</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="form-group mb-30">
+                                            <input name="effective_date" class="form-control required date-picker" type="text" placeholder="Effective Date" aria-required="true">
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-12">
+                                        <div class="form-group mb-0 mt-0">
+                                            <input name="form_botcheck" class="form-control" type="hidden" value="">
+                                            <button type="submit" class="btn btn-colored btn-theme-colored btn-lg btn-flat border-left-theme-color-2-4px" data-loading-text="Please wait...">Submit
+                                                Now
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                           {% comment %} <!-- Form End-->
+
+                            <!-- Form Validation Start-->
+                            <!--<script type="text/javascript">
+                                $("#reservation_form").validate({
+                                    submitHandler: function (form) {
+                                        var form_btn = $(form).find('button[type="submit"]');
+                                        var form_result_div = '#form-result';
+                                        $(form_result_div).remove();
+                                        form_btn.before('<div id="form-result" class="alert alert-success" role="alert" style="display: none;"></div>');
+                                        var form_btn_old_msg = form_btn.html();
+                                        form_btn.html(form_btn.prop('disabled', true).data("loading-text"));
+                                        $(form).ajaxSubmit({
+                                            dataType: 'json',
+                                            success: function (data) {
+                                                if (data.status == 'true') {
+                                                    $(form).find('.form-control').val('');
+                                                }
+                                                form_btn.prop('disabled', false).html(form_btn_old_msg);
+                                                $(form_result_div).html(data.message).fadeIn('slow');
+                                                setTimeout(function () {
+                                                    $(form_result_div).fadeOut('slow')
+                                                }, 6000);
+                                            }
+                                        });
+                                    }
+                                });
+                            </script>-->
+                            <!-- Form Validation Start -->{% endcomment %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!--start gallary Section-->
+        <section id="gallery">
+            <div class="container">
+                <div class="section-title text-center mt-0">
+                    <div class="row">
+                        <div class="col-md-8 col-md-offset-2">
+                            <h2 class="mt-0 line-height-1 text-uppercase">Our <span class="text-theme-colored2">Gallery</span></h2>
+                            <div class="title-icon">
+                                <img class="mb-10" src="{% static 'images/title-icon.png' %}" alt="">
+                            </div>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Rem autem<br> voluptatem obcaecati!</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="section-content">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <!-- Portfolio Filter -->
+                            <div class="portfolio-filter text-center">
+                                <a href="#" class="active" data-filter="*">All</a>
+                                <a href="#branding" class="" data-filter=".branding">Branding</a>
+                                <a href="#design" class="" data-filter=".design">Design</a>
+                                <a href="#photography" class="" data-filter=".photography">Photography</a>
+                            </div>
+                            <!-- End Portfolio Filter -->
+
+                            <!-- Portfolio Gallery Grid -->
+                            <div class="gallery-isotope default-animation-effect grid-4 gutter-small clearfix" data-lightbox="gallery">
+                                <!-- Portfolio Item Start -->
+                                <div class="gallery-item design">
+                                    <div class="thumb">
+                                        <img class="img-fullwidth" src="http://placehold.it/280x190" alt="project">
+                                        <div class="overlay-shade bg-theme-colored2"></div>
+                                        <div class="icons-holder">
+                                            <div class="icons-holder-inner">
+                                                <div class="styled-icons icon-sm icon-dark icon-circled icon-theme-colored">
+                                                    <a href="#" data-lightbox-gallery="gallery" title="Your Title Here"><i class="fa fa-picture-o"></i></a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Portfolio Item End -->
+                                <!-- Portfolio Item Start -->
+                                <div class="gallery-item branding photography">
+                                    <div class="thumb">
+                                        <img class="img-fullwidth" src="http://placehold.it/280x190" alt="project">
+                                        <div class="overlay-shade bg-theme-colored2"></div>
+                                        <div class="icons-holder">
+                                            <div class="icons-holder-inner">
+                                                <div class="styled-icons icon-sm icon-dark icon-circled icon-theme-colored">
+                                                    <a href="#" data-lightbox-gallery="gallery" title="Your Title Here"><i class="fa fa-picture-o"></i></a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Portfolio Item End -->
+                                <!-- Portfolio Item Start -->
+                                <div class="gallery-item design">
+                                    <div class="thumb">
+                                        <img class="img-fullwidth" src="http://placehold.it/280x190" alt="project">
+                                        <div class="overlay-shade bg-theme-colored2"></div>
+                                        <div class="icons-holder">
+                                            <div class="icons-holder-inner">
+                                                <div class="styled-icons icon-sm icon-dark icon-circled icon-theme-colored">
+                                                    <a href="#" data-lightbox-gallery="gallery" title="Your Title Here"><i class="fa fa-picture-o"></i></a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Portfolio Item End -->
+                                <!-- Portfolio Item Start -->
+                                <div class="gallery-item branding">
+                                    <div class="thumb">
+                                        <img class="img-fullwidth" src="http://placehold.it/280x190" alt="project">
+                                        <div class="overlay-shade bg-theme-colored2"></div>
+                                        <div class="icons-holder">
+                                            <div class="icons-holder-inner">
+                                                <div class="styled-icons icon-sm icon-dark icon-circled icon-theme-colored">
+                                                    <a href="#" data-lightbox-gallery="gallery" title="Your Title Here"><i class="fa fa-picture-o"></i></a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Portfolio Item End -->
+                                <!-- Portfolio Item Start -->
+                                <div class="gallery-item design photography">
+                                    <div class="thumb">
+                                        <img class="img-fullwidth" src="http://placehold.it/280x190" alt="project">
+                                        <div class="overlay-shade bg-theme-colored2"></div>
+                                        <div class="icons-holder">
+                                            <div class="icons-holder-inner">
+                                                <div class="styled-icons icon-sm icon-dark icon-circled icon-theme-colored">
+                                                    <a href="#" data-lightbox-gallery="gallery" title="Your Title Here"><i class="fa fa-picture-o"></i></a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Portfolio Item End -->
+                                <!-- Portfolio Item Start -->
+                                <div class="gallery-item photography">
+                                    <div class="thumb">
+                                        <img class="img-fullwidth" src="http://placehold.it/280x190" alt="project">
+                                        <div class="overlay-shade bg-theme-colored2"></div>
+                                        <div class="icons-holder">
+                                            <div class="icons-holder-inner">
+                                                <div class="styled-icons icon-sm icon-dark icon-circled icon-theme-colored">
+                                                    <a href="#" data-lightbox-gallery="gallery" title="Your Title Here"><i class="fa fa-picture-o"></i></a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Portfolio Item End -->
+                                <!-- Portfolio Item Start -->
+                                <div class="gallery-item branding">
+                                    <div class="thumb">
+                                        <img class="img-fullwidth" src="http://placehold.it/280x190" alt="project">
+                                        <div class="overlay-shade bg-theme-colored2"></div>
+                                        <div class="icons-holder">
+                                            <div class="icons-holder-inner">
+                                                <div class="styled-icons icon-sm icon-dark icon-circled icon-theme-colored">
+                                                    <a href="#" data-lightbox-gallery="gallery" title="Your Title Here"><i class="fa fa-picture-o"></i></a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Portfolio Item End -->
+                                <!-- Portfolio Item Start -->
+                                <div class="gallery-item photography">
+                                    <div class="thumb">
+                                        <img class="img-fullwidth" src="http://placehold.it/280x190" alt="project">
+                                        <div class="overlay-shade bg-theme-colored2"></div>
+                                        <div class="icons-holder">
+                                            <div class="icons-holder-inner">
+                                                <div class="styled-icons icon-sm icon-dark icon-circled icon-theme-colored">
+                                                    <a href="#" data-lightbox-gallery="gallery" title="Your Title Here"><i class="fa fa-picture-o"></i></a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Portfolio Item End -->
+                                <!-- Portfolio Item Start -->
+                                <div class="gallery-item design">
+                                    <div class="thumb">
+                                        <img class="img-fullwidth" src="http://placehold.it/280x190" alt="project">
+                                        <div class="overlay-shade bg-theme-colored2"></div>
+                                        <div class="icons-holder">
+                                            <div class="icons-holder-inner">
+                                                <div class="styled-icons icon-sm icon-dark icon-circled icon-theme-colored">
+                                                    <a href="#" data-lightbox-gallery="gallery" title="Your Title Here"><i class="fa fa-picture-o"></i></a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Portfolio Item End -->
+                                <!-- Portfolio Item Start -->
+                                <div class="gallery-item branding photography">
+                                    <div class="thumb">
+                                        <img class="img-fullwidth" src="http://placehold.it/280x190" alt="project">
+                                        <div class="overlay-shade bg-theme-colored2"></div>
+                                        <div class="icons-holder">
+                                            <div class="icons-holder-inner">
+                                                <div class="styled-icons icon-sm icon-dark icon-circled icon-theme-colored">
+                                                    <a href="#" data-lightbox-gallery="gallery" title="Your Title Here"><i class="fa fa-picture-o"></i></a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Portfolio Item End -->
+                                <!-- Portfolio Item Start -->
+                                <div class="gallery-item design">
+                                    <div class="thumb">
+                                        <img class="img-fullwidth" src="http://placehold.it/280x190" alt="project">
+                                        <div class="overlay-shade bg-theme-colored2"></div>
+                                        <div class="icons-holder">
+                                            <div class="icons-holder-inner">
+                                                <div class="styled-icons icon-sm icon-dark icon-circled icon-theme-colored">
+                                                    <a href="#" data-lightbox-gallery="gallery" title="Your Title Here"><i class="fa fa-picture-o"></i></a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Portfolio Item End -->
+                                <!-- Portfolio Item Start -->
+                                <div class="gallery-item branding">
+                                    <div class="thumb">
+                                        <img class="img-fullwidth" src="http://placehold.it/280x190" alt="project">
+                                        <div class="overlay-shade bg-theme-colored2"></div>
+                                        <div class="icons-holder">
+                                            <div class="icons-holder-inner">
+                                                <div class="styled-icons icon-sm icon-dark icon-circled icon-theme-colored">
+                                                    <a href="#" data-lightbox-gallery="gallery" title="Your Title Here"><i class="fa fa-picture-o"></i></a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Portfolio Item End -->
+                            </div>
+                            <!-- End Portfolio Gallery Grid -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!--start Clients Section-->
+        <section class="clients bg-theme-colored2 pt-20 pb-20">
+            <div class="container pt-10 pb-10">
+                <div class="section-content">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <!-- Section: Clients -->
+                            <div class="owl-carousel-6col transparent text-center owl-nav-top">
+                                <div class="pr-10 pl-10 item"><a href="#"><img src="{% static 'images/clients/logo-1.png' %}" alt=""></a></div>
+                                <div class="pr-10 pl-10 item"><a href="#"><img src="{% static 'images/clients/logo-2.png' %}" alt=""></a></div>
+                                <div class="pr-10 pl-10 item"><a href="#"><img src="{% static 'images/clients/logo-3.png' %}" alt=""></a></div>
+                                <div class="pr-10 pl-10 item"><a href="#"><img src="{% static 'images/clients/logo-4.png' %}" alt=""></a></div>
+                                <div class="pr-10 pl-10 item"><a href="#"><img src="{% static 'images/clients/logo-5.png' %}" alt=""></a></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
 {% endblock content %}
