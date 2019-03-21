@@ -17,5 +17,6 @@ core/settings/local.py
 dump.rdb
 celerybeat-schedule
 media/
+static/
 Dockerfile
 db/config.sh
