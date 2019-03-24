@@ -903,19 +903,21 @@
             </div>
         </section>
 
-        <!--start Clients Section-->
-        <section class="clients bg-theme-colored2 pt-20 pb-20">
+        <section class="bg-theme-colored2 pt-20 pb-20">
             <div class="container pt-10 pb-10">
                 <div class="section-content">
                     <div class="row">
                         <div class="col-md-12">
-                            <!-- Section: Clients -->
                             <div class="owl-carousel-6col transparent text-center owl-nav-top">
-                                <div class="pr-10 pl-10 item"><a href="#"><img src="{% static 'images/clients/logo-1.png' %}" alt=""></a></div>
-                                <div class="pr-10 pl-10 item"><a href="#"><img src="{% static 'images/clients/logo-2.png' %}" alt=""></a></div>
-                                <div class="pr-10 pl-10 item"><a href="#"><img src="{% static 'images/clients/logo-3.png' %}" alt=""></a></div>
-                                <div class="pr-10 pl-10 item"><a href="#"><img src="{% static 'images/clients/logo-4.png' %}" alt=""></a></div>
-                                <div class="pr-10 pl-10 item"><a href="#"><img src="{% static 'images/clients/logo-5.png' %}" alt=""></a></div>
+                                {% for partner_logo in settings.home.PartnerImgSettings.partner_img_panel.all %}
+                                    {% if partner_logo.logo %}
+                                        <div class="pr-10 pl-10 item">
+                                            {% if partner_logo.ptnr_url %}<a href="{{ partner_logo.ptnr_url }}">{% endif %}
+                                                <img src="{{ partner_logo.logo.url }}" alt="{{ partner_logo.alt_text|default:"" }}">
+                                            {% if partner_logo.ptnr_url %}</a>{% endif %}
+                                        </div>
+                                    {% endif %}
+                                {% endfor %}
                             </div>
                         </div>
                     </div>

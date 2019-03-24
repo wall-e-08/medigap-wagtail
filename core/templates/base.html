@@ -270,11 +270,11 @@
                             <div class="input-group">
                                 <input type="email" value="" name="EMAIL" placeholder="Your Email" class="form-control input-lg font-16" data-height="45px" id="mce-EMAIL-footer">
                                 <span class="input-group-btn">
-                    <button data-height="45px" class="btn btn-colored btn-theme-colored btn-xs m-0 font-14" type="submit">Subscribe</button>
-                  </span>
+                                    <button data-height="45px" class="btn btn-colored btn-theme-colored btn-xs m-0 font-14" type="submit">Subscribe</button>
+                                </span>
                             </div>
                         </form>
-                        <!-- Mailchimp Subscription Form Validation-->
+                        {% comment %}<!-- Mailchimp Subscription Form Validation-->
                         <script type="text/javascript">
                             $('#mailchimp-subscription-form-footer').ajaxChimp({
                                 callback: mailChimpCallBack,
@@ -294,28 +294,16 @@
                                 $mailchimpform.prepend($response);
                             }
                         </script>
-                        <!-- Mailchimp Subscription Form Ends Here -->
+                        <!-- Mailchimp Subscription Form Ends Here -->{% endcomment %}
                     </div>
                 </div>
             </div>
         </div>
         <div class="footer-bottom bg-black-222">
-            <div class="container pt-10 pb-0">
+            <div class="container pt-20 pb-20">
                 <div class="row">
-                    <div class="col-md-6 sm-text-center">
-                        <p class="font-13 text-black-777 m-0">Copyright &copy;2018 Concitus. All Rights Reserved</p>
-                    </div>
-                    <div class="col-md-6 text-right flip sm-text-center">
-                        <div class="widget no-border m-0">
-                            <ul class="styled-icons icon-dark icon-circled icon-sm">
-                                <li><a href="#"><i class="fa fa-facebook"></i></a></li>
-                                <li><a href="#"><i class="fa fa-twitter"></i></a></li>
-                                <li><a href="#"><i class="fa fa-skype"></i></a></li>
-                                <li><a href="#"><i class="fa fa-youtube"></i></a></li>
-                                <li><a href="#"><i class="fa fa-instagram"></i></a></li>
-                                <li><a href="#"><i class="fa fa-pinterest"></i></a></li>
-                            </ul>
-                        </div>
+                    <div class="col-md-12 text-center">
+                        <p class="font-13 text-black-777 m-0">{{ settings.home.PrimarySiteSettings.copyright_text|default:"Copyright ©2018" }}</p>
                     </div>
                 </div>
             </div>

@@ -40,6 +40,8 @@ class PrimarySiteSettings(BaseSetting):
         verbose_name="Quote Heading",
     )
 
+    copyright_text = models.CharField(blank=True, null=True, max_length=250)
+
     class Meta:
         verbose_name = 'Site Identity'
 
@@ -68,6 +70,16 @@ class ContactSettings(BaseSetting, ClusterableModel):
 
     class Meta:
         verbose_name = 'Contact Info'
+
+
+@register_setting(icon='image')
+class PartnerImgSettings(BaseSetting, ClusterableModel):
+    panels = [
+        InlinePanel('partner_img_panel', label="New Partner")
+    ]
+
+    class Meta:
+        verbose_name = 'Partner Logo'
 
 
 class HomePage(Page):
@@ -109,6 +121,36 @@ class AchievementCount(Orderable):
     ]
 
 
+class PartnerItem(Orderable):
+    main_settings = ParentalKey(
+        PartnerImgSettings,
+        on_delete=models.CASCADE,
+        related_name='partner_img_panel'
+    )
+
+    logo = models.ImageField(
+        blank=True, null=True, upload_to='settings/',
+        help_text="Business partner's Logo"
+    )
+
+    alt_text = models.CharField(
+        max_length=250,
+        blank=True, null=True,
+    )
+
+    ptnr_url =  models.URLField(
+        max_length=255,
+        blank=True, null=True,
+        verbose_name="Pertner's website",
+    )
+
+    panels = [
+        FieldPanel('logo'),
+        FieldPanel('alt_text'),
+        FieldPanel('ptnr_url'),
+    ]
+
+
 # settings orderable item
 class SocialItem(Orderable):
     SOCIAL_CHOICES = (
@@ -127,11 +169,13 @@ class SocialItem(Orderable):
         on_delete=models.CASCADE,
         related_name='sm_settings_panel'
     )
+
     sm_icon = models.CharField(
         choices=SOCIAL_CHOICES,
         max_length=50,
         verbose_name="Name",
     )
+
     sm_url = models.URLField(
         max_length=255,
         verbose_name="Link/Url",
@@ -151,7 +195,7 @@ class ContactItem(Orderable):
         ('fa fa-globe', 'Website'),
     )
 
-    sm_settings = ParentalKey(
+    cnct_settings = ParentalKey(
         ContactSettings,
         on_delete=models.CASCADE,
         related_name='contact_settings_panel'
