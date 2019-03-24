@@ -78,7 +78,9 @@
             <div class="container">
                 <div class="row">
                     <div class="col-xs-6 col-sm-3 col-md-3 text-left">
-                        <a class="menuzord-brand pull-left flip sm-pull-center mb-15" href="#"><img src="{% static 'images/logo-wide.png' %}" alt=""></a>
+                        <a class="menuzord-brand pull-left flip sm-pull-center mb-15" href="#">
+                            <img src="{% if page.logo %}{{ page.logo.url }}{% else %}{% static 'images/logo-wide.png' %}{% endif %}" alt="">
+                        </a>
                     </div>
                     <div class="hidden-xs hidden-sm col-md-offset-4 col-md-5 text-right" id="head-call-btn">
                         <div class="head-call-btn-bg">
