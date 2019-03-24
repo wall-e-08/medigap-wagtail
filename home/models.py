@@ -54,37 +54,20 @@ class SocialMediaSettings(BaseSetting, ClusterableModel):
         verbose_name = 'Social Media'
 
 
-class SocialItem(Orderable):
-    SOCIAL_CHOICES = (
-        ('fa fa fa-facebook', 'Facebook'),
-        ('fa fa-twitter', 'Twitter'),
-        ('fa fa-skype', 'Skype'),
-        ('fa fa-youtube', 'Youtube'),
-        ('fa-instagram', 'Instagram'),
-        ('fa fa-pinterest', 'Pinterest'),
-        ('fa fa-linkedin', 'LinkedIn'),
-        ('fa fa-envelope', 'Email'),
-    )
-
-    sm_settings = ParentalKey(
-        'SocialMediaSettings',
-        on_delete=models.CASCADE,
-        related_name='sm_settings_panel'
-    )
-    sm_icon = models.CharField(
-        choices=SOCIAL_CHOICES,
-        max_length=50,
-        verbose_name="Name",
-    )
-    sm_url = models.URLField(
+@register_setting(icon='redirect')
+class ContactSettings(BaseSetting, ClusterableModel):
+    contact_desc = models.CharField(
         max_length=255,
-        verbose_name="Link/Url",
+        blank=True, null=True,
+        verbose_name="Pre-contact Text",
     )
 
     panels = [
-        FieldPanel('sm_icon'),
-        FieldPanel('sm_url'),
+        InlinePanel('contact_settings_panel', label="New Contact info", max_num=4),
     ]
+
+    class Meta:
+        verbose_name = 'Contact Info'
 
 
 class HomePage(Page):
@@ -125,3 +108,70 @@ class AchievementCount(Orderable):
         FieldPanel('count'),
     ]
 
+
+# settings orderable item
+class SocialItem(Orderable):
+    SOCIAL_CHOICES = (
+        ('fa fa-facebook', 'Facebook'),
+        ('fa fa-twitter', 'Twitter'),
+        ('fa fa-skype', 'Skype'),
+        ('fa fa-youtube', 'Youtube'),
+        ('fa-instagram', 'Instagram'),
+        ('fa fa-pinterest', 'Pinterest'),
+        ('fa fa-linkedin', 'LinkedIn'),
+        ('fa fa-envelope', 'Email'),
+    )
+
+    sm_settings = ParentalKey(
+        'SocialMediaSettings',
+        on_delete=models.CASCADE,
+        related_name='sm_settings_panel'
+    )
+    sm_icon = models.CharField(
+        choices=SOCIAL_CHOICES,
+        max_length=50,
+        verbose_name="Name",
+    )
+    sm_url = models.URLField(
+        max_length=255,
+        verbose_name="Link/Url",
+    )
+
+    panels = [
+        FieldPanel('sm_icon'),
+        FieldPanel('sm_url'),
+    ]
+
+
+class ContactItem(Orderable):
+    SOCIAL_CHOICES = (
+        ('fa fa-map-marker', 'Location'),
+        ('fa fa-phone', 'Phone'),
+        ('fa fa-envelope-o', 'E-mail'),
+        ('fa fa-globe', 'Website'),
+    )
+
+    sm_settings = ParentalKey(
+        ContactSettings,
+        on_delete=models.CASCADE,
+        related_name='contact_settings_panel'
+    )
+    contact_icon = models.CharField(
+        choices=SOCIAL_CHOICES,
+        max_length=50,
+        verbose_name="Type",
+    )
+    contact_text = models.CharField(
+        max_length=255,
+        verbose_name="Details",
+    )
+    contact_url = models.URLField(
+        max_length=255,
+        verbose_name="Link/Url",
+    )
+
+    panels = [
+        FieldPanel('contact_icon'),
+        FieldPanel('contact_text'),
+        FieldPanel('contact_url'),
+    ]
