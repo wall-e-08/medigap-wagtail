@@ -18,11 +18,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
 
     <!-- Favicon & Touch Icon -->
-    <link href="{% static 'images/favicon.png' %}" rel="shortcut icon" type="image/png">
-    <link href="{% static 'images/apple-touch-icon.png' %}" rel="apple-touch-icon">
-    <link href="{% static 'images/apple-touch-icon-72x72.png' %}" rel="apple-touch-icon" sizes="72x72">
-    <link href="{% static 'images/apple-touch-icon-114x114.png' %}" rel="apple-touch-icon" sizes="114x114">
-    <link href="{% static 'images/apple-touch-icon-144x144.png' %}" rel="apple-touch-icon" sizes="144x144">
+    <link href="{% if settings.home.PrimarySiteSettings.favicon %}{{ settings.home.PrimarySiteSettings.favicon.url }}{% else %}{% static 'images/favicon.png' %}{% endif %}" rel="shortcut icon" type="image/png">
+    <link href="{% if settings.home.PrimarySiteSettings.favicon %}{{ settings.home.PrimarySiteSettings.favicon.url }}{% else %}{% static 'images/apple-touch-icon.png' %}{% endif %}" rel="apple-touch-icon">
+    <link href="{% if settings.home.PrimarySiteSettings.favicon %}{{ settings.home.PrimarySiteSettings.favicon.url }}{% else %}{% static 'images/apple-touch-icon-72x72.png' %}{% endif %}" rel="apple-touch-icon" sizes="72x72">
+    <link href="{% if settings.home.PrimarySiteSettings.favicon %}{{ settings.home.PrimarySiteSettings.favicon.url }}{% else %}{% static 'images/apple-touch-icon-114x114.png' %}{% endif %}" rel="apple-touch-icon" sizes="114x114">
+    <link href="{% if settings.home.PrimarySiteSettings.favicon %}{{ settings.home.PrimarySiteSettings.favicon.url }}{% else %}{% static 'images/apple-touch-icon-144x144.png' %}{% endif %}" rel="apple-touch-icon" sizes="144x144">
 
     <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet" type="text/css">
     <link href="{% static 'css/preloader.css' %}" rel="stylesheet" type="text/css">
@@ -79,17 +79,17 @@
                 <div class="row">
                     <div class="col-xs-6 col-sm-3 col-md-3 text-left">
                         <a class="menuzord-brand pull-left flip sm-pull-center mb-15" href="#">
-                            <img src="{% if page.logo %}{{ page.logo.url }}{% else %}{% static 'images/logo-wide.png' %}{% endif %}" alt="">
+                            <img src="{% if settings.home.PrimarySiteSettings.logo %}{{ settings.home.PrimarySiteSettings.logo.url }}{% else %}{% static 'images/logo-wide.png' %}{% endif %}" alt="Medigap">
                         </a>
                     </div>
                     <div class="hidden-xs hidden-sm col-md-offset-4 col-md-5 text-right" id="head-call-btn">
                         <div class="head-call-btn-bg">
                             <p class="mb-0 line-height-1">Call us now</p>
-                            <a href="tel:+(012) 345 6789" class="widget no-border sm-text-center mt-10 mb-10 m-0 line-height-1">
+                            <a href="tel:{{ settings.home.PrimarySiteSettings.phone_number|default:"" }}" class="widget no-border sm-text-center mt-10 mb-10 m-0 line-height-1">
                                 <!--<i class="fa fa-phone text-theme-colored2 mt-5 mr-sm-0"></i>-->
-                                <span class="font-weight-700 text-theme-colored m-0"> +(012) 345 6789</span>
+                                <span class="font-weight-700 text-theme-colored m-0"> {{ settings.home.PrimarySiteSettings.phone_number|default:"" }}</span>
                             </a>
-                            <p class="small mb-0 line-height-1">Speak to an agent</p>
+                            <p class="small mb-0 line-height-1">{{ settings.home.PrimarySiteSettings.txt_ph_nmb|default:"" }}</p>
                         </div>
                     </div>
                     <div class="visible-sm-block visible-xs-block col-xs-6 col-sm-9 text-right">
@@ -123,9 +123,9 @@
         </div>
         <div class="bg-theme-colored-darker6 text-white text-center visible-xs-block visible-sm-block mt-0 pt-15 pb-15 pl-20 pr-20">
             <div class="btn-stack-top">
-                <a href="tel:+(012) 345 6789" class="btn btn-theme-colored2">
+                <a href="tel:{{ settings.home.PrimarySiteSettings.phone_number|default:"" }}" class="btn btn-theme-colored2">
                     <i class="fa fa-phone text-theme-colored mt-0 mr-sm-0 font-25 media-middle"></i>
-                    <span class="font-weight-900 text-black text-white m-0"> +(012) 345 6789</span>
+                    <span class="font-weight-900 text-black text-white m-0"> {{ settings.home.PrimarySiteSettings.phone_number|default:"" }}</span>
                 </a>
                 <a href="#" class="btn btn-theme-colored2 font-19 font-weight-700 hidden-xxs" data-toggle="modal" data-target="#quote-modal">Get Free Quote</a>
             </div>
@@ -181,12 +181,9 @@
                     <div class="widget dark">
                         <h5 class="widget-title mb-10">Connect With Us</h5>
                         <ul class="styled-icons icon-dark icon-circled icon-sm">
-                            <li><a href="#"><i class="fa fa-facebook"></i></a></li>
-                            <li><a href="#"><i class="fa fa-twitter"></i></a></li>
-                            <li><a href="#"><i class="fa fa-skype"></i></a></li>
-                            <li><a href="#"><i class="fa fa-youtube"></i></a></li>
-                            <li><a href="#"><i class="fa fa-instagram"></i></a></li>
-                            <li><a href="#"><i class="fa fa-pinterest"></i></a></li>
+                            {% for social_media in settings.home.SocialMediaSettings.sm_settings_panel.all %}
+                                <li><a href="{{ social_media.sm_url }}"><i class="{{ social_media.sm_icon }}"></i></a></li>
+                            {% endfor %}
                         </ul>
                     </div>
                 </div>

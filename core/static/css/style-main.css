@@ -8778,3 +8778,7 @@ form.form-animated-field textarea:valid ~ label {
     font-size: 10px !important;
     color: #000 !important;
 }
+
+#home {
+    min-height: 70vh;
+}
