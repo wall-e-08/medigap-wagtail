@@ -74,7 +74,7 @@
 
     <!-- Start main-content -->
     <div class="main-content">
-        <!-- Section: home -->
+        <!-- Section: Home Banner -->
         <section id="home" class="divider parallax overlay-img-bg" data-stellar-background-ratio="0.5"
                  data-bg-img="{% if page.banner_bg %}{{ page.banner_bg.url }}{% else %}{% static 'images/bg/bg3.jpg' %}{% endif %}">
             <div class="display-table">
@@ -100,29 +100,6 @@
                                         </div>
                                     </form>
                                     <p class="text-center text-black-777">{{ page.banner_qt_text|default:"" }}</p>
-                                    <!--<script type="text/javascript">
-                                        $("#home_appointment_form").validate({
-                                            submitHandler: function(form) {
-                                                var form_btn = $(form).find('button[type="submit"]');
-                                                var form_result_div = '#form-result';
-                                                $(form_result_div).remove();
-                                                form_btn.before('<div id="form-result" class="alert alert-success" role="alert" style="display: none;"></div>');
-                                                var form_btn_old_msg = form_btn.html();
-                                                form_btn.html(form_btn.prop('disabled', true).data("loading-text"));
-                                                $(form).ajaxSubmit({
-                                                    dataType:  'json',
-                                                    success: function(data) {
-                                                        if( data.status == 'true' ) {
-                                                            $(form).find('.form-control').val('');
-                                                        }
-                                                        form_btn.prop('disabled', false).html(form_btn_old_msg);
-                                                        $(form_result_div).html(data.message).fadeIn('slow');
-                                                        setTimeout(function(){ $(form_result_div).fadeOut('slow') }, 6000);
-                                                    }
-                                                });
-                                            }
-                                        });
-                                    </script>-->
                                 </div>
                             </div>
                         </div>
@@ -177,6 +154,41 @@
                     </div>
                     <div class="col-md-4 wow fadeInRight animation-delay4">
                         <img src="{% static 'images/about/dc2.png' %}" alt="">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="divider parallax layer-overlay overlay-theme-colored2-9" data-bg-img="{% static 'images/bg/bg5.jpg' %}" data-parallax-ratio="0.7">
+            <div class="container pt-60 pb-60">
+                <div class="row">
+                    <div class="col-xs-6 col-sm-6 col-md-3 mb-md-50">
+                        <div class="funfact text-center">
+                            <i class="pe-7s-smile mt-5 text-white"></i>
+                            <h2 data-animation-duration="2000" data-value="9751" class="animate-number text-white font-42 font-weight-500">0</h2>
+                            <h5 class="text-white text-uppercase font-weight-600">Happy Customer</h5>
+                        </div>
+                    </div>
+                    <div class="col-xs-6 col-sm-6 col-md-3 mb-md-50">
+                        <div class="funfact text-center">
+                            <i class="pe-7s-rocket mt-5 text-white"></i>
+                            <h2 data-animation-duration="2000" data-value="844" class="animate-number text-white font-42 font-weight-500">0</h2>
+                            <h5 class="text-white text-uppercase font-weight-600">Insurance Coverage</h5>
+                        </div>
+                    </div>
+                    <div class="col-xs-6 col-sm-6 col-md-3 mb-md-50">
+                        <div class="funfact text-center">
+                            <i class="pe-7s-add-user mt-5 text-white"></i>
+                            <h2 data-animation-duration="2000" data-value="121" class="animate-number text-white font-42 font-weight-500">0</h2>
+                            <h5 class="text-white text-uppercase font-weight-600">Our Agents</h5>
+                        </div>
+                    </div>
+                    <div class="col-xs-6 col-sm-6 col-md-3 mb-md-50">
+                        <div class="funfact text-center">
+                            <i class="pe-7s-global mt-5 text-white"></i>
+                            <h2 data-animation-duration="2000" data-value="24" class="animate-number text-white font-42 font-weight-500">0</h2>
+                            <h5 class="text-white text-uppercase font-weight-600">Service Points</h5>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -245,44 +257,76 @@
             </div>
         </section>
 
-        <!-- Divider: Funfact -->
-        <section class="divider parallax layer-overlay overlay-theme-colored2-9" data-bg-img="{% static 'images/bg/bg5.jpg' %}" data-parallax-ratio="0.7">
-            <div class="container pt-60 pb-60">
-                <div class="row">
-                    <div class="col-xs-6 col-sm-6 col-md-3 mb-md-50">
-                        <div class="funfact text-center">
-                            <i class="pe-7s-smile mt-5 text-white"></i>
-                            <h2 data-animation-duration="2000" data-value="9751" class="animate-number text-white font-42 font-weight-500">0</h2>
-                            <h5 class="text-white text-uppercase font-weight-600">Happy Customer</h5>
+        <section>
+            <div class="container-fluid pt-0 pb-0">
+                <div class="row equal-height">
+                    <div class="col-md-6 bg-theme-colored2 sm-height-auto">
+                        <div class="p-50 p-sm-0 p-sm-0 pt-sm-30 pb-sm-30">
+                            <h2 class="text-white">In Search Of A Good And Quality Health Insurance, 100+ agents are waiting for you.</h2>
+                            <p class="text-white">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Atque commodi molestiae autem fugit consectetur dolor ullam illo ipsa numquam, quod iusto
+                                enim ipsum amet iusto amet consec utem fugit consllo ipsa numquam dolor ullam illo, quod iusto enim ipsum amet iusto amet consec.</p>
+                            <a href="#" class="btn btn-default btn-circled mt-10">view details</a>
                         </div>
                     </div>
-                    <div class="col-xs-6 col-sm-6 col-md-3 mb-md-50">
-                        <div class="funfact text-center">
-                            <i class="pe-7s-rocket mt-5 text-white"></i>
-                            <h2 data-animation-duration="2000" data-value="844" class="animate-number text-white font-42 font-weight-500">0</h2>
-                            <h5 class="text-white text-uppercase font-weight-600">Insurance Coverage</h5>
-                        </div>
-                    </div>
-                    <div class="col-xs-6 col-sm-6 col-md-3 mb-md-50">
-                        <div class="funfact text-center">
-                            <i class="pe-7s-add-user mt-5 text-white"></i>
-                            <h2 data-animation-duration="2000" data-value="121" class="animate-number text-white font-42 font-weight-500">0</h2>
-                            <h5 class="text-white text-uppercase font-weight-600">Our Agents</h5>
-                        </div>
-                    </div>
-                    <div class="col-xs-6 col-sm-6 col-md-3 mb-md-50">
-                        <div class="funfact text-center">
-                            <i class="pe-7s-global mt-5 text-white"></i>
-                            <h2 data-animation-duration="2000" data-value="24" class="animate-number text-white font-42 font-weight-500">0</h2>
-                            <h5 class="text-white text-uppercase font-weight-600">Service Points</h5>
+                    <div class="col-md-6 bg-img-cover sm-height-auto overlay-img-bg overlay-img-bg-theme2" data-bg-img="{% static 'images/bg/bg29.jpg' %}">
+                        <div class="p-50 p-sm-0 p-sm-0 pt-sm-30 pb-sm-30">
+                            <form>
+                                <h3 class="mt-0 line-bottom mb-30">Quote <span class="text-theme-colored font-weight-600">Now!</span></h3>
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <div class="form-group mb-30">
+                                            <input placeholder="First Name" type="text" name="f_name" required="required" class="form-control">
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="form-group mb-30">
+                                            <input placeholder="Last Name" type="text" name="l_name" required="required" class="form-control">
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="form-group mb-30">
+                                            <input placeholder="Email" type="text" name="email" class="form-control" required="">
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="form-group mb-30">
+                                            <input placeholder="Phone" type="text" name="phone" class="form-control" required="">
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="form-group mb-30">
+                                            <div class="styled-select">
+                                                <select name="car_select" class="form-control" required="">
+                                                    <option value="">- Select Your Services -</option>
+                                                    <option value="stm">STM</option>
+                                                    <option value="lim">Limited</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="form-group mb-30">
+                                            <input name="effective_date" class="form-control required date-picker" type="text" placeholder="Effective Date" aria-required="true">
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-12">
+                                        <div class="form-group mb-0 mt-0">
+                                            <input name="form_botcheck" class="form-control" type="hidden" value="">
+                                            <button type="submit" class="btn btn-colored btn-theme-colored btn-lg btn-flat border-left-theme-color-2-4px" data-loading-text="Please wait...">Submit
+                                                Now
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- Section: Departments -->
-        <section id="depertments" class="bg-silver-light">
+        <!-- Section: Health Insurances -->
+        <section id="health-insurances" class="bg-silver-light">
             <div class="container">
                 <div class="section-title text-center">
                     <div class="row">
@@ -523,387 +567,9 @@
                 </div>
             </div>
         </section>
-{% comment %}
 
-        <!-- Section: Pricing -->
-        <!--<section id="pricing">
-            <div class="container pb-50">
-                <div class="section-title text-center mb-60">
-                    <div class="row">
-                        <div class="col-md-8 col-md-offset-2">
-                            <h2 class="mt-0 line-height-1 text-uppercase">Our <span class="text-theme-colored2">Pricing</span></h2>
-                            <div class="title-icon">
-                                <img class="mb-10" src="images/title-icon.png" alt="">
-                            </div>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Rem autem<br> voluptatem obcaecati!</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="section-content mt-20">
-                    <div class="row">
-                        <div class="col-xs-12 col-sm-6 col-md-4 hvr-float-shadow mb-sm-30 wow fadeInLeft animation-delay1">
-                            <div class="pricing-table style1 bg-white-light text-center">
-                                <div class="pricing-icon">
-                                    <i class="flaticon-medical-medical51"></i>
-                                </div>
-                                <div class="p-40 bg-white">
-                                    <h3 class="package-type mt-0 font-24 text-uppercase">Dental Care</h3>
-                                    <h1 class="price text-theme-colored mb-10 font-60">24<span class="font-24">%</span></h1>
-                                    <h4 class="discount">Discount</h4>
-                                    <p>Lorem ipsum dolor sit amet conse ctetur adipi sicing elit. Rem autem voluptatem obcaecati! </p>
-                                    <a class="btn btn-colored btn-theme-colored2 text-uppercase mt-30" href="#">Get Offer!</a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-xs-12 col-sm-6 col-md-4 hvr-float-shadow mb-sm-30 wow fadeInUp animation-delay1">
-                            <div class="pricing-table style1 bg-white-light text-center">
-                                <div class="pricing-icon">
-                                    <i class="flaticon-medical-hospital35"></i>
-                                </div>
-                                <div class="p-40 bg-white">
-                                    <h3 class="package-type mt-0 font-24 text-uppercase">Blood Test</h3>
-                                    <h1 class="price text-theme-colored mb-10 font-60">15<span class="font-24">%</span></h1>
-                                    <h4 class="discount">Discount</h4>
-                                    <p>Lorem ipsum dolor sit amet conse ctetur adipi sicing elit. Rem autem voluptatem obcaecati! </p>
-                                    <a class="btn btn-colored btn-theme-colored2 text-uppercase mt-30" href="#">Get Offer!</a><br>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-xs-12 col-sm-6 col-md-4 hvr-float-shadow mb-sm-30 wow fadeInRight animation-delay1">
-                            <div class="pricing-table style1 bg-white-light text-center">
-                                <div class="pricing-icon">
-                                    <i class="flaticon-medical-stethoscope10"></i>
-                                </div>
-                                <div class="p-40 bg-white">
-                                    <h3 class="package-type mt-0 font-24 text-uppercase">Medical Checkup</h3>
-                                    <h1 class="price text-theme-colored mb-10 font-60">30<span class="font-24">%</span></h1>
-                                    <h4 class="discount">Discount</h4>
-                                    <p>Lorem ipsum dolor sit amet conse ctetur adipi sicing elit. Rem autem voluptatem obcaecati! </p>
-                                    <a class="btn btn-colored btn-theme-colored2 text-uppercase mt-30" href="#">Get Offer!</a><br>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>-->
-{% endcomment %}
-
-        <!-- Section: Features -->
-        <section>
-            <div class="container-fluid pt-0 pb-0">
-                <div class="row equal-height">
-                    <div class="col-md-6 bg-theme-colored2 sm-height-auto">
-                        <div class="p-50 p-sm-0 p-sm-0 pt-sm-30 pb-sm-30">
-                            <h2 class="text-white">In Search Of A Good And Quality Health Insurance, 100+ agents are waiting for you.</h2>
-                            <p class="text-white">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Atque commodi molestiae autem fugit consectetur dolor ullam illo ipsa numquam, quod iusto
-                                enim ipsum amet iusto amet consec utem fugit consllo ipsa numquam dolor ullam illo, quod iusto enim ipsum amet iusto amet consec.</p>
-                            <a href="#" class="btn btn-default btn-circled mt-10">view details</a>
-                        </div>
-                    </div>
-                    <div class="col-md-6 bg-img-cover sm-height-auto overlay-img-bg overlay-img-bg-theme2" data-bg-img="{% static 'images/bg/bg29.jpg' %}">
-                        <div class="p-50 p-sm-0 p-sm-0 pt-sm-30 pb-sm-30">
-                            <form>
-                                <h3 class="mt-0 line-bottom mb-30">Quote <span class="text-theme-colored font-weight-600">Now!</span></h3>
-                                <div class="row">
-                                    <div class="col-sm-6">
-                                        <div class="form-group mb-30">
-                                            <input placeholder="First Name" type="text" name="f_name" required="required" class="form-control">
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-6">
-                                        <div class="form-group mb-30">
-                                            <input placeholder="Last Name" type="text" name="l_name" required="required" class="form-control">
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-6">
-                                        <div class="form-group mb-30">
-                                            <input placeholder="Email" type="text" name="email" class="form-control" required="">
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-6">
-                                        <div class="form-group mb-30">
-                                            <input placeholder="Phone" type="text" name="phone" class="form-control" required="">
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-6">
-                                        <div class="form-group mb-30">
-                                            <div class="styled-select">
-                                                <select name="car_select" class="form-control" required="">
-                                                    <option value="">- Select Your Services -</option>
-                                                    <option value="stm">STM</option>
-                                                    <option value="lim">Limited</option>
-                                                </select>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-6">
-                                        <div class="form-group mb-30">
-                                            <input name="effective_date" class="form-control required date-picker" type="text" placeholder="Effective Date" aria-required="true">
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-12">
-                                        <div class="form-group mb-0 mt-0">
-                                            <input name="form_botcheck" class="form-control" type="hidden" value="">
-                                            <button type="submit" class="btn btn-colored btn-theme-colored btn-lg btn-flat border-left-theme-color-2-4px" data-loading-text="Please wait...">Submit
-                                                Now
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </form>
-                           {% comment %} <!-- Form End-->
-
-                            <!-- Form Validation Start-->
-                            <!--<script type="text/javascript">
-                                $("#reservation_form").validate({
-                                    submitHandler: function (form) {
-                                        var form_btn = $(form).find('button[type="submit"]');
-                                        var form_result_div = '#form-result';
-                                        $(form_result_div).remove();
-                                        form_btn.before('<div id="form-result" class="alert alert-success" role="alert" style="display: none;"></div>');
-                                        var form_btn_old_msg = form_btn.html();
-                                        form_btn.html(form_btn.prop('disabled', true).data("loading-text"));
-                                        $(form).ajaxSubmit({
-                                            dataType: 'json',
-                                            success: function (data) {
-                                                if (data.status == 'true') {
-                                                    $(form).find('.form-control').val('');
-                                                }
-                                                form_btn.prop('disabled', false).html(form_btn_old_msg);
-                                                $(form_result_div).html(data.message).fadeIn('slow');
-                                                setTimeout(function () {
-                                                    $(form_result_div).fadeOut('slow')
-                                                }, 6000);
-                                            }
-                                        });
-                                    }
-                                });
-                            </script>-->
-                            <!-- Form Validation Start -->{% endcomment %}
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!--start gallary Section-->
-        <section id="gallery">
-            <div class="container">
-                <div class="section-title text-center mt-0">
-                    <div class="row">
-                        <div class="col-md-8 col-md-offset-2">
-                            <h2 class="mt-0 line-height-1 text-uppercase">Our <span class="text-theme-colored2">Gallery</span></h2>
-                            <div class="title-icon">
-                                <img class="mb-10" src="{% static 'images/title-icon.png' %}" alt="">
-                            </div>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Rem autem<br> voluptatem obcaecati!</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="section-content">
-                    <div class="row">
-                        <div class="col-md-12">
-                            <!-- Portfolio Filter -->
-                            <div class="portfolio-filter text-center">
-                                <a href="#" class="active" data-filter="*">All</a>
-                                <a href="#branding" class="" data-filter=".branding">Branding</a>
-                                <a href="#design" class="" data-filter=".design">Design</a>
-                                <a href="#photography" class="" data-filter=".photography">Photography</a>
-                            </div>
-                            <!-- End Portfolio Filter -->
-
-                            <!-- Portfolio Gallery Grid -->
-                            <div class="gallery-isotope default-animation-effect grid-4 gutter-small clearfix" data-lightbox="gallery">
-                                <!-- Portfolio Item Start -->
-                                <div class="gallery-item design">
-                                    <div class="thumb">
-                                        <img class="img-fullwidth" src="http://placehold.it/280x190" alt="project">
-                                        <div class="overlay-shade bg-theme-colored2"></div>
-                                        <div class="icons-holder">
-                                            <div class="icons-holder-inner">
-                                                <div class="styled-icons icon-sm icon-dark icon-circled icon-theme-colored">
-                                                    <a href="#" data-lightbox-gallery="gallery" title="Your Title Here"><i class="fa fa-picture-o"></i></a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- Portfolio Item End -->
-                                <!-- Portfolio Item Start -->
-                                <div class="gallery-item branding photography">
-                                    <div class="thumb">
-                                        <img class="img-fullwidth" src="http://placehold.it/280x190" alt="project">
-                                        <div class="overlay-shade bg-theme-colored2"></div>
-                                        <div class="icons-holder">
-                                            <div class="icons-holder-inner">
-                                                <div class="styled-icons icon-sm icon-dark icon-circled icon-theme-colored">
-                                                    <a href="#" data-lightbox-gallery="gallery" title="Your Title Here"><i class="fa fa-picture-o"></i></a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- Portfolio Item End -->
-                                <!-- Portfolio Item Start -->
-                                <div class="gallery-item design">
-                                    <div class="thumb">
-                                        <img class="img-fullwidth" src="http://placehold.it/280x190" alt="project">
-                                        <div class="overlay-shade bg-theme-colored2"></div>
-                                        <div class="icons-holder">
-                                            <div class="icons-holder-inner">
-                                                <div class="styled-icons icon-sm icon-dark icon-circled icon-theme-colored">
-                                                    <a href="#" data-lightbox-gallery="gallery" title="Your Title Here"><i class="fa fa-picture-o"></i></a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- Portfolio Item End -->
-                                <!-- Portfolio Item Start -->
-                                <div class="gallery-item branding">
-                                    <div class="thumb">
-                                        <img class="img-fullwidth" src="http://placehold.it/280x190" alt="project">
-                                        <div class="overlay-shade bg-theme-colored2"></div>
-                                        <div class="icons-holder">
-                                            <div class="icons-holder-inner">
-                                                <div class="styled-icons icon-sm icon-dark icon-circled icon-theme-colored">
-                                                    <a href="#" data-lightbox-gallery="gallery" title="Your Title Here"><i class="fa fa-picture-o"></i></a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- Portfolio Item End -->
-                                <!-- Portfolio Item Start -->
-                                <div class="gallery-item design photography">
-                                    <div class="thumb">
-                                        <img class="img-fullwidth" src="http://placehold.it/280x190" alt="project">
-                                        <div class="overlay-shade bg-theme-colored2"></div>
-                                        <div class="icons-holder">
-                                            <div class="icons-holder-inner">
-                                                <div class="styled-icons icon-sm icon-dark icon-circled icon-theme-colored">
-                                                    <a href="#" data-lightbox-gallery="gallery" title="Your Title Here"><i class="fa fa-picture-o"></i></a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- Portfolio Item End -->
-                                <!-- Portfolio Item Start -->
-                                <div class="gallery-item photography">
-                                    <div class="thumb">
-                                        <img class="img-fullwidth" src="http://placehold.it/280x190" alt="project">
-                                        <div class="overlay-shade bg-theme-colored2"></div>
-                                        <div class="icons-holder">
-                                            <div class="icons-holder-inner">
-                                                <div class="styled-icons icon-sm icon-dark icon-circled icon-theme-colored">
-                                                    <a href="#" data-lightbox-gallery="gallery" title="Your Title Here"><i class="fa fa-picture-o"></i></a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- Portfolio Item End -->
-                                <!-- Portfolio Item Start -->
-                                <div class="gallery-item branding">
-                                    <div class="thumb">
-                                        <img class="img-fullwidth" src="http://placehold.it/280x190" alt="project">
-                                        <div class="overlay-shade bg-theme-colored2"></div>
-                                        <div class="icons-holder">
-                                            <div class="icons-holder-inner">
-                                                <div class="styled-icons icon-sm icon-dark icon-circled icon-theme-colored">
-                                                    <a href="#" data-lightbox-gallery="gallery" title="Your Title Here"><i class="fa fa-picture-o"></i></a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- Portfolio Item End -->
-                                <!-- Portfolio Item Start -->
-                                <div class="gallery-item photography">
-                                    <div class="thumb">
-                                        <img class="img-fullwidth" src="http://placehold.it/280x190" alt="project">
-                                        <div class="overlay-shade bg-theme-colored2"></div>
-                                        <div class="icons-holder">
-                                            <div class="icons-holder-inner">
-                                                <div class="styled-icons icon-sm icon-dark icon-circled icon-theme-colored">
-                                                    <a href="#" data-lightbox-gallery="gallery" title="Your Title Here"><i class="fa fa-picture-o"></i></a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- Portfolio Item End -->
-                                <!-- Portfolio Item Start -->
-                                <div class="gallery-item design">
-                                    <div class="thumb">
-                                        <img class="img-fullwidth" src="http://placehold.it/280x190" alt="project">
-                                        <div class="overlay-shade bg-theme-colored2"></div>
-                                        <div class="icons-holder">
-                                            <div class="icons-holder-inner">
-                                                <div class="styled-icons icon-sm icon-dark icon-circled icon-theme-colored">
-                                                    <a href="#" data-lightbox-gallery="gallery" title="Your Title Here"><i class="fa fa-picture-o"></i></a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- Portfolio Item End -->
-                                <!-- Portfolio Item Start -->
-                                <div class="gallery-item branding photography">
-                                    <div class="thumb">
-                                        <img class="img-fullwidth" src="http://placehold.it/280x190" alt="project">
-                                        <div class="overlay-shade bg-theme-colored2"></div>
-                                        <div class="icons-holder">
-                                            <div class="icons-holder-inner">
-                                                <div class="styled-icons icon-sm icon-dark icon-circled icon-theme-colored">
-                                                    <a href="#" data-lightbox-gallery="gallery" title="Your Title Here"><i class="fa fa-picture-o"></i></a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- Portfolio Item End -->
-                                <!-- Portfolio Item Start -->
-                                <div class="gallery-item design">
-                                    <div class="thumb">
-                                        <img class="img-fullwidth" src="http://placehold.it/280x190" alt="project">
-                                        <div class="overlay-shade bg-theme-colored2"></div>
-                                        <div class="icons-holder">
-                                            <div class="icons-holder-inner">
-                                                <div class="styled-icons icon-sm icon-dark icon-circled icon-theme-colored">
-                                                    <a href="#" data-lightbox-gallery="gallery" title="Your Title Here"><i class="fa fa-picture-o"></i></a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- Portfolio Item End -->
-                                <!-- Portfolio Item Start -->
-                                <div class="gallery-item branding">
-                                    <div class="thumb">
-                                        <img class="img-fullwidth" src="http://placehold.it/280x190" alt="project">
-                                        <div class="overlay-shade bg-theme-colored2"></div>
-                                        <div class="icons-holder">
-                                            <div class="icons-holder-inner">
-                                                <div class="styled-icons icon-sm icon-dark icon-circled icon-theme-colored">
-                                                    <a href="#" data-lightbox-gallery="gallery" title="Your Title Here"><i class="fa fa-picture-o"></i></a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- Portfolio Item End -->
-                            </div>
-                            <!-- End Portfolio Gallery Grid -->
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section class="bg-theme-colored2 pt-20 pb-20">
+         <!-- Section: Partner -->
+        <section id="partner" class="bg-theme-colored2 pt-20 pb-20">
             <div class="container pt-10 pb-10">
                 <div class="section-content">
                     <div class="row">
