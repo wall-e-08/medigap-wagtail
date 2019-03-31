@@ -3,27 +3,37 @@ from django.db import models
 from modelcluster.fields import ParentalKey
 from modelcluster.models import ClusterableModel
 
-from wagtail.admin.edit_handlers import FieldPanel, InlinePanel
+from wagtail.admin.edit_handlers import FieldPanel, InlinePanel, TabbedInterface, ObjectList
 from wagtail.core.models import Page, Orderable
 from wagtail.contrib.settings.models import BaseSetting
 from wagtail.contrib.settings.registry import register_setting
+from wagtail.images.edit_handlers import ImageChooserPanel
 
 
 @register_setting(icon='pick')
 class PrimarySiteSettings(BaseSetting):
-    favicon = models.ImageField(
-        blank=True, null=True, upload_to='home/',
-        help_text="Icon in title bar"
+    favicon = models.ForeignKey(
+        'wagtailimages.Image',
+        on_delete=models.SET_NULL,
+        blank=True, null=True,
+        help_text="Icon in title bar",
+        related_name='favicon'
     )
 
-    logo = models.ImageField(
-        blank=True, null=True, upload_to='home/',
-        help_text="Navbar Logo (Dark). Max height fixed by CSS"
+    logo = models.ForeignKey(
+        'wagtailimages.Image',
+        on_delete=models.SET_NULL,
+        blank=True, null=True,
+        help_text="Navbar Logo (Dark). Max height fixed by CSS",
+        related_name='logo'
     )
 
-    footer_logo = models.ImageField(
-        blank=True, null=True, upload_to='home/',
-        help_text="Footer Logo (light)"
+    footer_logo = models.ForeignKey(
+        'wagtailimages.Image',
+        on_delete=models.SET_NULL,
+        blank=True, null=True,
+        help_text="Footer Logo (light)",
+        related_name='footer_logo'
     )
 
     phone_number = models.CharField(blank=True, null=True, max_length=20)
@@ -41,6 +51,21 @@ class PrimarySiteSettings(BaseSetting):
     )
 
     copyright_text = models.CharField(blank=True, null=True, max_length=250)
+
+    base_panel = [FieldPanel('qt_heading'), FieldPanel('copyright_text'), ]
+    phone_panel = [FieldPanel('phone_number'), FieldPanel('txt_ph_nmb'), ]
+
+    img_panel = [
+        ImageChooserPanel('favicon'),
+        ImageChooserPanel('logo'),
+        ImageChooserPanel('footer_logo'),
+    ]
+
+    edit_handler = TabbedInterface([
+        ObjectList(img_panel, heading='Images'),
+        ObjectList(base_panel, heading='Base'),
+        ObjectList(phone_panel, heading='Phone number'),
+    ])
 
     class Meta:
         verbose_name = 'Site Identity'
@@ -89,8 +114,10 @@ class HomePage(Page):
 
     # banner
     banner_slogan = models.CharField(blank=True, null=True, max_length=150)
-    banner_bg = models.ImageField(
-        blank=True, null=True, upload_to='home/',
+    banner_bg = models.ForeignKey(
+        'wagtailimages.Image',
+        on_delete=models.SET_NULL,
+        blank=True, null=True,
         help_text="Background Image of Banner"
     )
     banner_qt_text = models.CharField(
@@ -100,7 +127,7 @@ class HomePage(Page):
     )
 
     content_panels = Page.content_panels + [
-        FieldPanel('banner_slogan'), FieldPanel('banner_bg'), FieldPanel('banner_qt_text'),
+        FieldPanel('banner_slogan'), ImageChooserPanel('banner_bg'), FieldPanel('banner_qt_text'),
         InlinePanel('achievement_count', label="Achievement Name & Count"),
     ]
 
@@ -128,8 +155,10 @@ class PartnerItem(Orderable):
         related_name='partner_img_panel'
     )
 
-    logo = models.ImageField(
-        blank=True, null=True, upload_to='settings/',
+    logo = models.ForeignKey(
+        'wagtailimages.Image',
+        on_delete=models.SET_NULL,
+        blank=True, null=True,
         help_text="Business partner's Logo"
     )
 
@@ -145,7 +174,7 @@ class PartnerItem(Orderable):
     )
 
     panels = [
-        FieldPanel('logo'),
+        ImageChooserPanel('logo'),
         FieldPanel('alt_text'),
         FieldPanel('ptnr_url'),
     ]

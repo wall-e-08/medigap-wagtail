@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% load static %}
+{% load static wagtailcore_tags wagtailimages_tags %}
 
 {% block content %}
     <!-- Modal -->
@@ -76,7 +76,7 @@
     <div class="main-content">
         <!-- Section: Home Banner -->
         <section id="home" class="divider parallax overlay-img-bg" data-stellar-background-ratio="0.5"
-                 data-bg-img="{% if page.banner_bg %}{{ page.banner_bg.url }}{% else %}{% static 'images/bg/bg3.jpg' %}{% endif %}">
+                 data-bg-img="{% if page.banner_bg.file %}{{ page.banner_bg.file.url }}{% else %}{% static 'images/bg/bg3.jpg' %}{% endif %}">
             <div class="display-table">
                 <div class="display-table-cell">
                     <div class="container">
@@ -119,7 +119,7 @@
                         </div>
                     </div>
                     <div class="col-md-8 wow fadeInLeft animation-delay1">
-                        <div>
+                        {% comment %}<div>
                             <h3>In Search Of A Good And <span>Health Insurance</span> right now?</h3>
                             <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Atque commodi molestiae autem fugit consectetur dolor ullam illo ipsa numquam, quod iusto enim ipsum amet iusto
                                 amet consec utem fugit consllo ipsa numquam dolor ullam illo, quod iusto enim ipsum amet iusto amet consec.</p>
@@ -161,7 +161,7 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </div>{% endcomment %}
                     </div>
                     <div class="col-md-4 wow fadeInRight animation-delay4">
                         <img src="{% static 'images/about/dc2.png' %}" alt="">
@@ -587,10 +587,10 @@
                         <div class="col-md-12">
                             <div class="owl-carousel-6col transparent text-center owl-nav-top">
                                 {% for partner_logo in settings.home.PartnerImgSettings.partner_img_panel.all %}
-                                    {% if partner_logo.logo %}
+                                    {% if partner_logo.logo.file %}
                                         <div class="pr-10 pl-10 item">
                                             {% if partner_logo.ptnr_url %}<a href="{{ partner_logo.ptnr_url }}">{% endif %}
-                                                <img src="{{ partner_logo.logo.url }}" alt="{{ partner_logo.alt_text|default:"" }}">
+                                                <img src="{{ partner_logo.logo.file.url }}" alt="{{ partner_logo.alt_text|default:"" }}">
                                             {% if partner_logo.ptnr_url %}</a>{% endif %}
                                         </div>
                                     {% endif %}
