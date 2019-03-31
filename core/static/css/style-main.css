@@ -422,6 +422,10 @@ iframe {
   max-width: 160px;
   position: relative;
 }
+.title-icon:before,
+.title-icon:after {
+    background-color: #f36438;
+}
 .title-icon::after {
   content: "";
   height: 2px;
@@ -8781,4 +8785,17 @@ form.form-animated-field textarea:valid ~ label {
 
 #home {
     min-height: 70vh;
+}
+
+.themed-heading{
+    font-size: 40px;
+    font-weight: 700;
+    font-family: 'Open Sans', sans-serif;
+}
+.themed-heading > span {
+    color: #0c67b8 !important;
+}
+
+.service-icon-box {
+    display: flex;
 }
