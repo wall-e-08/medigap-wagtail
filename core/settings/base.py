@@ -14,6 +14,11 @@ https://docs.djangoproject.com/en/2.1/ref/settings/
 import os
 import dj_database_url
 
+from PIL import ImageFile
+
+# fix: truncated image upload bug in imagechooserpanel
+ImageFile.LOAD_TRUNCATED_IMAGES = True
+
 PROJECT_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 BASE_DIR = os.path.dirname(PROJECT_DIR)
 
@@ -173,3 +178,16 @@ WAGTAIL_SITE_NAME = "core"
 # Base URL to use when referring to full URLs within the Wagtail admin backend -
 # e.g. in notification emails. Don't include '/admin' or a trailing slash
 BASE_URL = 'http://example.com'
+
+# wagtail rich text
+RICH_TEXT_BLOCK = ['h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'ol', 'ul', 'align']
+RICH_TEXT_INLINE = ['bold', 'italic', 'monospace']
+RICH_TEXT_ENTITIES = ['image', 'embed', 'link', 'document-link']
+RICH_TEXT_MISC = ['hr', 'calour palette']
+
+RICH_TEXT_FEATURE_TYPE_A = (
+    RICH_TEXT_BLOCK +
+    RICH_TEXT_INLINE +
+    RICH_TEXT_ENTITIES +
+    RICH_TEXT_MISC
+)

@@ -108,99 +108,54 @@
             </div>
         </section>
 
-        <!-- Section: about -->
+        <!-- Section: why choose us -->
         <section id="about">
             <div class="container pb-0">
                 <div class="row">
                     <div class="col-xs-12 text-center">
-                        <h2 class="text-uppercase mt-0 mb-0 font-opensans themed-heading">Why People <span>Choose</span> Us ?</h2>
+                        <h2 class="text-uppercase mt-0 mb-0 font-opensans themed-heading">{{ page.why_choose_heading|default:""|safe }}</h2>
                         <div class="title-icon mb-20">
-                            <img class="mb-10" src="/static/images/title-icon.png" alt="">
+                            <img class="mb-10" src="{% static 'images/title-icon.png' %}" alt="">
                         </div>
                     </div>
                     <div class="col-md-8 wow fadeInLeft animation-delay1">
-                        {% comment %}<div>
-                            <h3>In Search Of A Good And <span>Health Insurance</span> right now?</h3>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Atque commodi molestiae autem fugit consectetur dolor ullam illo ipsa numquam, quod iusto enim ipsum amet iusto
-                                amet consec utem fugit consllo ipsa numquam dolor ullam illo, quod iusto enim ipsum amet iusto amet consec.</p>
-                        </div>
+                        <div>{{ page.why_choose_desc |default:""|safe }}</div>
                         <div class="row mt-20 mb-sm-30">
-                            <div class="col-sm-6">
-                                <div class="service-icon-box">
-                                    <a href="#" class="icon pull-left mr-10"><i class="flaticon-medical-ambulance14"></i></a>
-                                    <div>
-                                        <h4 class="mt-0 mb-0">Self-Employed</h4>
-                                        <p class="">Lorem ipsum dolor sit amet consec tetur elit</p>
+                            {% for wcit in page.whychoose_icontext.all %}
+                                <div class="col-sm-6">
+                                    <div class="service-icon-box">
+                                        <a href="#" class="icon pull-left mr-10">
+                                            <i class="{{ wcit.icon|default:"" }}"></i>
+                                        </a>
+                                        <div>
+                                            <h4 class="mt-0 mb-0">{{ wcit.name|default:"" }}</h4>
+                                            <p class="">{{ wcit.desc|default:"" }}</p>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="col-sm-6">
-                                <div class="service-icon-box">
-                                    <a href="#" class="icon pull-left mr-10"><i class="flaticon-medical-illness"></i></a>
-                                    <div>
-                                        <h4 class="mt-0 mb-0">Single Parents</h4>
-                                        <p class="">Lorem ipsum dolor sit amet consec tetur elit</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-sm-6">
-                                <div class="service-icon-box">
-                                    <a href="#" class="icon pull-left mr-10"><i class="flaticon-medical-stethoscope10"></i></a>
-                                    <div>
-                                        <h4 class="mt-0 mb-0">Avoid Tax Penalty</h4>
-                                        <p class="">Lorem ipsum dolor sit amet consec tetur elit</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-sm-6">
-                                <div class="service-icon-box">
-                                    <a href="#" class="icon pull-left mr-10"><i class="flaticon-medical-medical51"></i></a>
-                                    <div>
-                                        <h4 class="mt-0 mb-0">Who Received Large Rate Increase</h4>
-                                        <p class="">Lorem ipsum dolor sit amet consec tetur elit</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>{% endcomment %}
+                            {% endfor %}
+                        </div>
                     </div>
                     <div class="col-md-4 wow fadeInRight animation-delay4">
-                        <img src="{% static 'images/about/dc2.png' %}" alt="">
+                        <img src="{% if page.why_choose_img.file %}{{ page.why_choose_img.file.url }}{% endif %}" alt="{{ page.why_choose_img.title|default:"Happy Customer" }}">
                     </div>
                 </div>
             </div>
         </section>
 
-        <section class="divider parallax layer-overlay overlay-theme-colored2-9" data-bg-img="{% static 'images/bg/bg5.jpg' %}" data-parallax-ratio="0.7">
+        <!-- Section: Achievement -->
+        <section class="divider parallax layer-overlay overlay-theme-colored2-9" data-bg-img="{% if page.achiev_bg.file %}{{ page.achiev_bg.file.url }}{% endif %}" data-parallax-ratio="0.7">
             <div class="container pt-60 pb-60">
                 <div class="row">
-                    <div class="col-xs-6 col-sm-6 col-md-3 mb-md-50">
-                        <div class="funfact text-center">
-                            <i class="pe-7s-smile mt-5 text-white"></i>
-                            <h2 data-animation-duration="2000" data-value="9751" class="animate-number text-white font-42 font-weight-500">0</h2>
-                            <h5 class="text-white text-uppercase font-weight-600">Happy Customer</h5>
+                    {% for acv in page.achievement_count.all %}
+                        <div class="col-xs-6 col-sm-6 col-md-3 mb-md-50">
+                            <div class="funfact text-center">
+                                <i class="{{ acv.icon|default:"" }} mt-5 text-white"></i>
+                                <h2 data-animation-duration="2000" data-value="{{ acv.count|default:"0" }}" class="animate-number text-white font-42 font-weight-500">0</h2>
+                                <h5 class="text-white text-uppercase font-weight-600">{{ acv.name|default:"-" }}</h5>
+                            </div>
                         </div>
-                    </div>
-                    <div class="col-xs-6 col-sm-6 col-md-3 mb-md-50">
-                        <div class="funfact text-center">
-                            <i class="pe-7s-rocket mt-5 text-white"></i>
-                            <h2 data-animation-duration="2000" data-value="844" class="animate-number text-white font-42 font-weight-500">0</h2>
-                            <h5 class="text-white text-uppercase font-weight-600">Insurance Coverage</h5>
-                        </div>
-                    </div>
-                    <div class="col-xs-6 col-sm-6 col-md-3 mb-md-50">
-                        <div class="funfact text-center">
-                            <i class="pe-7s-add-user mt-5 text-white"></i>
-                            <h2 data-animation-duration="2000" data-value="121" class="animate-number text-white font-42 font-weight-500">0</h2>
-                            <h5 class="text-white text-uppercase font-weight-600">Our Agents</h5>
-                        </div>
-                    </div>
-                    <div class="col-xs-6 col-sm-6 col-md-3 mb-md-50">
-                        <div class="funfact text-center">
-                            <i class="pe-7s-global mt-5 text-white"></i>
-                            <h2 data-animation-duration="2000" data-value="24" class="animate-number text-white font-42 font-weight-500">0</h2>
-                            <h5 class="text-white text-uppercase font-weight-600">Service Points</h5>
-                        </div>
-                    </div>
+                    {% endfor %}
                 </div>
             </div>
         </section>
@@ -211,58 +166,25 @@
                 <div class="section-title text-center">
                     <div class="row">
                         <div class="col-md-8 col-md-offset-2">
-                            <h2 class="text-uppercase mt-0 line-height-1 themed-heading">Our <span>Services</span></h2>
+                            <h2 class="text-uppercase mt-0 line-height-1 themed-heading">{{ page.srvc_heading }}</h2>
                             <div class="title-icon">
                                 <img class="mb-10" src="{% static 'images/title-icon.png' %}" alt="">
                             </div>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Rem autem<br> voluptatem obcaecati!</p>
+                            <p>{{ page.srvc_desc }}</p>
                         </div>
                     </div>
                 </div>
                 <div class="section-content">
                     <div class="row" style="display: flex; flex-wrap: wrap;">
-                        <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4 pb-30">
-                            <div class="icon-box text-center bg-white bg-hover-theme-colored2 p-30" style="height: 100%;">
-                                <i class="fa fa-user-md font-weight-600 text-theme-colored2 font-38"></i>
-                                <h3 class="mt-20">Qualified Doctors</h3>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Mollitia quasiqui invent cumque nulla!</p>
+                        {% for svcit in page.services_icontext.all %}
+                            <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4 pb-30">
+                                <div class="icon-box text-center bg-white bg-hover-theme-colored2 p-30 h-100">
+                                    <i class="{{ svcit.icon|default:"" }} font-weight-600 text-theme-colored{% if forloop.counter|divisibleby:2 %}2{% endif %} font-38"></i>
+                                    <h3 class="mt-20">{{ svcit.name|default:"" }}</h3>
+                                    <p>{{ svcit.desc|default:"" }}</p>
+                                </div>
                             </div>
-                        </div>
-                        <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4 pb-30">
-                            <div class="icon-box text-center bg-white bg-hover-theme-colored2 p-30" style="height: 100%;">
-                                <i class="fa fa-medkit font-weight-600 text-theme-colored font-38"></i>
-                                <h3 class="mt-20">Secured Information</h3>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Mollitia quasiqui invent cumque nulla!</p>
-                            </div>
-                        </div>
-                        <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4 pb-30">
-                            <div class="icon-box text-center bg-white bg-hover-theme-colored2 p-30" style="height: 100%;">
-                                <i class="flaticon-medical-hospital36 font-weight-600 text-theme-colored2 font-38"></i>
-                                <h3 class="mt-20">Licensed Agent</h3>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Mollitia quasiqui invent cumque nulla!</p>
-                            </div>
-                        </div>
-                        <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4 pb-30">
-                            <div class="icon-box text-center bg-white bg-hover-theme-colored2 p-30" style="height: 100%;">
-                                <i class="fa fa-phone font-weight-600 text-theme-colored font-38"></i>
-                                <h3 class="mt-20">One Call</h3>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Mollitia quasiqui invent cumque nulla!</p>
-                            </div>
-                        </div>
-                        <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4 pb-30">
-                            <div class="icon-box text-center bg-white bg-hover-theme-colored2 p-30" style="height: 100%;">
-                                <i class="flaticon-medical-hospital16 font-weight-600 text-theme-colored2 font-38"></i>
-                                <h3 class="mt-20">Free Agent Connection</h3>
-                                <p>Our Agents will Cost You Nothing. It's absolutely FREE</p>
-                            </div>
-                        </div>
-                        <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4 pb-30">
-                            <div class="icon-box text-center bg-white bg-hover-theme-colored2 p-30" style="height: 100%;">
-                                <i class="flaticon-medical-hospital37 font-weight-600 text-theme-colored font-38"></i>
-                                <h3 class="mt-20">Trustworthy</h3>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Mollitia quasiqui invent cumque nulla!</p>
-                            </div>
-                        </div>
+                        {% endfor %}
                     </div>
                 </div>
             </div>

@@ -3,11 +3,16 @@ from django.db import models
 from modelcluster.fields import ParentalKey
 from modelcluster.models import ClusterableModel
 
-from wagtail.admin.edit_handlers import FieldPanel, InlinePanel, TabbedInterface, ObjectList
+from wagtail.admin.edit_handlers import FieldPanel, InlinePanel, TabbedInterface, ObjectList, MultiFieldPanel
+from wagtail.core.fields import RichTextField
 from wagtail.core.models import Page, Orderable
 from wagtail.contrib.settings.models import BaseSetting
 from wagtail.contrib.settings.registry import register_setting
 from wagtail.images.edit_handlers import ImageChooserPanel
+
+from core.settings.base import RICH_TEXT_FEATURE_TYPE_A
+
+SPAN_TAG_HELP_TEXT = 'use <span> tag for colored text'
 
 
 @register_setting(icon='pick')
@@ -118,7 +123,8 @@ class HomePage(Page):
         'wagtailimages.Image',
         on_delete=models.SET_NULL,
         blank=True, null=True,
-        help_text="Background Image of Banner"
+        help_text="Background Image of Banner",
+        related_name="banner_bg",
     )
     banner_qt_text = models.CharField(
         blank=True, null=True, max_length=250,
@@ -126,10 +132,86 @@ class HomePage(Page):
         verbose_name="Banner QUOTE Text",
     )
 
+    # Why Choose Us / About
+    why_choose_heading = models.CharField(
+        blank=True, null=True, max_length=250,
+        help_text="Main Heading, " + SPAN_TAG_HELP_TEXT,
+        verbose_name="Heading"
+    )
+
+    why_choose_desc = RichTextField(
+        blank=True, null=True,
+        features=RICH_TEXT_FEATURE_TYPE_A,
+        help_text="description of 'Why choose us' section",
+        verbose_name="Description",
+    )
+    why_choose_img = models.ForeignKey(
+        'wagtailimages.Image',
+        on_delete=models.SET_NULL,
+        blank=True, null=True,
+        help_text="Why Choose Image (Transparent Image will give satisfactory result)",
+        verbose_name="Side Image",
+        related_name="why_choose_img",
+    )
+
+    # Achievement
+    achiev_bg = models.ForeignKey(
+        'wagtailimages.Image',
+        on_delete=models.SET_NULL,
+        blank=True, null=True,
+        help_text="Parallax Background image for Achievement section",
+        verbose_name="Background Image",
+        related_name="achievement_bg",
+    )
+
+    # Services
+    srvc_heading = models.CharField(
+        blank=True, null=True, max_length=100,
+        help_text="Main Heading, " + SPAN_TAG_HELP_TEXT,
+        verbose_name="Heading",
+    )
+    srvc_desc = models.CharField(
+        blank=True, null=True, max_length=250,
+        verbose_name="Description",
+    )
+
     content_panels = Page.content_panels + [
         FieldPanel('banner_slogan'), ImageChooserPanel('banner_bg'), FieldPanel('banner_qt_text'),
-        InlinePanel('achievement_count', label="Achievement Name & Count"),
+        MultiFieldPanel(
+            [
+                FieldPanel('why_choose_heading'),
+                FieldPanel('why_choose_desc', classname="full"),
+                ImageChooserPanel('why_choose_img'),
+                InlinePanel('whychoose_icontext', label="List of Why Choose Us"),
+            ],
+            heading="Why Choose Us", classname="collapsible",
+        ),
+        MultiFieldPanel(
+            [
+                ImageChooserPanel('achiev_bg'),
+                InlinePanel('achievement_count', label="Name & Count"),
+            ],
+            heading="Achievement", classname="collapsible",
+        ),
+        MultiFieldPanel(
+            [
+                FieldPanel('srvc_heading'),
+                FieldPanel('srvc_desc'),
+                InlinePanel('services_icontext', label="Icons with Texts"),
+            ],
+            heading="Services", classname="collapsible",
+        ),
     ]
+
+
+class BaseIconText(models.Model):
+    icon = models.CharField(
+        max_length=50,
+        help_text="Font awesome(mainly) or Flat icon CSS class name",
+        verbose_name='Icon CSS Class name',
+    )
+    name = models.CharField(max_length=80, help_text="Option's name")
+    desc = models.CharField(max_length=200, help_text="Option's description", verbose_name='Description')
 
 
 class AchievementCount(Orderable):
@@ -140,11 +222,17 @@ class AchievementCount(Orderable):
     )
 
     name = models.CharField(max_length=50, help_text="Name of the Achievement")
-    count = models.CharField(max_length=6, help_text="Achievement counts (eg: 5,000)")
+    count = models.IntegerField(help_text="Achievement counts (eg: 5000)")
+    icon = models.CharField(
+        max_length=50,
+        help_text="Font awesome(mainly) or Flat icon CSS class name",
+        verbose_name='Icon CSS Class name',
+    )
 
     panels = [
         FieldPanel('name'),
         FieldPanel('count'),
+        FieldPanel('icon'),
     ]
 
 
@@ -177,6 +265,34 @@ class PartnerItem(Orderable):
         ImageChooserPanel('logo'),
         FieldPanel('alt_text'),
         FieldPanel('ptnr_url'),
+    ]
+
+
+class WhyChooseIconText(Orderable, BaseIconText):
+    page = ParentalKey(
+        HomePage,
+        on_delete=models.CASCADE,
+        related_name='whychoose_icontext'
+    )
+
+    panels = [
+        FieldPanel('name'),
+        FieldPanel('icon'),
+        FieldPanel('desc'),
+    ]
+
+
+class ServicesIconText(Orderable, BaseIconText):
+    page = ParentalKey(
+        HomePage,
+        on_delete=models.CASCADE,
+        related_name='services_icontext'
+    )
+
+    panels = [
+        FieldPanel('name'),
+        FieldPanel('icon'),
+        FieldPanel('desc'),
     ]
 
 
