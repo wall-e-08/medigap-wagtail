@@ -185,15 +185,15 @@ form {
     height: 100% !important;
 }
 .full-centered {
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
-    -webkit-box-pack: center;
-        -ms-flex-pack: center;
-            justify-content: center;
-    -webkit-box-align: center;
-        -ms-flex-align: center;
-            align-items: center;
+    display: -webkit-box !important;
+    display: -ms-flexbox !important;
+    display: flex !important;
+    -webkit-box-pack: center !important;
+        -ms-flex-pack: center !important;
+            justify-content: center !important;
+    -webkit-box-align: center !important;
+        -ms-flex-align: center !important;
+            align-items: center !important;
 }
 /* -------- Custom Font Family ---------- */
 .font-opensans {
@@ -6220,7 +6220,7 @@ blockquote p {
   margin-bottom: 30px;
   overflow: hidden;
 }
-.service-icon-box a {
+.service-icon-box .icon {
   background: #eeeeee;
   color: #fff;
   display: inline-block;
@@ -6233,7 +6233,7 @@ blockquote p {
   transition: all 0.3s ease-in-out 0s;
   width: 70px;
 }
-.service-icon-box a i {
+.service-icon-box .icon i {
   font-size: 28px;
 }
 .service-icon-box:hover a i {
@@ -8487,7 +8487,7 @@ blockquote p {
   margin-bottom: 30px;
   overflow: hidden;
 }
-.service-icon-box a {
+.service-icon-box .icon {
   background: #eeeeee;
   color: #fff;
   display: inline-block;
@@ -8500,7 +8500,7 @@ blockquote p {
   transition: all 0.3s ease-in-out 0s;
   width: 70px;
 }
-.service-icon-box a i {
+.service-icon-box .icon i {
   font-size: 28px;
 }
 .service-icon-box:hover a i {
@@ -8825,4 +8825,8 @@ form.form-animated-field textarea:valid ~ label {
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
+}
+
+.service-icon-box .icon > img {
+    width: 60%;
 }
