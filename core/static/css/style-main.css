@@ -184,6 +184,17 @@ form {
 .h-100 {
     height: 100% !important;
 }
+.full-centered {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+}
 /* -------- Custom Font Family ---------- */
 .font-opensans {
   font-family: 'Open Sans', sans-serif;
@@ -1299,8 +1310,12 @@ section > .container-fluid {
 }
 /* header widget contact info box */
 .header-widget-contact-info-box {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  justify-content: flex-end;
+  -webkit-box-pack: end;
+      -ms-flex-pack: end;
+          justify-content: flex-end;
 }
 @media only screen and (max-width: 991px) {
   .header-widget-contact-info-box {
@@ -8681,13 +8696,20 @@ body.has-fixed-footer .main-content {
 }
 
 .btn-stack-top {
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
-    justify-content: space-between;
+    -webkit-box-pack: justify;
+        -ms-flex-pack: justify;
+            justify-content: space-between;
 }
 
 @media (max-width: 580px) {
     .btn-stack-top {
-        flex-direction: column;
+        -webkit-box-orient: vertical;
+        -webkit-box-direction: normal;
+            -ms-flex-direction: column;
+                flex-direction: column;
     }
 }
 
@@ -8800,5 +8822,7 @@ form.form-animated-field textarea:valid ~ label {
 }
 
 .service-icon-box {
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
 }
