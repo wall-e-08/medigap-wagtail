@@ -129,7 +129,7 @@ class FacilityBlock(blocks.StructBlock):
 
 class HomePage(Page):
     max_count = 1
-    subpage_types = []
+    subpage_types = ['article.ArticleIndexPage', ]
     parent_page_types = ['wagtailcore.Page']
 
     # banner
