@@ -85,7 +85,7 @@
                     <div class="hidden-xs hidden-sm col-md-offset-4 col-md-5 text-right" id="head-call-btn">
                         <div class="head-call-btn-bg">
                             <p class="mb-0 line-height-1">Call us now</p>
-                            <a href="tel:{{ settings.home.PrimarySiteSettings.phone_number|default:"" }}" class="widget no-border sm-text-center mt-10 mb-10 m-0 line-height-1">
+                            <a href="tel:{{ settings.home.PrimarySiteSettings.phone_number|default:""|cut:" " }}" class="widget no-border sm-text-center mt-10 mb-10 m-0 line-height-1">
                                 <!--<i class="fa fa-phone text-theme-colored2 mt-5 mr-sm-0"></i>-->
                                 <span class="font-weight-700 text-theme-colored m-0"> {{ settings.home.PrimarySiteSettings.phone_number|default:"" }}</span>
                             </a>

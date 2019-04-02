@@ -3,11 +3,14 @@ from django.db import models
 from modelcluster.fields import ParentalKey
 from modelcluster.models import ClusterableModel
 
-from wagtail.admin.edit_handlers import FieldPanel, InlinePanel, TabbedInterface, ObjectList, MultiFieldPanel
-from wagtail.core.fields import RichTextField
+from wagtail.admin.edit_handlers import (FieldPanel, InlinePanel, TabbedInterface,
+                                         ObjectList, MultiFieldPanel, StreamFieldPanel)
+from wagtail.core import blocks
+from wagtail.core.fields import RichTextField, StreamField
 from wagtail.core.models import Page, Orderable
 from wagtail.contrib.settings.models import BaseSetting
 from wagtail.contrib.settings.registry import register_setting
+from wagtail.images.blocks import ImageChooserBlock
 from wagtail.images.edit_handlers import ImageChooserPanel
 
 from core.settings.base import RICH_TEXT_FEATURE_TYPE_A
@@ -112,6 +115,18 @@ class PartnerImgSettings(BaseSetting, ClusterableModel):
         verbose_name = 'Partner Logo'
 
 
+# Blocks
+class FacilityBlock(blocks.StructBlock):
+    title = blocks.CharBlock(required=True, help_text="Add your title")
+    image = ImageChooserBlock(required=True, help_text="White colored image preferred")
+    desc = blocks.TextBlock(required=True, max_length=500, verbose_name="Description")
+
+    class Meta:
+        template = "blocks/facility_block.html"
+        icon = "placeholder"
+        label = "Insurance Facilities"
+
+
 class HomePage(Page):
     max_count = 1
     subpage_types = []
@@ -175,6 +190,17 @@ class HomePage(Page):
         verbose_name="Description",
     )
 
+    # Insurance Policilies
+    ins_heading = models.CharField(
+        blank=True, null=True, max_length=100,
+        help_text="Main Heading, " + SPAN_TAG_HELP_TEXT,
+        verbose_name="Heading",
+    )
+    ins_desc = models.CharField(
+        blank=True, null=True, max_length=250,
+        verbose_name="Description",
+    )
+
     content_panels = Page.content_panels + [
         FieldPanel('banner_slogan'), ImageChooserPanel('banner_bg'), FieldPanel('banner_qt_text'),
         MultiFieldPanel(
@@ -200,6 +226,14 @@ class HomePage(Page):
                 InlinePanel('services_icontext', label="Icons with Texts"),
             ],
             heading="Services", classname="collapsible",
+        ),
+        MultiFieldPanel(
+            [
+                FieldPanel('ins_heading'),
+                FieldPanel('ins_desc'),
+                InlinePanel('ins_policy', label="Policy"),
+            ],
+            heading="Insurance Policy", classname="collapsible",
         ),
     ]
 
@@ -293,6 +327,40 @@ class ServicesIconText(Orderable, BaseIconText):
         FieldPanel('name'),
         FieldPanel('icon'),
         FieldPanel('desc'),
+    ]
+
+
+class InsurancePolicy(Orderable):
+    page = ParentalKey(
+        HomePage,
+        on_delete=models.CASCADE,
+        related_name='ins_policy'
+    )
+
+    name = models.CharField(max_length=50)
+    desc = RichTextField(
+        features=RICH_TEXT_FEATURE_TYPE_A,
+        verbose_name="Description",
+    )
+    img = models.ForeignKey(
+        'wagtailimages.Image',
+        on_delete=models.SET_NULL,
+        blank=True, null=True,
+        help_text="Image Besides Insurance Policy",
+        verbose_name="Side Image"
+    )
+
+    facilities = StreamField(
+        [("facility", FacilityBlock()),],
+        blank=True, null=True,
+        verbose_name="Insurance Facilities",
+    )
+
+    panels = [
+        FieldPanel('name'),
+        FieldPanel('desc'),
+        ImageChooserPanel('img'),
+        StreamFieldPanel("facilities"),
     ]
 
 

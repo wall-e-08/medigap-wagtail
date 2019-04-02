@@ -1,0 +1,17 @@
+{% load wagtailimages_tags %}
+
+<div class="col-sm-6">
+    <div class="service-icon-box">
+        {#<a href="#" class="icon pull-left mr-20 full-centered">#}
+        <span class="icon pull-left mr-20 full-centered">
+            {% comment %}<i class="flaticon-medical-ambulance14"></i>{% endcomment %}
+            {% comment %}<img src="http://qturbo.dev.concitus.com/media/benefits/phcs.png" alt="">{% endcomment %}
+            {% image self.image original %}
+        </span>
+        {#</a>#}
+        <div>
+            <h4 class="mt-0 mb-0">{{ self.title|safe }}</h4>
+            <p class="">{{ self.desc|safe }}</p>
+        </div>
+    </div>
+</div>

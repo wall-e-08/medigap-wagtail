@@ -6220,19 +6220,6 @@ blockquote p {
   margin-bottom: 30px;
   overflow: hidden;
 }
-.service-icon-box .icon {
-  background: #eeeeee;
-  color: #fff;
-  display: inline-block;
-  height: 70px;
-  line-height: 80px;
-  text-align: center;
-  text-decoration: none;
-  -webkit-transition: all 0.3s ease-in-out 0s;
-  -o-transition: all 0.3s ease-in-out 0s;
-  transition: all 0.3s ease-in-out 0s;
-  width: 70px;
-}
 .service-icon-box .icon i {
   font-size: 28px;
 }
@@ -8492,13 +8479,13 @@ blockquote p {
   color: #fff;
   display: inline-block;
   height: 70px;
+  width: 70px;
   line-height: 80px;
   text-align: center;
   text-decoration: none;
   -webkit-transition: all 0.3s ease-in-out 0s;
   -o-transition: all 0.3s ease-in-out 0s;
   transition: all 0.3s ease-in-out 0s;
-  width: 70px;
 }
 .service-icon-box .icon i {
   font-size: 28px;
@@ -8829,4 +8816,11 @@ form.form-animated-field textarea:valid ~ label {
 
 .service-icon-box .icon > img {
     width: 60%;
+    height: auto;
+}
+
+@media (max-width: 768px) {
+    .themed-heading {
+        font-size: 30px;
+    }
 }
