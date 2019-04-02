@@ -78,7 +78,7 @@
             <div class="container">
                 <div class="row">
                     <div class="col-xs-6 col-sm-3 col-md-3 text-left">
-                        <a class="menuzord-brand pull-left flip sm-pull-center mb-15" href="#">
+                        <a class="menuzord-brand pull-left flip sm-pull-center mb-15" href="{% url 'wagtail_serve' '' %}">
                             <img src="{% if settings.home.PrimarySiteSettings.logo.file %}{{ settings.home.PrimarySiteSettings.logo.file.url }}{% else %}{% static 'images/logo-wide.png' %}{% endif %}" alt="Medigap">
                         </a>
                     </div>
@@ -105,7 +105,7 @@
                     <div class="collapse navbar-collapse menuzord green menuzord-responsive" id="top-main-menu">
                         <ul class="menuzord-menu menuzord-indented scrollable">
                             <li class="active">
-                                <a href="#">Home</a>
+                                <a href="{% url 'wagtail_serve' '' %}">Home</a>
                             </li>
                             <li>
                                 <a href="#">Features</a>
@@ -138,7 +138,7 @@
                             <a class="btn btn-colored btn-flat btn-theme-colored2 mt-10 mb-10 pt-10 pb-10" data-toggle="modal" data-target="#quote-modal">Get Free Quote</a>
                         </div>-->
                         <ul class="menuzord-menu">
-                            <li class="active"><a href="#">Home</a></li>
+                            <li class="active"><a href="{% url 'wagtail_serve' '' %}">Home</a></li>
                             <li><a href="#">Life / Final Expanse</a></li>
                             <li><a href="#">Dental Vision</a></li>
                             <li><a href="#">Medigap</a></li>
@@ -156,6 +156,10 @@
             </div>
         </div>
     </header>
+{% endblock %}
+
+{% block quote_modal %}
+    {% include 'includes/quote_form_modal.html' %}
 {% endblock %}
 
 {% block content %}{% endblock %}
@@ -191,7 +195,7 @@
                     <div class="widget dark">
                         <h5 class="widget-title">Useful Links</h5>
                         <ul class="list-border">
-                            <li><a href="#">Home</a></li>
+                            <li><a href="{% url 'wagtail_serve' '' %}">Home</a></li>
                             <li><a href="#">About us</a></li>
                             <li><a href="#">Contact</a></li>
                         </ul>

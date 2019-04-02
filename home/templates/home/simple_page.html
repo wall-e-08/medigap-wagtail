@@ -1,0 +1,74 @@
+{% extends "base.html" %}
+{% load static wagtailcore_tags wagtailimages_tags %}
+
+{% block extra_css %}
+    <style>
+        #simple-page-heading {
+            background: url('{{ page.heading_bg.file.url }}') center center fixed;
+            -webkit-background-size: cover;
+            background-size: cover;
+        }
+        #slogan {
+            background:url('{{ page.slogan_img.file.url }}') #eef0ff no-repeat 92% 50%;
+            -webkit-background-size: auto 200px;
+            background-size: auto 200px;
+            min-height: 250px;
+            font-size: 30px;
+            line-height: 1.4;
+            color: #000;
+        }
+        #content {
+            font-size: 18px;
+            line-height: 1.4;
+        }
+    </style>
+{% endblock %}
+
+{% block content %}
+    <!-- Section: Heading -->
+    <section id="simple-page-heading" class="inner-header layer-overlay overlay-dark-5">
+        <div class="container pt-60 pb-60">
+            <!-- Section Content -->
+            <div class="section-content">
+                <div class="row">
+                    <div class="col-md-12 text-center">
+                        <h2 class="text-white font-48 font-weight-700 mb-25 font-opensans title">{{ page.title }}</h2>
+                    </div>
+                    <div class="col-md-6 col-md-offset-3">
+                        <div class="p-25 pb-40 banner-zip-form-wrapper">
+                            <h3 class="m-0 mb-30 text-center">
+                                <span class="text-theme-colored2">Get a</span>
+                                <span class="text-theme-colored">Quote</span>
+                            </h3>
+                            <form id="home_appointment_form">
+                                <div class="input-group">
+                                    <input type="text" placeholder="Enter Zip code" class="form-control input-lg font-16" style="height: 45px;">
+                                    <span class="input-group-btn">
+                                        <button class="btn btn-colored btn-theme-colored btn-xs m-0 font-14 pl-60 pr-60" type="button"
+                                                data-toggle="modal" data-target="#quote-modal" style="height: 45px;">Quote</button>
+                                    </span>
+                                </div>
+                            </form>
+                            <p class="text-center text-black-777">{{ page.banner_qt_text|default:"" }}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section: Slogan -->
+    <section id="slogan">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-10 col-md-offset-1 text-center">
+                    {{ page.slogan_txt|default:page.title|safe }}
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="content">
+        <div class="container">{{ page.content|default:page.title|safe }}</div>
+    </section>
+{% endblock %}

@@ -129,7 +129,7 @@ class FacilityBlock(blocks.StructBlock):
 
 class HomePage(Page):
     max_count = 1
-    subpage_types = ['article.ArticleIndexPage', ]
+    subpage_types = ['article.ArticleIndexPage', 'home.SimplePage']
     parent_page_types = ['wagtailcore.Page']
 
     # banner
@@ -234,6 +234,57 @@ class HomePage(Page):
                 InlinePanel('ins_policy', label="Policy"),
             ],
             heading="Insurance Policy", classname="collapsible",
+        ),
+    ]
+
+
+class SimplePage(Page):
+    subpage_types = []  # no sub-page allowed
+    parent_page_types = ['home.HomePage', ]
+    template = 'home/simple_page.html'
+
+    heading_bg = models.ForeignKey(
+        'wagtailimages.Image',
+        on_delete=models.SET_NULL,
+        blank=True, null=True,
+        help_text="Background Image in Heading/Title",
+        related_name="heading_bg",
+    )
+
+    slogan_txt = RichTextField(
+        blank=True, null=True,
+        features=RICH_TEXT_FEATURE_TYPE_A,
+        verbose_name="Slogan Text",
+    )
+    slogan_img = models.ForeignKey(
+        'wagtailimages.Image',
+        on_delete=models.SET_NULL,
+        blank=True, null=True,
+        help_text="Slogan Background Image",
+        related_name="slogan_img",
+    )
+
+    content = RichTextField(
+        blank=True, null=True,
+        features=RICH_TEXT_FEATURE_TYPE_A,
+        verbose_name="Main Content",
+    )
+
+    content_panels = [
+        MultiFieldPanel(
+            [
+                FieldPanel('title'),
+                ImageChooserPanel('heading_bg'),
+                FieldPanel('content', classname="full"),
+            ],
+            heading="Page Identity", classname="collapsible",
+        ),
+        MultiFieldPanel(
+            [
+                FieldPanel('slogan_txt'),
+                ImageChooserPanel('slogan_img'),
+            ],
+            heading="Slogan", classname="collapsible",
         ),
     ]
 
