@@ -1,4 +1,5 @@
 from django.db import models
+from django.conf import settings
 
 from modelcluster.fields import ParentalKey
 from modelcluster.models import ClusterableModel
@@ -12,8 +13,6 @@ from wagtail.contrib.settings.models import BaseSetting
 from wagtail.contrib.settings.registry import register_setting
 from wagtail.images.blocks import ImageChooserBlock
 from wagtail.images.edit_handlers import ImageChooserPanel
-
-from core.settings.base import RICH_TEXT_FEATURE_TYPE_A
 
 SPAN_TAG_HELP_TEXT = 'use <span> tag for colored text'
 
@@ -156,7 +155,7 @@ class HomePage(Page):
 
     why_choose_desc = RichTextField(
         blank=True, null=True,
-        features=RICH_TEXT_FEATURE_TYPE_A,
+        features=settings.RICH_TEXT_FEATURE_TYPE_A,
         help_text="description of 'Why choose us' section",
         verbose_name="Description",
     )
@@ -253,7 +252,7 @@ class SimplePage(Page):
 
     slogan_txt = RichTextField(
         blank=True, null=True,
-        features=RICH_TEXT_FEATURE_TYPE_A,
+        features=settings.RICH_TEXT_FEATURE_TYPE_A,
         verbose_name="Slogan Text",
     )
     slogan_img = models.ForeignKey(
@@ -266,7 +265,7 @@ class SimplePage(Page):
 
     content = RichTextField(
         blank=True, null=True,
-        features=RICH_TEXT_FEATURE_TYPE_A,
+        features=settings.RICH_TEXT_FEATURE_TYPE_A,
         verbose_name="Main Content",
     )
 
@@ -395,7 +394,7 @@ class InsurancePolicy(Orderable):
 
     name = models.CharField(max_length=50)
     desc = RichTextField(
-        features=RICH_TEXT_FEATURE_TYPE_A,
+        features=settings.RICH_TEXT_FEATURE_TYPE_A,
         verbose_name="Description",
     )
     img = models.ForeignKey(
