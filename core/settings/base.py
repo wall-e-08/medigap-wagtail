@@ -34,6 +34,7 @@ INSTALLED_APPS = [
     'article',
     'search',
 
+    'wagtail.contrib.routable_page',
     'wagtail.contrib.settings',
     'wagtail.contrib.styleguide',
     'wagtail.contrib.forms',

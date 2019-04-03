@@ -6,6 +6,7 @@ from modelcluster.fields import ParentalKey
 from taggit.models import TaggedItemBase, Tag as TaggitTag
 
 from wagtail.admin.edit_handlers import FieldPanel, TabbedInterface, ObjectList
+from wagtail.contrib.routable_page.models import route, RoutablePageMixin
 from wagtail.core.fields import RichTextField
 from wagtail.core.models import Page
 from wagtail.images.edit_handlers import ImageChooserPanel
@@ -14,7 +15,7 @@ from wagtail.snippets.models import register_snippet
 from home.models import HomePage
 
 
-class ArticleIndexPage(Page):
+class ArticleIndexPage(RoutablePageMixin, Page):
     max_count = 1
     parent_page_types = ['home.HomePage',]
     subpage_types = ['article.ArticlePage',]
@@ -35,7 +36,20 @@ class ArticleIndexPage(Page):
     def get_context(self, request):
         context = super(ArticleIndexPage, self).get_context(request)
         context['home_page'] = HomePage.objects.first()
+        context['article_index_page'] = self
+        context['all_tags'] = [Tag.objects.get(id=x) for x in ArticlePage.objects.all().values_list('tags', flat=True)]
+        print(context['all_tags'])
         return context
+
+    def get_articles(self):
+        return ArticlePage.objects.descendant_of(self).live()
+
+    @route(r'^tag/(?P<tag>[-\w]+)/$')
+    def article_by_tag(self, request, tag, *args, **kwargs):
+        self.search_type = 'tag'
+        self.search_term = tag
+        self.get_children = self.get_articles().filter(tags__slug=tag)
+        return Page.serve(self, request, *args, **kwargs)
 
 
 class ArticlePage(Page):

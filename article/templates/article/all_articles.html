@@ -1,17 +1,10 @@
 {% extends "base.html" %}
-{% load static wagtailcore_tags wagtailimages_tags %}
+{% load static wagtailcore_tags wagtailimages_tags wagtailroutablepage_tags %}
 
 {% block extra_css %}
     <style>
         #article-heading {
             background-image: url('{{ page.feature_bg.file.url }}');
-        }
-        .article-img-bg {
-            width: 100%;
-            height: 500px;
-            background-repeat: no-repeat;
-            background-position: center;
-            background-size: cover
         }
     </style>
 {% endblock %}
@@ -66,11 +59,11 @@
                                                         <div class="media-body pl-15">
                                                             <div class="event-content pull-left flip">
                                                                 <span class="mb-10 text-gray-darkgray mr-10 font-13">
-                                                                    <i class="fa fa-commenting-o mr-5 text-theme-colored"></i>
+                                                                    <i class="fa fa-commenting-o mr-5 text-theme-colored-amber"></i>
                                                                     <span> 214 Comments</span>
                                                                 </span>
                                                                 <span class="mb-10 text-gray-darkgray mr-10 font-13">
-                                                                    <i class="fa fa-heart-o mr-5 text-theme-colored"></i>
+                                                                    <i class="fa fa-heart-o mr-5 text-theme-colored-amber"></i>
                                                                     <span> 895 Likes</span>
                                                                 </span>
                                                             </div>
@@ -79,9 +72,9 @@
                                                         {% if article.tags.all.count %}
                                                             <div class="article-tags pl-15">
                                                                 <span class="mb-10 text-gray-darkgray mr-10 font-13">
-                                                                    <i class="fa fa-tags mr-5 text-theme-colored"></i>
+                                                                    <i class="fa fa-tags mr-5 text-theme-colored-amber"></i>
                                                                     {% for tag in article.tags.all %}
-                                                                        <a href="#">{{ tag }}</a>
+                                                                        <a href="{% routablepageurl article_index_page "article_by_tag" tag.slug %}">{{ tag }}</a>
                                                                     {% endfor %}
                                                                 </span>
                                                             </div>
@@ -125,13 +118,13 @@
                                 </form>
                             </div>
                         </div>
-                        <div class="widget">
+                        {% comment %}<div class="widget">
                             <h5 class="widget-title">Popular Articles</h5>
                             <div class="widget-image-carousel">
-                                {% for i in i|rjust:3 %}
+                                {% for k in k|rjust:2 %}
                                     <div class="item">
                                         <img src="https://placehold.it/365x230" alt="">
-                                        <h4 class="title">This is a Demo Title</h4>
+                                        <h4 class="title">This is a Popular Title</h4>
                                         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Molestiae illum amet illo.</p>
                                     </div>
                                 {% endfor %}
@@ -140,30 +133,26 @@
                         <div class="widget">
                             <h5 class="widget-title">Recent Articles</h5>
                             <div class="widget-image-carousel">
-                                {% for i in i|rjust:3 %}
+                                {% for j in j|rjust:1 %}
                                     <div class="item">
                                         <img src="https://placehold.it/365x230" alt="">
-                                        <h4 class="title">This is a Demo Title</h4>
+                                        <h4 class="title">This is a Recent Title</h4>
                                         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Molestiae illum amet illo.</p>
                                     </div>
                                 {% endfor %}
                             </div>
-                        </div>
-                        <div class="widget">
-                            <h5 class="widget-title">Tags</h5>
-                            <div class="tags">
-                                <a href="#">travel</a>
-                                <a href="#">blog</a>
-                                <a href="#">lifestyle</a>
-                                <a href="#">feature</a>
-                                <a href="#">mountain</a>
-                                <a href="#">design</a>
-                                <a href="#">restaurant</a>
-                                <a href="#">journey</a>
-                                <a href="#">classic</a>
-                                <a href="#">sunset</a>
+                        </div>{% endcomment %}
+
+                        {% if all_tags|length > 1 %}
+                            <div class="widget">
+                                <h5 class="widget-title">Tags</h5>
+                                <div class="tags">
+                                    {% for tag in all_tags %}
+                                        <a href="{% routablepageurl article_index_page "article_by_tag" tag.slug %}">{{ tag }}</a>
+                                    {% endfor %}
+                                </div>
                             </div>
-                        </div>
+                        {% endif %}
                     </div>
                 </div>
             </div>
