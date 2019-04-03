@@ -627,6 +627,15 @@ fieldset[disabled] .btn-theme-colored.focus {
   color: #f36438;
   background-color: #fff;
 }
+.btn-theme-outline-colored {
+  background-color: #fff;
+  color: #c8380c;
+  -webkit-transition: all 0.3s;
+  -moz-transition: all 0.3s;
+  -ms-transition: all 0.3s;
+  -o-transition: all 0.3s;
+  transition: all 0.3s;
+}
 /*
  * btn-transparent
  * -----------------------------------------------

@@ -1,6 +1,160 @@
 {% extends "base.html" %}
 {% load static wagtailcore_tags wagtailimages_tags %}
 
+{% block extra_css %}
+    <style>
+        #article-heading {
+            background-image: url('{{ page.feature_bg.file.url }}');
+        }
+    </style>
+{% endblock %}
+
 {% block content %}
-    <h1>SDFSDFSDF</h1>
+    <!-- Section: Heading -->
+    <section id="article-heading" class="inner-header layer-overlay overlay-white-5">
+        <div class="container pt-60 pb-60">
+            <!-- Section Content -->
+            <div class="section-content">
+                <div class="row">
+                    <div class="col-md-12 text-center">
+                        <h2 class="font-dois title">{{ page.title|default:""|safe }}</h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section: Recent Articles -->
+    <section>
+        <div class="container mt-30 mb-30 pt-30 pb-30">
+            <div class="row">
+                <div class="col-md-9">
+                    <div class="blog-posts">
+                        <div class="col-md-12">
+                            <div class="row list-dashed">
+                                {% for i in i|rjust:3 %}
+                                    <article class="post clearfix pb-0">
+                                        <div class="entry-header">
+                                            <div class="post-thumb thumb">
+                                                <a href="#"><img src="https://placehold.it/90x45" alt="" class="img-responsive img-fullwidth"></a>
+                                            </div>
+                                        </div>
+                                        <div class="entry-date media-left bg-white flip article-date">
+                                            <div class="font-16 text-gray-darkgray text-uppercase">Feb</div>
+                                            <div class="font-36 font-weight-700 font-weight-600">28</div>
+                                            <div class="font-16 text-gray-darkgray font-weight-600">2019</div>
+                                        </div>
+                                        <div class="entry-content border-1px p-20 pr-10">
+                                            <div class="row">
+                                                <div class="col-md-5">
+                                                    <h4 class="entry-title font-42 font-opensans font-weight-700 text-uppercase m-0 mt-5">
+                                                        <a href="#" class="text-theme-colored2">Image Post</a>
+                                                    </h4>
+                                                    <div class="entry-meta media mt-0 no-bg no-border">
+                                                        <div class="media-body pl-15">
+                                                            <div class="event-content pull-left flip">
+                                                                <span class="mb-10 text-gray-darkgray mr-10 font-13">
+                                                                    <i class="fa fa-commenting-o mr-5 text-theme-colored"></i>
+                                                                    <span> 214 Comments</span>
+                                                                </span>
+                                                                <span class="mb-10 text-gray-darkgray mr-10 font-13">
+                                                                    <i class="fa fa-heart-o mr-5 text-theme-colored"></i>
+                                                                    <span> 895 Likes</span>
+                                                                </span>
+                                                            </div>
+                                                        </div>
+                                                        <hr>
+                                                        <div class="article-tags pl-15">
+                                                            <span class="mb-10 text-gray-darkgray mr-10 font-13">
+                                                                <i class="fa fa-tags mr-5 text-theme-colored"></i>
+                                                                <a href="#"> Comments</a>
+                                                                <a href="#"> momments</a>
+                                                            </span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-7">
+                                                    <div class="mt-10">
+                                                        <p>Lorem ipsum dolor sit amet, consectetur adipisi cing elit. Molestias eius illum libero dolor nobis deleniti, sint assumenda. Pariatur iste
+                                                            veritatis excepturi, ipsa optio nobis.</p>
+                                                    </div>
+                                                    <a href="#" class="btn btn-theme-colored btn-theme-outline-colored btn-read-more">Read more</a>
+                                                </div>
+                                            </div>
+                                            <div class="clearfix"></div>
+                                        </div>
+                                    </article>
+                                    {% if not forloop.last %}<hr class="mt-60 mb-60 article-divider">{% endif %}
+                                {% endfor %}
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <nav>
+                                <ul class="pagination theme-colored">
+                                    <li><a aria-label="Previous" href="#"> <span aria-hidden="true">« prev</span> </a></li>
+                                    <li class="active"><a href="#">1</a></li>
+                                    <li><a aria-label="Next" href="#"> <span aria-hidden="true">next »</span> </a></li>
+                                </ul>
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="sidebar sidebar-right mt-sm-30">
+                        <div class="widget">
+                            <h4 class="widget-title">Compare Insurance Plans</h4>
+                            <div>
+                                <h5>Find the best plan suit for you</h5>
+                                <img src="http://placehold.it/500x100" alt="gg">
+                                <form>
+                                    <label for="gg">Enter Zip Code</label>
+                                    <input type="text" id="gg">
+                                    <button type="submit" class="btn btn-theme-colored">Get Quote</button>
+                                </form>
+                            </div>
+                        </div>
+                        <div class="widget">
+                            <h5 class="widget-title">Popular Articles</h5>
+                            <div class="widget-image-carousel">
+                                {% for i in i|rjust:3 %}
+                                    <div class="item">
+                                        <img src="https://placehold.it/365x230" alt="">
+                                        <h4 class="title">This is a Demo Title</h4>
+                                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Molestiae illum amet illo.</p>
+                                    </div>
+                                {% endfor %}
+                            </div>
+                        </div>
+                        <div class="widget">
+                            <h5 class="widget-title">Recent Articles</h5>
+                            <div class="widget-image-carousel">
+                                {% for i in i|rjust:3 %}
+                                    <div class="item">
+                                        <img src="https://placehold.it/365x230" alt="">
+                                        <h4 class="title">This is a Demo Title</h4>
+                                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Molestiae illum amet illo.</p>
+                                    </div>
+                                {% endfor %}
+                            </div>
+                        </div>
+                        <div class="widget">
+                            <h5 class="widget-title">Tags</h5>
+                            <div class="tags">
+                                <a href="#">travel</a>
+                                <a href="#">blog</a>
+                                <a href="#">lifestyle</a>
+                                <a href="#">feature</a>
+                                <a href="#">mountain</a>
+                                <a href="#">design</a>
+                                <a href="#">restaurant</a>
+                                <a href="#">journey</a>
+                                <a href="#">classic</a>
+                                <a href="#">sunset</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section> 
 {% endblock %}

@@ -2,6 +2,8 @@ from django.db import models
 from wagtail.core.models import Page
 from wagtail.images.edit_handlers import ImageChooserPanel
 
+from home.models import HomePage
+
 
 class ArticleIndexPage(Page):
     max_count = 1
@@ -20,6 +22,11 @@ class ArticleIndexPage(Page):
     content_panels = Page.content_panels + [
         ImageChooserPanel('feature_bg')
     ]
+
+    def get_context(self, request):
+        context = super(ArticleIndexPage, self).get_context(request)
+        context['home_page'] = HomePage.objects.first()
+        return context
 
 
 class ArticlePage(Page):
