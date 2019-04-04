@@ -8914,9 +8914,10 @@ hr.article-divider {
 .article-img-bg {
     width: 100%;
     height: 500px;
+    max-height: 100%;
     background-repeat: no-repeat;
     background-position: center;
-    background-size: cover
+    background-size: cover;
 }
 
 .text-theme-colored-amber,
@@ -8926,4 +8927,23 @@ hr.article-divider {
 .pagination.theme-colored li.active a {
     background-color: #ffc535 !important;
     color: #333 !important;
+}
+
+
+.widget-sidebar-article a {
+    display: flex;
+    height: 100px;
+    padding: 5px 10px;
+}
+
+.widget-sidebar-article a>.widget-sidebar-article-img-bg {
+    height: 100%;
+    width: 80px;
+}
+
+.widget-sidebar-article a>.widget-sidebar-article-text {
+    overflow: hidden;
+}
+.widget-sidebar-article a>.widget-sidebar-article-text:not(:first-child) {
+    padding-left: 20px;
 }

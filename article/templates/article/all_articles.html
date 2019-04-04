@@ -129,19 +129,22 @@
                                     </div>
                                 {% endfor %}
                             </div>
-                        </div>
-                        <div class="widget">
-                            <h5 class="widget-title">Recent Articles</h5>
-                            <div class="widget-image-carousel">
-                                {% for j in j|rjust:1 %}
-                                    <div class="item">
-                                        <img src="https://placehold.it/365x230" alt="">
-                                        <h4 class="title">This is a Recent Title</h4>
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Molestiae illum amet illo.</p>
-                                    </div>
-                                {% endfor %}
-                            </div>
                         </div>{% endcomment %}
+                        {% if recent_articles %}
+                            <div class="widget">
+                                <h5 class="widget-title">Recent Articles</h5>
+                                <div class="widget-sidebar-article">
+                                    {% for article in recent_articles %}
+                                        <a href="{% pageurl article %}" class="item">
+                                            <div class="article-img-bg widget-sidebar-article-img-bg" style="background-image: url('{{ article.feature_img.file.url }}');"></div>
+                                            <div class="widget-sidebar-article-text">
+                                                <h4 class="mt-0 mb-0">This is a Recent Title</h4>
+                                            </div>
+                                        </a>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                        {% endif %}
 
                         {% if all_tags|length > 1 %}
                             <div class="widget">

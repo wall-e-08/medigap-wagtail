@@ -21,6 +21,12 @@ class ArticleIndexPage(RoutablePageMixin, Page):
     subpage_types = ['article.ArticlePage',]
     template = 'article/all_articles.html'
 
+    # custom settings
+    is_show_recent_articles = True
+    show_recent_articles_count = 5
+    is_show_most_viewed_articles = True
+    show_most_viewed_articles_count = 3
+
     feature_bg = models.ForeignKey(
         'wagtailimages.Image',
         on_delete=models.SET_NULL,
@@ -38,11 +44,15 @@ class ArticleIndexPage(RoutablePageMixin, Page):
         context['home_page'] = HomePage.objects.first()
         context['article_index_page'] = self
         context['all_tags'] = [Tag.objects.get(id=x) for x in ArticlePage.objects.all().values_list('tags', flat=True)]
-        print(context['all_tags'])
+        context['recent_articles'] = self.get_latest_articles()
         return context
 
     def get_articles(self):
         return ArticlePage.objects.descendant_of(self).live()
+
+    def get_latest_articles(self):
+        return ArticlePage.objects.descendant_of(self).live().order_by('-first_published_at')[:self.show_recent_articles_count] \
+            if self.is_show_recent_articles else None
 
     @route(r'^tag/(?P<tag>[-\w]+)/$')
     def article_by_tag(self, request, tag, *args, **kwargs):

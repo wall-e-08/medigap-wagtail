@@ -238,6 +238,7 @@ class HomePage(Page):
 
 
 class SimplePage(Page):
+    show_in_menus_default = True
     subpage_types = []  # no sub-page allowed
     parent_page_types = ['home.HomePage', ]
     template = 'home/simple_page.html'
