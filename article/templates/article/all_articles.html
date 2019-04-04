@@ -64,7 +64,12 @@
                                                                 </span>
                                                                 <span class="mb-10 text-gray-darkgray mr-10 font-13">
                                                                     <i class="fa fa-heart-o mr-5 text-theme-colored-amber"></i>
-                                                                    <span> 895 Likes</span>
+                                                                    <span>{{ article.like_count }} Likes</span>
+                                                                </span>
+                                                                <br>
+                                                                <span class="mb-10 text-gray-darkgray mr-10 font-13">
+                                                                    <i class="fa fa-user-o mr-5 text-theme-colored-amber"></i>
+                                                                    <span>{{ article.owner }}</span>
                                                                 </span>
                                                             </div>
                                                         </div>
@@ -93,7 +98,7 @@
                                 {% endfor %}
                             </div>
                         </div>
-                        <div class="col-md-12">
+                        {% comment %}<div class="col-md-12">
                             <nav>
                                 <ul class="pagination theme-colored">
                                     <li><a aria-label="Previous" href="#"> <span aria-hidden="true">« prev</span> </a></li>
@@ -101,7 +106,7 @@
                                     <li><a aria-label="Next" href="#"> <span aria-hidden="true">next »</span> </a></li>
                                 </ul>
                             </nav>
-                        </div>
+                        </div>{% endcomment %}
                     </div>
                 </div>
                 <div class="col-md-3">
@@ -118,18 +123,23 @@
                                 </form>
                             </div>
                         </div>
-                        {% comment %}<div class="widget">
-                            <h5 class="widget-title">Popular Articles</h5>
-                            <div class="widget-image-carousel">
-                                {% for k in k|rjust:2 %}
-                                    <div class="item">
-                                        <img src="https://placehold.it/365x230" alt="">
-                                        <h4 class="title">This is a Popular Title</h4>
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Molestiae illum amet illo.</p>
-                                    </div>
-                                {% endfor %}
+
+                        {% if most_viewed_articles %}
+                            <div class="widget">
+                                <h5 class="widget-title">Most viewed Articles</h5>
+                                <div class="widget-sidebar-article">
+                                    {% for article in most_viewed_articles %}
+                                        <a href="{% pageurl article %}" class="item">
+                                            <div class="article-img-bg widget-sidebar-article-img-bg" style="background-image: url('{{ article.feature_img.file.url }}');"></div>
+                                            <div class="widget-sidebar-article-text">
+                                                <h4 class="mt-0 mb-0">This is a Recent Title</h4>
+                                            </div>
+                                        </a>
+                                    {% endfor %}
+                                </div>
                             </div>
-                        </div>{% endcomment %}
+                        {% endif %}
+                    
                         {% if recent_articles %}
                             <div class="widget">
                                 <h5 class="widget-title">Recent Articles</h5>
