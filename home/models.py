@@ -51,6 +51,12 @@ class PrimarySiteSettings(BaseSetting):
         verbose_name="Text below Phone No.(top)"
     )
 
+    txt_ph_nmb_footer = models.CharField(
+        blank=True, null=True, max_length=150,
+        help_text="Text below phone number in Footer",
+        verbose_name="Text below Phone No.(bottom)"
+    )
+
     qt_heading = models.CharField(
         blank=True, null=True, max_length=250,
         help_text="QUOTE Heading in Pop-up form",
@@ -60,7 +66,7 @@ class PrimarySiteSettings(BaseSetting):
     copyright_text = models.CharField(blank=True, null=True, max_length=250)
 
     base_panel = [FieldPanel('qt_heading'), FieldPanel('copyright_text'), ]
-    phone_panel = [FieldPanel('phone_number'), FieldPanel('txt_ph_nmb'), ]
+    phone_panel = [FieldPanel('phone_number'), FieldPanel('txt_ph_nmb'),  FieldPanel('txt_ph_nmb_footer'), ]
 
     img_panel = [
         ImageChooserPanel('favicon'),

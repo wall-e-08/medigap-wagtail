@@ -1,4 +1,4 @@
-{% load static wagtailuserbar %}
+{% load static wagtailcore_tags wagtailuserbar menu_tags article_tags %}
 
 <!DOCTYPE html>
 <html class="no-js" lang="en">
@@ -104,18 +104,7 @@
                     <!-- Collect the nav links, forms, and other content for toggling -->
                     <div class="collapse navbar-collapse menuzord green menuzord-responsive" id="top-main-menu">
                         <ul class="menuzord-menu menuzord-indented scrollable">
-                            <li class="active">
-                                <a href="{% url 'wagtail_serve' '' %}">Home</a>
-                            </li>
-                            <li>
-                                <a href="#">Features</a>
-                            </li>
-                            <li>
-                                <a href="#">Pages</a>
-                            </li>
-                            <li>
-                                <a href="#">Blog</a>
-                            </li>
+                            {% main_menu template="menus/main_menu.html" apply_active_classes=True %}
                         </ul>
                     </div>
                 </div>
@@ -138,15 +127,7 @@
                             <a class="btn btn-colored btn-flat btn-theme-colored2 mt-10 mb-10 pt-10 pb-10" data-toggle="modal" data-target="#quote-modal">Get Free Quote</a>
                         </div>-->
                         <ul class="menuzord-menu">
-                            <li class="active"><a href="{% url 'wagtail_serve' '' %}">Home</a></li>
-                            <li><a href="#">Life / Final Expanse</a></li>
-                            <li><a href="#">Dental Vision</a></li>
-                            <li><a href="#">Medigap</a></li>
-                            <li><a href="#">About Us</a></li>
-                            <li><a href="#">Contact Us </a></li>
-                            <li><a href="#">Privacy</a></li>
-                            <li><a href="#">Terms</a></li>
-                            <!--<li><a href="#">Blog</a></li>-->
+                            {% main_menu template="menus/main_menu.html" apply_active_classes=True %}
                         </ul>
                         <div class="pull-right visible-lg-block mb-sm-15 text-center">
                             <a class="btn btn-colored btn-theme-colored mt-15 mt-sm-10 pt-10 pb-10" data-toggle="modal" data-target="#quote-modal">Get Free Quote</a>
@@ -169,11 +150,11 @@
     <footer id="footer" class="footer bg-black-111">
         <div class="container pt-70 pb-40">
             <div class="row border-bottom-black">
-                <div class="col-sm-6 col-md-3">
+                <div class="col-sm-4">
                     <div class="widget dark">
                         <img class="mt-10 mb-20" alt="" src="{% if settings.home.PrimarySiteSettings.footer_logo.file %}{{ settings.home.PrimarySiteSettings.footer_logo.file.url }}{% else %}{% static 'images/logo-wide-white.png' %}{% endif %}">
                         <p>{{ settings.home.ContactSettings.contact_desc|default:"" }}</p>
-                        <ul class="list-inline mt-5">
+                        <ul class="pl-0 mt-5">
                             {% for each_contact in settings.home.ContactSettings.contact_settings_panel.all %}
                                 <li class="m-0 pl-10 pr-10">
                                     <i class="{{ each_contact.contact_icon }} text-theme-colored mr-5"></i>
@@ -191,92 +172,46 @@
                         </ul>
                     </div>
                 </div>
-                <div class="col-sm-6 col-md-3">
+                <div class="col-sm-4">
                     <div class="widget dark">
-                        <h5 class="widget-title">Useful Links</h5>
-                        <ul class="list-border">
-                            <li><a href="{% url 'wagtail_serve' '' %}">Home</a></li>
-                            <li><a href="#">About us</a></li>
-                            <li><a href="#">Contact</a></li>
-                        </ul>
+                        <h5 class="widget-title">Quick Links</h5>
+                        {% flat_menu 'footer_menu' template="menus/footer_menu.html" %}
                     </div>
                     <div class="widget dark">
-                        <h5 class="widget-title">Other Links</h5>
-                        <ul class="list-border">
-                            <li><a href="#">FAQ</a></li>
-                            <li><a href="#">Sitemap</a></li>
-                            <li><a href="#">Policy</a></li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="col-sm-6 col-md-3">
-                    <div class="widget dark">
-                        <h5 class="widget-title">Latest News</h5>
-                        <div class="latest-posts">
-                            <article class="post media-post clearfix pb-0 mb-10">
-                                <a href="#" class="post-thumb"><img alt="" src="http://placehold.it/80x55"></a>
-                                <div class="post-right">
-                                    <h5 class="post-title mt-0 mb-5"><a href="#">Sustainable Construction</a></h5>
-                                    <p class="post-date mb-0 font-12">Mar 08, 2015</p>
-                                </div>
-                            </article>
-                            <article class="post media-post clearfix pb-0 mb-10">
-                                <a href="#" class="post-thumb"><img alt="" src="http://placehold.it/80x55"></a>
-                                <div class="post-right">
-                                    <h5 class="post-title mt-0 mb-5"><a href="#">Industrial Coatings</a></h5>
-                                    <p class="post-date mb-0 font-12">Mar 08, 2015</p>
-                                </div>
-                            </article>
-                            <article class="post media-post clearfix pb-0 mb-10">
-                                <a href="#" class="post-thumb"><img alt="" src="http://placehold.it/80x55"></a>
-                                <div class="post-right">
-                                    <h5 class="post-title mt-0 mb-5"><a href="#">Storefront Installations</a></h5>
-                                    <p class="post-date mb-0 font-12">Mar 08, 2015</p>
-                                </div>
-                            </article>
-                        </div>
-                    </div>
-                    <div class="widget dark">
-                        <h5 class="widget-title">Call Us Now</h5>
-                        <div class="text-gray">
-                            +61 3 1234 5678 <br>
-                            +12 3 1234 5678
-                        </div>
-                    </div>
-                </div>
-                <div class="col-sm-6 col-md-3">
-                    <div class="widget dark">
-                        <h5 class="widget-title">Opening Hours</h5>
-                        <div class="opening-hours">
-                            <ul class="list-border">
-                                <li class="clearfix"><span> Mon - Tues :  </span>
-                                    <div class="value pull-right flip"> 6.00 am - 10.00 pm</div>
-                                </li>
-                                <li class="clearfix text-white"><span> Wednes - Thurs :</span>
-                                    <div class="value pull-right flip"> 8.00 am - 6.00 pm</div>
-                                </li>
-                                <li class="clearfix"><span> Fri : </span>
-                                    <div class="value pull-right flip"> 3.00 pm - 8.00 pm</div>
-                                </li>
-                                <li class="clearfix"><span> Sun : </span>
-                                    <div class="value pull-right flip"> Closed</div>
-                                </li>
-                                <li class="clearfix"><span> Sat : </span>
-                                    <div class="value pull-right flip"> 10.00 am - 2.00 pm</div>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="widget dark">
-                        <h5 class="widget-title">Subscribe Us</h5>
-                        <form id="mailchimp-subscription-form-footer" class="newsletter-form">
+                        <h5 class="widget-title">Get a Free <span class="text-theme-colored">Quote</span></h5>
+                        <form id="footer-quote-form" class="">
                             <div class="input-group">
-                                <input type="email" value="" name="EMAIL" placeholder="Your Email" class="form-control input-lg font-16" data-height="45px" id="mce-EMAIL-footer">
+                                <input type="email" value="" name="zip_code" placeholder="Zip Code" class="form-control input-lg font-16" data-height="45px">
                                 <span class="input-group-btn">
-                                    <button data-height="45px" class="btn btn-colored btn-theme-colored btn-xs m-0 font-14" type="submit">Subscribe</button>
+                                    <button data-height="45px" class="btn btn-colored btn-theme-colored pl-30 pr-30 m-0 font-14" type="submit">Quote</button>
                                 </span>
                             </div>
                         </form>
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <div class="widget dark">
+                        <h5 class="widget-title">Latest Articles</h5>
+                        <div class="latest-posts">
+                            {% latest_articles count=3 as articles %}
+                            {% for article in articles %}
+                                <article class="post media-post clearfix pb-0 mb-10">
+                                    <a href="{% slugurl article.slug %}" class="display-block">
+                                        {% if article.feature_img.file %}
+                                            <div class="post-thumb" style="background-image:url('{{ article.feature_img.file.url }}');"></div>
+                                        {% endif %}
+                                        <div class="post-right">
+                                            <h5 class="post-title mt-0 mb-5"><span class="text-gray-ddd font-weight-500">{{ article.title|default:""|safe }}</span></h5>
+                                            <p class="post-date mb-0 font-12">{{ article.first_published_at|date }}</p>
+                                        </div>
+                                    </a>
+                                </article>
+                            {% endfor %}
+                        </div>
+                    </div>
+                    <div class="widget dark">
+                        <h5 class="widget-title">{{ settings.home.PrimarySiteSettings.txt_ph_nmb_footer|default:"Call Us" }}</h5>
+                        <div class="text-gray">{{ settings.home.PrimarySiteSettings.phone_number|default:"" }}</div>
                     </div>
                 </div>
             </div>
