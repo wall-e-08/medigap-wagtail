@@ -1,79 +1,81 @@
+{% load extra_tags static %}
+
 <div class="modal fade" id="quote-modal" tabindex="-1" role="dialog">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
+            <div id="quote-modal-overlay">
+                <img src="{% static 'images/preloaders/1.gif' %}" alt="Loading..">
+            </div>
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                 <h3 class="modal-title p-15">{{ settings.home.PrimarySiteSettings.qt_heading }}</h3>
+                <div id="quote-form-response" class="pl-15 pr-15 text-capitalize"></div>
             </div>
             <div class="modal-body">
                 <div class="section-content bg-white p-15">
                     <div class="row">
                         <div class="col-md-12">
-                            <form class="form-animated-field">
+                            <form class="form-animated-field" id="form-quote-modal">
+                                {% quote_form as form %}
                                 <div class="row">
                                     <div class="col-sm-6">
                                         <div class="form-group mb-10">
-                                            <input name="quote_f_name" id="quote_f_name" class="form-control required" type="text" required="required" aria-required="true">
+                                            <input name="{{ form.first_name.name }}" id="quote_f_name" class="form-control required" type="text" required="required" aria-required="true">
                                             <label for="quote_f_name">First Name</label>
                                         </div>
                                     </div> <!--first name-->
                                     <div class="col-sm-6">
                                         <div class="form-group mb-10">
-                                            <input name="quote_m_name" id="quote_m_name" class="form-control required" type="text">
+                                            <input name="{{ form.middle_name.name }}" id="quote_m_name" class="form-control" type="text">
                                             <label for="quote_m_name">Middle Name</label>
                                         </div>
                                     </div> <!--middle name-->
                                     <div class="col-sm-6">
                                         <div class="form-group mb-10">
-                                            <input name="quote_l_name" id="quote_l_name" class="form-control required" type="text" required="required" aria-required="true">
+                                            <input name="{{ form.last_name.name }}" id="quote_l_name" class="form-control required" type="text" required="required" aria-required="true">
                                             <label for="quote_l_name">Last Name</label>
                                         </div>
                                     </div> <!--last name-->
                                     <div class="col-sm-6">
                                         <div class="form-group mb-10">
-                                            <input name="quote_email" id="quote_email" class="form-control required email" type="text" required="required" aria-required="true">
+                                            <input name="{{ form.email.name }}" id="quote_email" class="form-control required email" type="email" required="required" aria-required="true">
                                             <label for="quote_email">Your Email</label>
                                         </div>
                                     </div> <!--email-->
                                     <div class="col-sm-6">
                                         <div class="form-group mb-10">
-                                            <input name="quote_phone" id="quote_phone" class="form-control required" required="required" type="tel" aria-required="true">
+                                            <input name="{{ form.phone.name }}" id="quote_phone" class="form-control required" required="required" type="tel" aria-required="true">
                                             <label for="quote_phone">Phone number</label>
                                         </div>
                                     </div> <!--phone number-->
                                     <div class="col-sm-6">
                                         <div class="form-group mb-10">
-                                            <input name="quote_phone2" id="quote_phone2" class="form-control required" required="required" type="tel" aria-required="true">
+                                            <input name="{{ form.phone2.name }}" id="quote_phone2" class="form-control required" required="required" type="tel" aria-required="true">
                                             <label for="quote_phone2">Alternate Phone number</label>
                                         </div>
                                     </div> <!--phone number-->
-                                    <div class="col-sm-12">
+                                    <div class="col-sm-6">
                                         <div class="form-group mb-10">
-                                            <input name="quote_zip" id="quote_zip" class="form-control required" required="required" type="tel" aria-required="true">
+                                            <input name="{{ form.dob.name }}" id="quote_dob" class="form-control required date-picker" required="required" type="text" aria-required="true">
+                                            <label for="quote_dob">Date of Birth</label>
+                                        </div>
+                                    </div> <!--DOB-->
+                                    <div class="col-sm-6">
+                                        <div class="form-group mb-10">
+                                            <input name="{{ form.zip_code.name }}" id="quote_zip" class="form-control required" required="required" type="tel" aria-required="true">
                                             <label for="quote_zip">Zip code</label>
                                         </div>
                                     </div> <!--zip code-->
-                                    {% comment %}<div class="col-sm-6">
-                                        <div class="form-group mb-10">
-                                            <input name="quote_eff_date" id="quote_eff_date" class="form-control required date-picker" required="required" type="text" aria-required="true">
-                                            <label for="quote_eff_date">Effective Date</label>
-                                        </div>
-                                    </div> <!--effective date-->
-                                    }<div class="col-sm-12">
-                                        <div class="form-group mb-10">
-                                            <textarea id="quote_address" name="form_message" class="form-control required" required="required" rows="5" aria-required="true"></textarea>
-                                            <label for="quote_address">Your Address</label>
-                                        </div>
-                                    </div>{% endcomment %}
+
+                                    <div class="col-sm-12 text-right mt-30">
+                                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                        <button type="submit" class="btn btn-primary btn-theme-colored">Submit</button>
+                                    </div>
                                 </div>
                             </form>
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary btn-theme-colored">Submit</button>
             </div>
             <div class="modal-body font-11" id="quote-disclaimer">{{ settings.home.PrimarySiteSettings.qt_disclaimer|default:""|safe }}</div>
         </div>

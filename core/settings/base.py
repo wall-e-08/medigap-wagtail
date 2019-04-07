@@ -33,6 +33,7 @@ INSTALLED_APPS = [
     'home',
     'article',
     'search',
+    'quotes',
 
     'condensedinlinepanel',  # menu management from admin panel
     'wagtailmenus',
