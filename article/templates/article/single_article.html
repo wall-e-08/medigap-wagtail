@@ -16,8 +16,13 @@
             padding: 10px;
             color: #fff;
             border-radius: 3px;
-            max-width:300px;
-            }
+
+         }
+         .widget-sidebar-article{
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+         }
         {% if all_article_page.sidebar_form_bg.file %}
             .sidebar-bg-over-form {
                 background: url('{{ all_article_page.sidebar_form_bg.file.url }}') no-repeat top center;
@@ -60,7 +65,7 @@
                         <div class="widget">
                             <h4 class="widget-title sidebar-widget-title-bg">{{ all_article_page.sidebar_form_main_heading|default:"Compare Insurance Plans" }}</h4>
                             <div>
-                                <h5 class="pl-10" style="color: #f36438">{{ all_article_page.sidebar_form_heading|default:"Find the best plan suit for you" }}</h5>
+                                <h5 class="pl-10 text-center" style="color: #f36438">{{ all_article_page.sidebar_form_heading|default:"Find the best plan suit for you" }}</h5>
                                 <form class="auto-zip-form">
                                     <div class="sidebar-bg-over-form"></div>
                                     <div class="input-group">
