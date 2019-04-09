@@ -72,7 +72,7 @@ class ArticleIndexPage(RoutablePageMixin, Page):
         context = super(ArticleIndexPage, self).get_context(request, *args, **kwargs)
         context['home_page'] = HomePage.objects.first()
         context['article_index_page'] = self
-        context['all_tags'] = [Tag.objects.get(id=x) for x in ArticlePage.objects.all().values_list('tags', flat=True)]
+        context['all_tags'] = [Tag.objects.get(id=x) for x in ArticlePage.objects.exclude(tags=None).values_list('tags', flat=True)]
         context['recent_articles'] = self.get_latest_articles()
         context['most_viewed_articles'] = self.get_most_viewed_articles()
         return context
@@ -148,7 +148,7 @@ class ArticlePage(Page):
 
     def get_context(self, request, *args, **kwargs):
         context = super(ArticlePage, self).get_context(request, *args, **kwargs)
-        # context['home_page'] = HomePage.objects.first()
+        context['all_tags'] = [Tag.objects.get(id=x) for x in ArticlePage.objects.exclude(tags=None).values_list('tags', flat=True)]
         context['all_article_page'] = ArticleIndexPage.objects.first()
         return context
 

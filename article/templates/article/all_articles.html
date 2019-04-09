@@ -171,12 +171,14 @@
                             </div>
                         {% endif %}
 
-                        {% if all_tags|length > 1 %}
+                        {% if all_tags|default:""|length > 1 %}
                             <div class="widget">
                                 <h5 class="widget-title">Tags</h5>
                                 <div class="tags">
                                     {% for tag in all_tags %}
-                                        <a href="{% routablepageurl article_index_page "article_by_tag" tag.slug %}">{{ tag }}</a>
+                                        {% if tag %}
+                                            <a href="{% routablepageurl article_index_page "article_by_tag" tag.slug %}">{{ tag }}</a>
+                                        {% endif %}
                                     {% endfor %}
                                 </div>
                             </div>
