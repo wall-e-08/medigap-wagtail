@@ -3,7 +3,6 @@
 
 {% block extra_css %}
     <style>
-
         #article-heading {
             background-image: url('{{ all_article_page.feature_bg.file.url }}');
         }
@@ -12,6 +11,14 @@
             flex-direction: column;
             max-width: 300px;
         }
+        {% if all_article_page.sidebar_form_bg.file %}
+            .sidebar-bg-over-form {
+                background: url('{{ all_article_page.sidebar_form_bg.file.url }}') no-repeat top center;
+                width: 100%;
+                height: 200px;
+                background-size: contain;
+            }
+        {% endif %}
     </style>
 {% endblock %}
 
