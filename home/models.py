@@ -51,16 +51,28 @@ class PrimarySiteSettings(BaseSetting):
         verbose_name="Text below Phone No.(top)"
     )
 
+    txt_ph_nmb_footer = models.CharField(
+        blank=True, null=True, max_length=150,
+        help_text="Text below phone number in Footer",
+        verbose_name="Text below Phone No.(bottom)"
+    )
+
     qt_heading = models.CharField(
         blank=True, null=True, max_length=250,
         help_text="QUOTE Heading in Pop-up form",
         verbose_name="Quote Heading",
     )
+    qt_disclaimer = RichTextField(
+        blank=True, null=True,
+        help_text="Quote Disclaimer in pop-up form (<span> & <a> tags are colored)",
+        verbose_name="Quote Disclaimer"
+    )
 
     copyright_text = models.CharField(blank=True, null=True, max_length=250)
 
-    base_panel = [FieldPanel('qt_heading'), FieldPanel('copyright_text'), ]
-    phone_panel = [FieldPanel('phone_number'), FieldPanel('txt_ph_nmb'), ]
+    base_panel = [ FieldPanel('copyright_text'), ]
+    phone_panel = [FieldPanel('phone_number'), FieldPanel('txt_ph_nmb'),  FieldPanel('txt_ph_nmb_footer'), ]
+    quote_panel = [FieldPanel('qt_heading'), FieldPanel('qt_disclaimer'), ]
 
     img_panel = [
         ImageChooserPanel('favicon'),
@@ -72,6 +84,7 @@ class PrimarySiteSettings(BaseSetting):
         ObjectList(img_panel, heading='Images'),
         ObjectList(base_panel, heading='Base'),
         ObjectList(phone_panel, heading='Phone number'),
+        ObjectList(quote_panel, heading='Quote'),
     ])
 
     class Meta:

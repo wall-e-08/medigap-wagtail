@@ -33,7 +33,11 @@ INSTALLED_APPS = [
     'home',
     'article',
     'search',
+    'quotes',
 
+    'condensedinlinepanel',  # menu management from admin panel
+    'wagtailmenus',
+    'wagtail.contrib.modeladmin',
     'wagtail.contrib.routable_page',
     'wagtail.contrib.settings',
     'wagtail.contrib.styleguide',
@@ -74,7 +78,6 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'core.urls'
-
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
@@ -89,7 +92,8 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
                 'django.template.context_processors.media',
-                'wagtail.contrib.settings.context_processors.settings'
+                'wagtail.contrib.settings.context_processors.settings',
+                'wagtailmenus.context_processors.wagtailmenus',
             ],
         },
     },

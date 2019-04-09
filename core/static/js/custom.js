@@ -2370,4 +2370,46 @@ var concitus = {};
     //call function before document ready
     concitus.initialize.DW_preLoaderClickDisable();
 
+    $('#form-quote-modal input, #form-quote-modal textarea').on("change paste keyup", function () {
+        let _t = $(this);
+        if (_t.val()) {
+            _t.next().css({
+                "top": "11px",
+                "font-size": "10px",
+                "color": "#000",
+            })
+        } else {
+            _t.next().css({
+                "top": "calc(50% - 5px)",
+                "font-size": "20px",
+                "color": "#777",
+            })
+        }
+    });
+
+    $('#form-quote-modal').submit(function (e) {
+        e.preventDefault();
+        let $form = $(this);
+        let $overlay = $('#quote-modal-overlay');
+        $overlay.addClass('showing');
+
+        setTimeout(function () {
+            $.ajax({
+                url: '/validate-quote-form/',
+                data: $form.serialize(),
+                success: function (json) {
+                    $overlay.removeClass('showing');
+                    if(json.success)
+                        $('#quote-form-response').html(`<div class="text-success">${json.msg}</div>`);
+                    else
+                        $('#quote-form-response').html(`Fix errors below: <div class="text-danger">${json.msg.replace("_", " ")}</div>`);
+                },
+                error: function (err) {
+                    $overlay.removeClass('showing');
+                    $('#quote-form-response').html(`Fix errors below: <div class="text-danger">${err.msg.replace("_", " ")}</div>`);
+                }
+            });
+        }, 500);
+    })
+
 })(jQuery);
