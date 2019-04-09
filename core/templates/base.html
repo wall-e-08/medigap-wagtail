@@ -54,6 +54,11 @@
 </head>
 
 <body class="{% block body_class %}{% endblock %}">
+
+    <noscript>  <!-- if js is off -->
+        <link rel="stylesheet" href="{% static 'css/no-script.css' %}">
+    </noscript>
+
 {% wagtailuserbar %}
 
 {% block wrapper_div_start %}
@@ -179,11 +184,13 @@
                     </div>
                     <div class="widget dark">
                         <h5 class="widget-title">Get a Free <span class="text-theme-colored">Quote</span></h5>
-                        <form id="footer-quote-form" class="">
+                        <form id="footer-quote-form" class="auto-zip-form">
                             <div class="input-group">
-                                <input type="email" value="" name="zip_code" placeholder="Zip Code" class="form-control input-lg font-16" data-height="45px">
+                                <input type="number" placeholder="Zip Code" class="form-control input-lg font-16" data-height="45px"
+                                    onKeyPress="if(this.value.length===5) return false;">
                                 <span class="input-group-btn">
-                                    <button data-height="45px" class="btn btn-colored btn-theme-colored pl-30 pr-30 m-0 font-14" type="submit">Quote</button>
+                                    <button class="btn btn-colored btn-theme-colored pl-30 pr-30 m-0 font-14" type="button"
+                                        data-toggle="modal" data-target="#quote-modal" data-height="45px">Quote</button>
                                 </span>
                             </div>
                         </form>

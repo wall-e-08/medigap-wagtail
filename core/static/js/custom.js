@@ -2410,6 +2410,12 @@ var concitus = {};
                 }
             });
         }, 500);
-    })
+    });
+    
+    $('.auto-zip-form button').click(function (e) {
+        let _t = $(this);
+        let zip_code = _t.closest('.auto-zip-form').find('input').val();
+        $('#quote_zip').val(zip_code);
+    });
 
 })(jQuery);
