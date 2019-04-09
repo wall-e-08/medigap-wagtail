@@ -3,6 +3,7 @@
 
 {% block extra_css %}
     <style>
+
         #article-heading {
             background-image: url('{{ all_article_page.feature_bg.file.url }}');
         }
@@ -28,14 +29,17 @@
         </div>
     </section>
 
-    <section>
-        <div class="container mt-30 mb-30 pt-30 pb-30">
+    <section class="bg-silver-light">
+        <div class="container pt-60 pb-60">
             <div class="row">
                 <div class="col-md-9">
-                    <div>
-                        <img src="{{ page.feature_img.file.url }}" style="width: 100%;" alt="{{ page.feature_img.title }}">
+                    <div class="bg-white">
+                        <div>
+                            <img src="{{ page.feature_img.file.url }}" style="width: 100%;"
+                                 alt="{{ page.feature_img.title }}">
+                        </div>
+                        <div class="p-20">{{ page.content|default:""|safe }}</div>
                     </div>
-                    <div>{{ page.content|default:""|safe }}</div>
                 </div>
                 <div class="col-md-3">
                     <div class="sidebar sidebar-right mt-sm-30">
