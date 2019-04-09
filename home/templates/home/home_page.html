@@ -22,8 +22,9 @@
                                     </h3>
                                     <form id="home_appointment_form" class="auto-zip-form">
                                         <div class="input-group">
+                                            <label for="banner_zip_code" class="hidden-label">Zip Code</label>
                                             <input type="number" onKeyPress="if(this.value.length===5) return false;" placeholder="Enter Zip code"
-                                                   class="form-control input-lg font-16" style="height: 45px;">
+                                                   class="form-control input-lg font-16" id="banner_zip_code" style="height: 45px;">
                                             <span class="input-group-btn">
                                                 <button class="btn btn-colored btn-theme-colored btn-xs m-0 font-14 pl-60 pr-60" type="button"
                                                         data-toggle="modal" data-target="#quote-modal" style="height: 45px;">Quote</button>
@@ -56,9 +57,10 @@
                                 <div class="col-sm-6">
                                     <div class="service-icon-box">
                                         <div>
-                                        <a href="javascript:void(0);" class="icon pull-left mr-10 full-centered">
+                                        {#<a href="javascript:void(0);" class="icon pull-left mr-10 full-centered">#}
+                                        <span class="icon pull-left mr-10 full-centered">
                                             <i class="{{ wcit.icon|default:"" }}"></i>
-                                        </a></div>
+                                        </span></div>
                                         <div>
                                             <h4 class="mt-0 mb-0">{{ wcit.name|default:"" }}</h4>
                                             <p class="">{{ wcit.desc|default:"" }}</p>
@@ -140,28 +142,33 @@
                                 <div class="row">
                                     <div class="col-sm-6">
                                         <div class="form-group mb-30">
-                                            <input placeholder="First Name" type="text" name="f_name" required="required" class="form-control">
+                                            <label for="f_name" class="hidden-label">Zip Code</label>
+                                            <input placeholder="First Name" type="text" name="f_name" id="f_name" required="required" class="form-control">
                                         </div>
                                     </div>
                                     <div class="col-sm-6">
                                         <div class="form-group mb-30">
-                                            <input placeholder="Last Name" type="text" name="l_name" required="required" class="form-control">
+                                            <label for="l_name" class="hidden-label">Zip Code</label>
+                                            <input placeholder="Last Name" type="text" name="l_name" id="l_name" required="required" class="form-control">
                                         </div>
                                     </div>
                                     <div class="col-sm-6">
                                         <div class="form-group mb-30">
-                                            <input placeholder="Email" type="text" name="email" class="form-control" required="">
+                                            <label for="email" class="hidden-label">Zip Code</label>
+                                            <input placeholder="Email" type="text" name="email" id="email" class="form-control" required="">
                                         </div>
                                     </div>
                                     <div class="col-sm-6">
                                         <div class="form-group mb-30">
-                                            <input placeholder="Phone" type="text" name="phone" class="form-control" required="">
+                                            <label for="phone" class="hidden-label">Zip Code</label>
+                                            <input placeholder="Phone" type="text" name="phone" id="phone" class="form-control" required="">
                                         </div>
                                     </div>
                                     <div class="col-sm-6">
                                         <div class="form-group mb-30">
                                             <div class="styled-select">
-                                                <select name="car_select" class="form-control" required="">
+                                                <label for="car_select" class="hidden-label">Zip Code</label>
+                                                <select name="car_select" id="car_select" class="form-control" required="">
                                                     <option value="">- Select Your Services -</option>
                                                     <option value="stm">STM</option>
                                                     <option value="lim">Limited</option>
@@ -171,12 +178,14 @@
                                     </div>
                                     <div class="col-sm-6">
                                         <div class="form-group mb-30">
-                                            <input name="effective_date" class="form-control required date-picker" type="text" placeholder="Effective Date" aria-required="true">
+                                            <label for="effective_date" class="hidden-label">Zip Code</label>
+                                            <input name="effective_date" id="effective_date" class="form-control required date-picker" type="text" placeholder="Effective Date" aria-required="true">
                                         </div>
                                     </div>
                                     <div class="col-sm-12">
                                         <div class="form-group mb-0 mt-0">
-                                            <input name="form_botcheck" class="form-control" type="hidden" value="">
+                                            <label for="form_botcheck" class="hidden-label">Zip Code</label>
+                                            <input name="form_botcheck" id="form_botcheck" class="form-control" type="hidden" value="">
                                             <button type="submit" class="btn btn-colored btn-theme-colored btn-lg btn-flat border-left-theme-color-2-4px" data-loading-text="Please wait...">Submit
                                                 Now
                                             </button>
