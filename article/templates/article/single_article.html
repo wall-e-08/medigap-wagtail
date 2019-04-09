@@ -11,6 +11,13 @@
             flex-direction: column;
             max-width: 300px;
         }
+        .sidebar-widget-title-bg{
+            background: #0c67b8;
+            padding: 10px;
+            color: #fff;
+            border-radius: 3px;
+            max-width:300px;
+            }
         {% if all_article_page.sidebar_form_bg.file %}
             .sidebar-bg-over-form {
                 background: url('{{ all_article_page.sidebar_form_bg.file.url }}') no-repeat top center;
@@ -51,9 +58,9 @@
                 <div class="col-md-3">
                     <div class="sidebar sidebar-right mt-sm-30">
                         <div class="widget">
-                            <h4 class="widget-title">{{ all_article_page.sidebar_form_main_heading|default:"Compare Insurance Plans" }}</h4>
+                            <h4 class="widget-title sidebar-widget-title-bg">{{ all_article_page.sidebar_form_main_heading|default:"Compare Insurance Plans" }}</h4>
                             <div>
-                                <h5>{{ all_article_page.sidebar_form_heading|default:"Find the best plan suit for you" }}</h5>
+                                <h5 class="pl-10" style="color: #f36438">{{ all_article_page.sidebar_form_heading|default:"Find the best plan suit for you" }}</h5>
                                 <form class="auto-zip-form">
                                     <div class="sidebar-bg-over-form"></div>
                                     <div class="input-group">
@@ -70,13 +77,13 @@
 
                         {% if all_article_page.get_most_viewed_articles %}
                             <div class="widget">
-                                <h5 class="widget-title">Most viewed Articles</h5>
+                                <h5 class="widget-title sidebar-widget-title-bg">Most viewed Articles</h5>
                                 <div class="widget-sidebar-article">
                                     {% for article in all_article_page.get_most_viewed_articles %}
-                                        <a href="{% pageurl article %}" class="item">
+                                        <a href="{% pageurl article %}" class="item pl-0">
                                             <div class="article-img-bg widget-sidebar-article-img-bg" style="background-image: url('{{ article.feature_img.file.url }}');"></div>
                                             <div class="widget-sidebar-article-text">
-                                                <h4 class="mt-0 mb-0">This is a Recent Title</h4>
+                                                <h5 class="mt-0 mb-0">This is a Recent Title</h5>
                                             </div>
                                         </a>
                                     {% endfor %}
@@ -86,13 +93,13 @@
 
                         {% if all_article_page.get_latest_articles %}
                             <div class="widget">
-                                <h5 class="widget-title">Recent Articles</h5>
+                                <h5 class="widget-title sidebar-widget-title-bg">Recent Articles</h5>
                                 <div class="widget-sidebar-article">
                                     {% for article in all_article_page.get_latest_articles %}
-                                        <a href="{% pageurl article %}" class="item">
+                                        <a href="{% pageurl article %}" class="item pl-0">
                                             <div class="article-img-bg widget-sidebar-article-img-bg" style="background-image: url('{{ article.feature_img.file.url }}');"></div>
                                             <div class="widget-sidebar-article-text">
-                                                <h4 class="mt-0 mb-0">This is a Recent Title</h4>
+                                                <h5 class="mt-0 mb-0">This is a Recent Title</h5>
                                             </div>
                                         </a>
                                     {% endfor %}
@@ -102,11 +109,11 @@
 
                         {% if all_tags|length > 1 %}
                             <div class="widget">
-                                <h5 class="widget-title">Tags</h5>
+                                <h5 class="widget-title sidebar-widget-title-bg">Tags</h5>
                                 <div class="tags">
                                     {% for tag in all_tags %}
                                         {% if tag %}
-                                            <a href="{% routablepageurl all_article_page "article_by_tag" tag.slug %}">{{ tag }}</a>
+                                            <a href="{% routablepageurl all_article_page "article_by_tag" tag.slug %}" class="ml-0">{{ tag }}</a>
                                         {% endif %}
                                     {% endfor %}
                                 </div>
