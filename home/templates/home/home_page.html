@@ -129,10 +129,15 @@
                 <div class="row equal-height">
                     <div class="col-md-6 bg-theme-colored2 sm-height-auto">
                         <div class="p-50 p-sm-0 p-sm-0 pt-sm-30 pb-sm-30">
-                            <h2 class="text-white">In Search Of A Good And Quality Health Insurance, 100+ agents are waiting for you.</h2>
-                            <p class="text-white">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Atque commodi molestiae autem fugit consectetur dolor ullam illo ipsa numquam, quod iusto
-                                enim ipsum amet iusto amet consec utem fugit consllo ipsa numquam dolor ullam illo, quod iusto enim ipsum amet iusto amet consec.</p>
-                            <a href="#" class="btn btn-default btn-circled mt-10">view details</a>
+                            <h2 class="text-white text-capitalize">{{ page.get_prom_items.title|default:"" }}</h2>
+                            <p class="text-white">{{ page.get_prom_items.content|default:""|striptags|truncatewords:"80"|safe }}</p>
+                            {% if page.get_prom_items.url %}
+                                <a href="{{ page.get_prom_items.url }}" class="btn btn-default btn-circled mt-10">
+                                    {{ page.get_prom_items.url_text|default:"view details" }}
+                                </a>
+                            {% elif page.get_prom_items.slug %}
+                                <a href="{% pageurl page.get_prom_items %}" class="btn btn-default btn-circled mt-10">view details</a>
+                            {% endif %}
                         </div>
                     </div>
                     <div class="col-md-6 bg-img-cover sm-height-auto overlay-img-bg overlay-img-bg-theme2" data-bg-img="{% static 'images/bg/bg29.jpg' %}">

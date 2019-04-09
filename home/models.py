@@ -5,7 +5,7 @@ from modelcluster.fields import ParentalKey
 from modelcluster.models import ClusterableModel
 
 from wagtail.admin.edit_handlers import (FieldPanel, InlinePanel, TabbedInterface,
-                                         ObjectList, MultiFieldPanel, StreamFieldPanel)
+                                         ObjectList, MultiFieldPanel, StreamFieldPanel, PageChooserPanel, FieldRowPanel)
 from wagtail.core import blocks
 from wagtail.core.fields import RichTextField, StreamField
 from wagtail.core.models import Page, Orderable
@@ -145,18 +145,23 @@ class HomePage(Page):
     parent_page_types = ['wagtailcore.Page']
 
     # banner
-    banner_slogan = models.CharField(blank=True, null=True, max_length=150)
+    banner_slogan = models.CharField(
+        blank=True, null=True,
+        max_length=150,
+        verbose_name="Slogan",
+    )
     banner_bg = models.ForeignKey(
         'wagtailimages.Image',
         on_delete=models.SET_NULL,
         blank=True, null=True,
         help_text="Background Image of Banner",
+        verbose_name="Background Image",
         related_name="banner_bg",
     )
     banner_qt_text = models.CharField(
         blank=True, null=True, max_length=250,
         help_text="Text below QUOTE Form in Banner",
-        verbose_name="Banner QUOTE Text",
+        verbose_name="Quote form text",
     )
 
     # Why Choose Us / About
@@ -202,6 +207,35 @@ class HomePage(Page):
         verbose_name="Description",
     )
 
+    # promote section
+    prom_article = models.ForeignKey(
+        'article.ArticlePage',
+        on_delete=models.SET_NULL,
+        blank=True, null=True,
+        related_name='promote_article',
+        verbose_name='Article Page',
+    )
+    prom_custom_heading = models.CharField(
+        blank=True, null=True,
+        max_length=150, verbose_name="Heading",
+        help_text="Heading if no article chosen",
+    )
+    prom_custom_desc = models.TextField(
+        blank=True, null=True,
+        max_length=500, verbose_name="Description",
+        help_text="Description if no article chosen",
+    )
+    prom_custom_url = models.URLField(
+        blank=True, null=True,
+        verbose_name="URL",
+        help_text="Custom Url if no article chosen",
+    )
+    prom_custom_url_text = models.CharField(
+        blank=True, null=True,
+        max_length=150, verbose_name="URL Text",
+        help_text="Custom url text if no article chosen",
+    )
+
     # Insurance Policilies
     ins_heading = models.CharField(
         blank=True, null=True, max_length=100,
@@ -214,7 +248,14 @@ class HomePage(Page):
     )
 
     content_panels = Page.content_panels + [
-        FieldPanel('banner_slogan'), ImageChooserPanel('banner_bg'), FieldPanel('banner_qt_text'),
+        MultiFieldPanel(
+            [
+                ImageChooserPanel('banner_bg'),
+                FieldPanel('banner_slogan'),
+                FieldPanel('banner_qt_text'),
+            ],
+            heading="Banner", classname="collapsible collapsed",
+        ),
         MultiFieldPanel(
             [
                 FieldPanel('why_choose_heading'),
@@ -222,14 +263,14 @@ class HomePage(Page):
                 ImageChooserPanel('why_choose_img'),
                 InlinePanel('whychoose_icontext', label="List of Why Choose Us"),
             ],
-            heading="Why Choose Us", classname="collapsible",
+            heading="Why Choose Us", classname="collapsible collapsed",
         ),
         MultiFieldPanel(
             [
                 ImageChooserPanel('achiev_bg'),
                 InlinePanel('achievement_count', label="Name & Count"),
             ],
-            heading="Achievement", classname="collapsible",
+            heading="Achievement", classname="collapsible collapsed",
         ),
         MultiFieldPanel(
             [
@@ -237,7 +278,19 @@ class HomePage(Page):
                 FieldPanel('srvc_desc'),
                 InlinePanel('services_icontext', label="Icons with Texts"),
             ],
-            heading="Services", classname="collapsible",
+            heading="Services", classname="collapsible collapsed",
+        ),
+        MultiFieldPanel(
+            [
+                PageChooserPanel('prom_article', 'article.ArticlePage'),
+                FieldPanel('prom_custom_heading'),
+                FieldPanel('prom_custom_desc'),
+                FieldRowPanel([
+                    FieldPanel('prom_custom_url'),
+                    FieldPanel('prom_custom_url_text'),
+                ])
+            ],
+            heading="Promote", classname="collapsible collapsed",
         ),
         MultiFieldPanel(
             [
@@ -245,9 +298,20 @@ class HomePage(Page):
                 FieldPanel('ins_desc'),
                 InlinePanel('ins_policy', label="Policy"),
             ],
-            heading="Insurance Policy", classname="collapsible",
+            heading="Insurance Policy", classname="collapsible collapsed",
         ),
     ]
+
+    def get_prom_items(self):
+        if self.prom_article:
+            return self.prom_article
+        else:
+            return {
+                "title": self.prom_custom_heading,
+                "content": self.prom_custom_desc,
+                "url": self.prom_custom_url,
+                "url_text": self.prom_custom_url_text,
+            }
 
 
 class SimplePage(Page):
@@ -290,14 +354,14 @@ class SimplePage(Page):
                 ImageChooserPanel('heading_bg'),
                 FieldPanel('content', classname="full"),
             ],
-            heading="Page Identity", classname="collapsible",
+            heading="Page Identity", classname="collapsible collapsed",
         ),
         MultiFieldPanel(
             [
                 FieldPanel('slogan_txt'),
                 ImageChooserPanel('slogan_img'),
             ],
-            heading="Slogan", classname="collapsible",
+            heading="Slogan", classname="collapsible collapsed",
         ),
     ]
 
