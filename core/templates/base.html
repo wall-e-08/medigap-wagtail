@@ -14,8 +14,19 @@
             {% endwith %}
         {% endblock %}
     </title>
-    <meta name="description" content=""/>
+
+    {# TODO: backend #}
+    <meta name="description" content="Health Insurance like medigap, stm, limited etc.">
+    <meta name="keywords" content="Health,Insurance,Medigap,STM,Limited">
+    <meta name="author" content="http://concitus.com">
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
+
+    <!-- Chrome, Firefox OS and Opera -->
+    <meta name="theme-color" content="#f14e1b">
+    <!-- Windows Phone -->
+    <meta name="msapplication-navbutton-color" content="#f14e1b">
+    <!-- iOS Safari -->
+    <meta name="apple-mobile-web-app-status-bar-style" content="#f14e1b">
 
     <!-- Favicon & Touch Icon -->
     <link href="{% if settings.home.PrimarySiteSettings.favicon.file %}{{ settings.home.PrimarySiteSettings.favicon.file.url }}{% else %}{% static 'images/favicon.png' %}{% endif %}" rel="shortcut icon" type="image/png">
@@ -99,7 +110,7 @@
                     </div>
                     <div class="visible-sm-block visible-xs-block col-xs-6 col-sm-9 text-right">
                         <div class="navbar-header">
-                            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#top-main-menu" aria-expanded="false">
+                            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#top-main-menu" aria-expanded="false" aria-label="Toggle Navbar">
                                 <i class="fa fa-bars font-25 text-black-111"></i>
                                 <i class="fa fa-times font-25 text-black-111"></i>
                             </button>
@@ -172,7 +183,7 @@
                         <h5 class="widget-title mb-10">Connect With Us</h5>
                         <ul class="styled-icons icon-dark icon-circled icon-sm">
                             {% for social_media in settings.home.SocialMediaSettings.sm_settings_panel.all %}
-                                <li><a href="{{ social_media.sm_url }}"><i class="{{ social_media.sm_icon }}"></i></a></li>
+                                <li><a href="{{ social_media.sm_url }}" aria-label="Social media {{ social_media.sm_url }}"><i class="{{ social_media.sm_icon }}"></i></a></li>
                             {% endfor %}
                         </ul>
                     </div>
@@ -186,7 +197,8 @@
                         <h5 class="widget-title">Get a Free <span class="text-theme-colored">Quote</span></h5>
                         <form id="footer-quote-form" class="auto-zip-form">
                             <div class="input-group">
-                                <input type="number" placeholder="Zip Code" class="form-control input-lg font-16" data-height="45px"
+                                <label for="footer_zip_code" class="hidden-label">Zip Code</label>
+                                <input type="number" id="footer_zip_code" placeholder="Zip Code" class="form-control input-lg font-16" data-height="45px"
                                     onKeyPress="if(this.value.length===5) return false;">
                                 <span class="input-group-btn">
                                     <button class="btn btn-colored btn-theme-colored pl-30 pr-30 m-0 font-14" type="button"

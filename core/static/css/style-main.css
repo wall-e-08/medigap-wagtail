@@ -9018,3 +9018,8 @@ input::-webkit-inner-spin-button {
 input[type=number] {
     -moz-appearance:textfield;
 }
+
+label.hidden-label {
+    position: absolute;
+    z-index: -5000 !important;
+}
