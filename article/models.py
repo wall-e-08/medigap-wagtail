@@ -37,9 +37,36 @@ class ArticleIndexPage(RoutablePageMixin, Page):
         related_name="article_feature_bg",
     )
 
-    content_panels = Page.content_panels + [
-        ImageChooserPanel('feature_bg')
+    # sidebar form
+    sidebar_form_main_heading = models.CharField(
+        blank=True, null=True,
+        max_length=250,
+    )
+    sidebar_form_bg = models.ForeignKey(
+        'wagtailimages.Image',
+        on_delete=models.SET_NULL,
+        blank=True, null=True,
+        help_text="Background Image above sidebar form",
+        related_name="article_sidebar_form_bg",
+    )
+    sidebar_form_heading = models.CharField(
+        blank=True, null=True,
+        max_length=250,
+    )
+
+    base_panel = [ImageChooserPanel('feature_bg'),]
+    sidebar_panel = [
+        FieldPanel('sidebar_form_main_heading'),
+        ImageChooserPanel('sidebar_form_bg'),
+        FieldPanel('sidebar_form_heading'),
     ]
+
+    edit_handler = TabbedInterface([
+        ObjectList(base_panel, heading='Content'),
+        ObjectList(sidebar_panel, heading='Sidebar', classname="list-ul"),
+        ObjectList(Page.promote_panels, heading='Promote'),
+        ObjectList(Page.settings_panels, heading='Publish Settings', classname="settings"),
+    ])
 
     def get_context(self, request, *args, **kwargs):
         context = super(ArticleIndexPage, self).get_context(request, *args, **kwargs)
