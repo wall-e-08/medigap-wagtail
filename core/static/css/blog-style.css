@@ -1,36 +1,74 @@
 
+.post-categories {
+    margin: 0 5px 10px;
+}
+.post-categories a{
+    border: 1px solid #f36438;
+    padding: 3px 5px;
+    margin-right: 8px;
+}
+.entry-title {
+    font-size: 32px;
+    margin: 5px 0 0 0;
+}
+.post-details {
+    font-size: 14px;
+    font-weight: 500;
+    color: #7a8a9e;
+    padding-top: 25px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+
+}
+.single-post .post-details>* {
+    display: inline-block;
+    vertical-align: middle;
+}
+.post-details .post-author-info .avatar {
+    border-radius: 50%;
+    margin-right: 10px;
+}
 
 
 /*sidebar style start*/
 .article-sidebar-form{
-            display: flex;
-            flex-direction: column;
-            max-width: 300px;
-        }
-        .sidebar-widget-title-bg{
-            background: #0c67b8;
-            padding: 10px;
-            color: #fff;
-            border-radius: 3px;
+    display: flex;
+    flex-direction: column;
+    max-width: 300px;
+}
+.widget .widget-title {
+    margin-top: 0;
+    margin-bottom: 0;
+    text-align: center;
+    font-family: 'lato', sans-serif;
+    font-size: 18px;
+    font-weight: 500;
+}
+.sidebar-widget-title-bg{
+    padding: 10px;
+    border-radius: 3px;
 
-         }
-         .widget-sidebar-article{
-            display: flex;
-            flex-direction: row;
-            flex-wrap: wrap;
-            background: #0c67b8;
-            padding: 30px;
-            border-radius: 6px;
-         }
+ }
+ .widget-sidebar-article{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    background: #0c67b8;
+    padding: 25px;
+    border-radius: 6px;
+ }
+
 .widget-sidebar-article a {
     display: flex;
-    height: 75px;
-    padding: 5px 0;
+    height: 80px;
+    padding: 8px 10px 8px 0;
 }
 
 .widget-sidebar-article a>.widget-sidebar-article-img-bg {
     height: 100%;
-    width: 75px;
+    width: 80px;
     border-radius: 6px;
 }
 
@@ -40,4 +78,5 @@
 .widget-sidebar-article a>.widget-sidebar-article-text:not(:first-child) {
     padding-left: 10px;
 }
+
 /*sidebar style end*/

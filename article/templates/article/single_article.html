@@ -38,10 +38,46 @@
         <div class="container pt-60 pb-60">
             <div class="row">
                 <div class="col-md-9">
+                    <div class="pb-20 post-details">
+                                <div class="post-author-info">
+                                    <img alt=""
+                                         src="https://secure.gravatar.com/avatar/5c35109621709af909f67c1cd0b36399?s=50&amp;d=mm&amp;r=g"
+                                         class="avatar avatar-50 photo" height="50" width="50">
+                                    <span>Author:</span> <a href="#">{{ all_article_page.owner }}</a>&nbsp;|&nbsp;
+                                </div>
+                                <div class="post-date">
+                                    <i class="fa fa-calendar mr-5 text-theme-colored-amber"></i>
+                                    <span class=>{{ all_article_page.first_published_at|date}}</span>
+                                </div>
+                                &nbsp;|&nbsp;
+                                <div class="post-comments-number"> <i class="fa fa-commenting-o mr-5 text-theme-colored-amber"></i>10000 Comments</div>
+                                &nbsp;|&nbsp;
+                                <div class="post-view">
+                                    <i class="fa fa-heart-o mr-5 text-theme-colored-amber"></i>
+                                    <span>{{ all_article_page.like_count }}10000 Likes</span>
+                                </div>
+                                </div>
                     <div class="bg-white">
+
                         <div>
                             <img src="{{ page.feature_img.file.url }}" style="width: 100%;"
                                  alt="{{ page.feature_img.title }}">
+                        </div>
+                        <div class="p-20 entry-header text-center">
+                            {% if all_tags|length > 1 %}
+                                <div class="article-tags pl-15">
+                                    <span class="mb-10 text-gray-darkgray mr-10 font-13">
+                                        <i class="fa fa-tags mr-5 text-theme-colored-amber"></i>
+                                       {% for tag in all_tags %}
+                                        {% if tag %}
+                                            <a href="{% routablepageurl all_article_page "article_by_tag" tag.slug %}" class="ml-0">{{ tag }}</a>
+                                        {% endif %}
+                                    {% endfor %}
+                                    </span>
+                                </div>
+
+                            {% endif %}
+                            <h1 class="entry-title">Short Term Health Insurance </h1>
                         </div>
                         <div class="p-20">{{ page.content|default:""|safe }}</div>
                     </div>
@@ -74,7 +110,8 @@
                                         <a href="{% pageurl article %}" class="item pl-0">
                                             <div class="article-img-bg widget-sidebar-article-img-bg" style="background-image: url('{{ article.feature_img.file.url }}');"></div>
                                             <div class="widget-sidebar-article-text">
-                                                <h5 class="mt-0 mb-0">This is a Recent Title</h5>
+                                                <h5 class="mt-0 mb-0 font-14">This is a Recent Title</h5>
+                                                 <p class="font-11 text-gray-silver font-weight-600">{{ all_article_page.first_published_at|date}}</p>
                                             </div>
                                         </a>
                                     {% endfor %}
@@ -90,7 +127,8 @@
                                         <a href="{% pageurl article %}" class="item pl-0">
                                             <div class="article-img-bg widget-sidebar-article-img-bg" style="background-image: url('{{ article.feature_img.file.url }}');"></div>
                                             <div class="widget-sidebar-article-text">
-                                                <h5 class="mt-0 mb-0">This is a Recent Title</h5>
+                                                <h5 class="mt-0 mb-0 font-14">This is a Recent Title</h5>
+                                                <p class="font-11 text-gray-silver font-weight-600">{{ all_article_page.first_published_at|date}}</p>
                                             </div>
                                         </a>
                                     {% endfor %}
@@ -101,7 +139,7 @@
                         {% if all_tags|length > 1 %}
                             <div class="widget">
                                 <h5 class="widget-title sidebar-widget-title-bg">Tags</h5>
-                                <div class="tags">
+                                <div class="tags text-center">
                                     {% for tag in all_tags %}
                                         {% if tag %}
                                             <a href="{% routablepageurl all_article_page "article_by_tag" tag.slug %}" class="ml-0">{{ tag }}</a>
