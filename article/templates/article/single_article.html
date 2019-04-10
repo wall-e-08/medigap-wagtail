@@ -2,27 +2,13 @@
 {% load static wagtailcore_tags wagtailimages_tags wagtailroutablepage_tags %}
 
 {% block extra_css %}
+    <link href="{% static 'css/blog-style.css' %}" rel="stylesheet" type="text/css">
     <style>
+
         #article-heading {
             background-image: url('{{ all_article_page.feature_bg.file.url }}');
         }
-        .article-sidebar-form{
-            display: flex;
-            flex-direction: column;
-            max-width: 300px;
-        }
-        .sidebar-widget-title-bg{
-            background: #0c67b8;
-            padding: 10px;
-            color: #fff;
-            border-radius: 3px;
 
-         }
-         .widget-sidebar-article{
-            display: flex;
-            flex-direction: row;
-            flex-wrap: wrap;
-         }
         {% if all_article_page.sidebar_form_bg.file %}
             .sidebar-bg-over-form {
                 background: url('{{ all_article_page.sidebar_form_bg.file.url }}') no-repeat top center;
