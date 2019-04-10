@@ -30,7 +30,10 @@
     border-radius: 50%;
     margin-right: 10px;
 }
-
+.article-tags a {
+    border: 1px solid #f36438;
+    color: #f36438;
+}
 
 /*sidebar style start*/
 .article-sidebar-form{
@@ -52,9 +55,6 @@
 
  }
  .widget-sidebar-article{
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
     background: #0c67b8;
     padding: 25px;
     border-radius: 6px;

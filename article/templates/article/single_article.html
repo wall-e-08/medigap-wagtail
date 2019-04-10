@@ -77,7 +77,7 @@
                                 </div>
 
                             {% endif %}
-                            <h1 class="entry-title">Short Term Health Insurance </h1>
+                            <h1 class="entry-title" >Short Term Health Insurance </h1>
                         </div>
                         <div class="p-20">{{ page.content|default:""|safe }}</div>
                     </div>
@@ -139,7 +139,7 @@
                         {% if all_tags|length > 1 %}
                             <div class="widget">
                                 <h5 class="widget-title sidebar-widget-title-bg">Tags</h5>
-                                <div class="tags text-center">
+                                <div class="article-tags text-center">
                                     {% for tag in all_tags %}
                                         {% if tag %}
                                             <a href="{% routablepageurl all_article_page "article_by_tag" tag.slug %}" class="ml-0">{{ tag }}</a>
