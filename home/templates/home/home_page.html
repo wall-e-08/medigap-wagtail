@@ -140,7 +140,8 @@
                             {% endif %}
                         </div>
                     </div>
-                    <div class="col-md-6 bg-img-cover sm-height-auto overlay-img-bg overlay-img-bg-theme2" data-bg-img="{% static 'images/bg/bg29.jpg' %}">
+                    <div class="col-md-6 sm-height-auto overlay-img-bg overlay-img-bg-theme2 promt_bg"
+                         {% if page.prom_bg.file %}data-bg-img="{{ page.prom_bg.file.url }}"{% endif %}>
                         <div class="p-50 p-sm-0 p-sm-0 pt-sm-30 pb-sm-30">
                             <form>
                                 <h3 class="mt-0 line-bottom mb-30">Get a <span class="text-theme-colored font-weight-600">Quote</span> Now!</h3>

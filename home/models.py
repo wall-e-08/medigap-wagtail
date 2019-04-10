@@ -208,6 +208,13 @@ class HomePage(Page):
     )
 
     # promote section
+    prom_bg = models.ForeignKey(
+        'wagtailimages.Image',
+        on_delete=models.SET_NULL,
+        blank=True, null=True,
+        verbose_name="Background Image",
+        related_name="prom_bg_img",
+    )
     prom_article = models.ForeignKey(
         'article.ArticlePage',
         on_delete=models.SET_NULL,
@@ -282,6 +289,7 @@ class HomePage(Page):
         ),
         MultiFieldPanel(
             [
+                ImageChooserPanel('prom_bg'),
                 PageChooserPanel('prom_article', 'article.ArticlePage'),
                 FieldPanel('prom_custom_heading'),
                 FieldPanel('prom_custom_desc'),
