@@ -27,7 +27,7 @@
             <div class="section-content">
                 <div class="row">
                     <div class="col-md-12 text-center">
-                        <h2 class="font-dois title text-uppercase">medigap blog </h2>
+                        <h2 class="font-dois title text-uppercase">medigap - blog </h2>
                     </div>
                 </div>
             </div>
@@ -39,9 +39,15 @@
             <div class="row">
                 <div class="col-md-9">
                     <div class="bg-white">
-                        <div>
+                        <div class="blog-feature-img">
+                            <div class="blog-feature-img-overlay">
+                                <div class="blog-feature-img-overlay-text item-middle text-white">
+                                <h2 class="font-dois  text-uppercase text-white">{{ page.title|default:""|safe }}</h2>
+                                </div>
+                            </div>
                             <img src="{{ page.feature_img.file.url }}" style="width: 100%;"
                                  alt="{{ page.feature_img.title }}">
+
                         </div>
                         <div class="p-20 entry-header">
                             <div class="pb-20 post-details">
@@ -141,7 +147,7 @@
                                 <div class="article-tags text-center">
                                     {% for tag in all_tags %}
                                         {% if tag %}
-                                            <a href="{% routablepageurl all_article_page "article_by_tag" tag.slug %}" class="ml-0">{{ tag }}</a>
+                                            <a href="{% routablepageurl all_article_page "article_by_tag" tag.slug %}" class="ml-0 mt-10">{{ tag }}</a>
                                         {% endif %}
                                     {% endfor %}
                                 </div>

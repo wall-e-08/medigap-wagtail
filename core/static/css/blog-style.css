@@ -34,7 +34,42 @@
     border: 1px solid #f36438;
     color: #f36438;
 }
+.blog-feature-img{
+     overflow: hidden;
+     position: relative;
+}
+.blog-feature-img img{
+    -moz-transition: all 0.5s;
+    -webkit-transition: all 0.5s;
+    transition: all 0.5s;
+}
+.blog-feature-img img:hover{
+    cursor: pointer;
+    -ms-transform: scale(1.2);
+    -moz-transform: scale(1.2);
+    -webkit-transform: scale(1.2);
+    -o-transform: scale(1.2);
+    transform: scale(1.2);
+}
 
+.blog-feature-img-overlay{
+    display: none;
+    position: absolute;
+    background: rgba(52,73,94,0.75);
+    height: 100%;
+    width: 100%;
+
+}
+.blog-feature-img img:hover .blog-feature-img-overlay{
+    display: block !important;
+
+}
+.item-middle{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+}
 /*sidebar style start*/
 .article-sidebar-form{
     display: flex;
