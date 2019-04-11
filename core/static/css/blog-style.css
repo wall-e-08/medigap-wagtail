@@ -8,7 +8,6 @@
     margin-right: 8px;
 }
 .entry-title {
-    font-size: 32px;
     margin: 5px 0 0 0;
 }
 .post-details {
@@ -20,6 +19,7 @@
     flex-direction: row;
     flex-wrap: wrap;
     align-items: center;
+    justify-content: center;
 
 }
 .single-post .post-details>* {
@@ -115,3 +115,15 @@
 }
 
 /*sidebar style end*/
+
+
+/*full page blog style start*/
+.entry-header{
+    display: inline-block;
+}
+.layer-overlay.overlay-white-5::before {
+    background-color: rgba(0, 0, 0, 0.5);
+}
+/*full page blog style end*/
+
+

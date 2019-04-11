@@ -23,56 +23,11 @@
 {% block content %}
     <!-- Section: Heading -->
     <section id="article-heading" class="inner-header layer-overlay overlay-white-5">
-        <div class="container pt-60 pb-60">
+        <div class="container pt-160 pb-160">
             <div class="section-content">
                 <div class="row">
                     <div class="col-md-12 text-center">
-                        <h2 class="font-dois title text-uppercase">medigap - blog </h2>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section class="bg-silver-light">
-        <div class="container pt-60 pb-60">
-            <div class="row">
-                <div class="col-md-9">
-                    <div class="bg-white">
-                        <div class="blog-feature-img">
-                            <div class="blog-feature-img-overlay">
-                                <div class="blog-feature-img-overlay-text item-middle text-white">
-                                <h2 class="font-dois  text-uppercase text-white">{{ page.title|default:""|safe }}</h2>
-                                </div>
-                            </div>
-                            <img src="{{ page.feature_img.file.url }}" style="width: 100%;"
-                                 alt="{{ page.feature_img.title }}">
-
-                        </div>
-                        <div class="p-20 entry-header">
-                            <div class="pb-20 post-details">
-                                <div class="post-author-info">
-                                    <img alt="{{ all_article_page.owner }}"
-                                         src="https://secure.gravatar.com/avatar/5c35109621709af909f67c1cd0b36399?s=50&amp;d=mm&amp;r=g"
-                                         class="avatar avatar-50 photo" height="50" width="50">
-                                    <span>Author:</span> <a href="#">{{ all_article_page.owner }}</a>&nbsp;|&nbsp;
-                                </div>
-                                <div class="post-date">
-                                    <i class="fa fa-calendar mr-5 text-theme-colored-amber"></i>
-                                    <span class=>{{ all_article_page.first_published_at|date}}</span>
-                                </div>
-                                &nbsp;|&nbsp;
-                                <div class="post-comments-number">
-                                    <i class="fa fa-commenting-o mr-5 text-theme-colored-amber"></i>
-                                    <span> 10000 Comments</span>
-                                </div>
-                                &nbsp;|&nbsp;
-                                <div class="post-view">
-                                    <i class="fa fa-heart-o mr-5 text-theme-colored-amber"></i>
-                                    <span>{{ all_article_page.like_count }}10000 Likes</span>
-                                </div>
-                            </div>
-                            {% if all_tags|length > 1 %}
+                       {% if all_tags|length > 1 %}
                                 <div class="article-tags pl-15">
                                     <span class="mb-10 text-gray-darkgray mr-10 font-13">
                                         <i class="fa fa-tags mr-5 text-theme-colored-amber"></i>
@@ -85,12 +40,44 @@
                                 </div>
 
                             {% endif %}
-                            <h1 class="entry-title text-capitalize" >{{ page.title|default:""|safe }} </h1>
+                            <h1 class="entry-title text-capitalize text-white pt-20" >{{ page.title|default:""|safe }} </h1>
+                        <div class="entry-header">
+                            <div class="pb-20 pt-20 post-details">
+                                <div class="post-author-info">
+                                    <span class="text-white">Author:</span> <a href="#" class="text-white">{{ all_article_page.owner }}</a>&nbsp;|&nbsp;
+                                </div>
+                                <div class="post-date">
+                                    <i class="fa fa-calendar mr-5 text-theme-colored-amber"></i>
+                                    <span class="text-white">{{ all_article_page.first_published_at|date}}</span>
+                                </div>
+                                &nbsp;|&nbsp;
+                                <div class="post-comments-number">
+                                    <i class="fa fa-commenting-o mr-5 text-theme-colored-amber"></i>
+                                    <span class="text-white"> 10000 Comments</span>
+                                </div>
+                                &nbsp;|&nbsp;
+                                <div class="post-view">
+                                    <i class="fa fa-heart-o mr-5 text-theme-colored-amber"></i>
+                                    <span class="text-white">{{ all_article_page.like_count }}10000 Likes</span>
+                                </div>
+                            </div>
                         </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="bg-silver-light">
+        <div class="container pt-60 pb-60">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="mx-auto" style="max-width: 900px; margin: 0 auto;">
+
                         <div class="p-20">{{ page.content|default:""|safe }}</div>
                     </div>
                 </div>
-                <div class="col-md-3">
+               <!-- <div class="col-md-3">
                     <div class="sidebar sidebar-right mt-sm-30">
                         <div class="widget">
                             <h4 class="widget-title sidebar-widget-title-bg">{{ all_article_page.sidebar_form_main_heading|default:"Compare Insurance Plans" }}</h4>
@@ -157,7 +144,7 @@
                             </div>
                         {% endif %}
                     </div>
-                </div>
+                </div>-->
             </div>
         </div>
     </section>
