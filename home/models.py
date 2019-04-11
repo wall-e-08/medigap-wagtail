@@ -590,6 +590,7 @@ class QuoteFormPage(AbstractForm):
     template = 'home/quote_form.html'
     landing_page_template = 'home/quote_form_landing.html'
     subpage_types = []
+    max_count = 1
 
     small_desc = RichTextField(blank=True, null=True)
     ty_text = RichTextField(blank=True, null=True)
