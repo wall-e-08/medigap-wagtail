@@ -52,7 +52,7 @@
                         <div class="p-20 entry-header">
                             <div class="pb-20 post-details">
                                 <div class="post-author-info">
-                                    <img alt=""
+                                    <img alt="{{ all_article_page.owner }}"
                                          src="https://secure.gravatar.com/avatar/5c35109621709af909f67c1cd0b36399?s=50&amp;d=mm&amp;r=g"
                                          class="avatar avatar-50 photo" height="50" width="50">
                                     <span>Author:</span> <a href="#">{{ all_article_page.owner }}</a>&nbsp;|&nbsp;
@@ -62,7 +62,10 @@
                                     <span class=>{{ all_article_page.first_published_at|date}}</span>
                                 </div>
                                 &nbsp;|&nbsp;
-                                <div class="post-comments-number"> <i class="fa fa-commenting-o mr-5 text-theme-colored-amber"></i>10000 Comments</div>
+                                <div class="post-comments-number">
+                                    <i class="fa fa-commenting-o mr-5 text-theme-colored-amber"></i>
+                                    <span> 10000 Comments</span>
+                                </div>
                                 &nbsp;|&nbsp;
                                 <div class="post-view">
                                     <i class="fa fa-heart-o mr-5 text-theme-colored-amber"></i>
