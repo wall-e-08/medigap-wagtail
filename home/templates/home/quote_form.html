@@ -1,0 +1,99 @@
+{% extends "base.html" %}
+{% load static wagtailcore_tags wagtailimages_tags %}
+
+{% block content %}
+    <div id="quote-loading-overlay">
+        <img src="{% static 'images/preloaders/1.gif' %}" alt="Loading..">
+    </div>
+    <div class="main-content">
+        <section>
+            <div class="container text-center">
+                <h1 class="text-uppercase mt-0 font-opensans themed-heading2 bordered-heading">Get a Free <span>Quote</span></h1>
+                <div class="">{{ page.small_desc|default:""|safe }}</div>
+            </div>
+        </section>
+        <section id="quote-form">
+            <div class="container pt-0">
+                <div id="quote-form-response" class="pl-15 pr-15 text-capitalize"></div>
+                <form class="form-animated-field" id="get-a-quote-main-form" method="post"
+                      action="{% pageurl page %}">
+                    {% csrf_token %}
+                    <div class="row">
+                        {% for field in form.visible_fields %}
+                            <div class="col-sm-6">
+                                <div class="form-group mb-10">
+                                    <div>{{ field.errors }}</div>
+                                    <input class="form-control{% if field.name == 'date-of-birth' %} date-picker{% endif %}" type="{{ field.field.widget.input_type }}"
+                                           {% if field.name == 'zip-code' and request.GET.zip_code %}value="{{ request.GET.zip_code }}"{% endif %}
+                                           name="{{ field.name }}" id="{{ field.id_for_label }}"
+                                           {% if field.field.required %}required="required" aria-required="true"{% endif %}>
+                                    {{ field.label_tag }}
+                                </div>
+                            </div>
+                        {% endfor %}
+                        <div class="col-sm-12 text-center mt-30">
+                            <button type="submit" class="btn btn-primary btn-lg btn-theme-colored">Submit</button>
+                        </div>
+                    </div>
+                </form>
+                {% comment %}<form class="form-animated-field" id="get-a-quote-main-form" 
+                      action="{% pageurl page %}?p={{ fields_step.number|add:"1" }}">
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group mb-10">
+                                <input name="{{ form.first_name.name }}" id="quote_f_name" class="form-control required" type="text" required="required" aria-required="true">
+                                <label for="quote_f_name">First Name</label>
+                            </div>
+                        </div> <!--first name-->
+                        <div class="col-sm-6">
+                            <div class="form-group mb-10">
+                                <input name="{{ form.middle_name.name }}" id="quote_m_name" class="form-control" type="text">
+                                <label for="quote_m_name">Middle Name</label>
+                            </div>
+                        </div> <!--middle name-->
+                        <div class="col-sm-6">
+                            <div class="form-group mb-10">
+                                <input name="{{ form.last_name.name }}" id="quote_l_name" class="form-control required" type="text" required="required" aria-required="true">
+                                <label for="quote_l_name">Last Name</label>
+                            </div>
+                        </div> <!--last name-->
+                        <div class="col-sm-6">
+                            <div class="form-group mb-10">
+                                <input name="{{ form.email.name }}" id="quote_email" class="form-control required email" type="email" required="required" aria-required="true">
+                                <label for="quote_email">Your Email</label>
+                            </div>
+                        </div> <!--email-->
+                        <div class="col-sm-6">
+                            <div class="form-group mb-10">
+                                <input name="{{ form.phone.name }}" id="quote_phone" class="form-control required" required="required" type="tel" aria-required="true">
+                                <label for="quote_phone">Phone number</label>
+                            </div>
+                        </div> <!--phone number-->
+                        <div class="col-sm-6">
+                            <div class="form-group mb-10">
+                                <input name="{{ form.phone2.name }}" id="quote_phone2" class="form-control required" required="required" type="tel" aria-required="true">
+                                <label for="quote_phone2">Alternate Phone number</label>
+                            </div>
+                        </div> <!--phone number-->
+                        <div class="col-sm-6">
+                            <div class="form-group mb-10">
+                                <input name="{{ form.dob.name }}" id="quote_dob" class="form-control required date-picker" required="required" type="text" aria-required="true">
+                                <label for="quote_dob">Date of Birth</label>
+                            </div>
+                        </div> <!--DOB-->
+                        <div class="col-sm-6">
+                            <div class="form-group mb-10">
+                                <input name="{{ form.zip_code.name }}" id="quote_zip" class="form-control required" required="required" type="tel" aria-required="true">
+                                <label for="quote_zip">Zip code</label>
+                            </div>
+                        </div> <!--zip code-->
+    
+                        <div class="col-sm-12 text-center mt-30">
+                            <button type="submit" class="btn btn-primary btn-lg btn-theme-colored">Submit</button>
+                        </div>
+                    </div>
+                </form>{% endcomment %}
+            </div>
+        </section>
+    </div>
+{% endblock %}

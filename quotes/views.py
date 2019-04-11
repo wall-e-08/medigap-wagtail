@@ -8,7 +8,7 @@ def validate_quote_form(request):
     if request.GET:
         form = LeadForm(request.GET)
         if form.is_valid():
-            form.save()
+            # form.save()   # using wagtail forms now, no need of model form
             json.update({
                 "success": True,
                 "msg": "Thank you for your quote!",

@@ -8818,7 +8818,8 @@ form.form-animated-field textarea[required="required"]:valid ~ label {
     min-height: 70vh;
 }
 
-.themed-heading{
+.themed-heading,
+.themed-heading2 {
     font-size: 40px;
     font-weight: 700;
     font-family: 'Open Sans', sans-serif;
@@ -8826,7 +8827,50 @@ form.form-animated-field textarea[required="required"]:valid ~ label {
 .themed-heading > span {
     color: #0c67b8 !important;
 }
+.themed-heading2 > span {
+    color: #f36438 !important;
+}
+.bordered-heading {
+    display: inline-block;
+    border-bottom: 4px solid;
+    padding: 0 25px 10px;
+    margin-bottom: 20px !important;
+    position: relative;
+}
+.bordered-heading:after {
+    content: '';
+    position: absolute;
+    height: 4px;
+    width: 50%;
+    border-top: 5px solid;
+    border-bottom: 5px solid;
+    display: block;
+    bottom: -9px;
+    left: 50%;
+    -webkit-transform: translateX(-50%);
+    -moz-transform: translateX(-50%);
+    -ms-transform: translateX(-50%);
+    -o-transform: translateX(-50%);
+    transform: translateX(-50%);
+    -webkit-box-sizing: content-box;
+    -moz-box-sizing: content-box;
+    box-sizing: content-box;
+}
+.bordered-heading.themed-heading {
+    border-bottom-color: #0c67b6;
+}
+.bordered-heading.themed-heading:after {
+    border-top-color: #f36438;
+    border-bottom-color: #f36438;
+}
+.bordered-heading.themed-heading2 {
+    border-bottom-color: #f36438;
+}
 
+.bordered-heading.themed-heading2:after {
+    border-top-color: #0c67b6;
+    border-bottom-color: #0c67b6;
+}
 .service-icon-box {
     display: -webkit-box;
     display: -ms-flexbox;
@@ -8839,7 +8883,8 @@ form.form-animated-field textarea[required="required"]:valid ~ label {
 }
 
 @media (max-width: 768px) {
-    .themed-heading {
+    .themed-heading,
+    .themed-heading2 {
         font-size: 30px;
     }
 }
@@ -8979,6 +9024,7 @@ hr.article-divider {
     margin: 0 !important;
 }
 
+#quote-loading-overlay,
 #quote-modal-overlay {
     position: absolute;
     z-index: 50;
@@ -8988,6 +9034,7 @@ hr.article-divider {
     display: none;
 }
 
+#quote-loading-overlay.showing,
 #quote-modal-overlay.showing {
     display: -webkit-box;
     display: -ms-flexbox;
@@ -9022,4 +9069,11 @@ input[type=number] {
 label.hidden-label {
     position: absolute;
     z-index: -5000 !important;
+}
+
+.promt_bg {
+    -webkit-background-size: auto 90%;
+    background-size: auto 90%;
+    background-position: center bottom;
+    background-repeat: no-repeat;
 }

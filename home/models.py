@@ -6,6 +6,8 @@ from modelcluster.models import ClusterableModel
 
 from wagtail.admin.edit_handlers import (FieldPanel, InlinePanel, TabbedInterface,
                                          ObjectList, MultiFieldPanel, StreamFieldPanel, PageChooserPanel, FieldRowPanel)
+from wagtail.contrib.forms.edit_handlers import FormSubmissionsPanel
+from wagtail.contrib.forms.models import AbstractFormField, AbstractForm
 from wagtail.core import blocks
 from wagtail.core.fields import RichTextField, StreamField
 from wagtail.core.models import Page, Orderable
@@ -141,7 +143,7 @@ class FacilityBlock(blocks.StructBlock):
 
 class HomePage(Page):
     max_count = 1
-    subpage_types = ['article.ArticleIndexPage', 'home.SimplePage']
+    subpage_types = ['article.ArticleIndexPage', 'home.SimplePage', 'home.QuoteFormPage']
     parent_page_types = ['wagtailcore.Page']
 
     # banner
@@ -208,6 +210,13 @@ class HomePage(Page):
     )
 
     # promote section
+    prom_bg = models.ForeignKey(
+        'wagtailimages.Image',
+        on_delete=models.SET_NULL,
+        blank=True, null=True,
+        verbose_name="Background Image",
+        related_name="prom_bg_img",
+    )
     prom_article = models.ForeignKey(
         'article.ArticlePage',
         on_delete=models.SET_NULL,
@@ -282,6 +291,7 @@ class HomePage(Page):
         ),
         MultiFieldPanel(
             [
+                ImageChooserPanel('prom_bg'),
                 PageChooserPanel('prom_article', 'article.ArticlePage'),
                 FieldPanel('prom_custom_heading'),
                 FieldPanel('prom_custom_desc'),
@@ -565,3 +575,37 @@ class ContactItem(Orderable):
         FieldPanel('contact_text'),
         FieldPanel('contact_url'),
     ]
+
+
+# quote form
+class QuoteFormField(AbstractFormField):
+    page = ParentalKey(
+        'QuoteFormPage',
+        on_delete=models.CASCADE,
+        related_name='form_fields',
+    )
+
+
+class QuoteFormPage(AbstractForm):
+    template = 'home/quote_form.html'
+    landing_page_template = 'home/quote_form_landing.html'
+    subpage_types = []
+
+    small_desc = RichTextField(blank=True, null=True)
+    ty_text = RichTextField(blank=True, null=True)
+
+    content_panels = AbstractForm.content_panels + [
+        FormSubmissionsPanel(),
+        FieldPanel('small_desc', classname="full"),
+        InlinePanel('form_fields', label="Quote Form fields"),
+        FieldPanel('ty_text', classname="full"),
+    ]
+
+
+
+
+
+
+
+
+
