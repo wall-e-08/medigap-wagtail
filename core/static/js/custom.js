@@ -2370,7 +2370,7 @@ var concitus = {};
     //call function before document ready
     concitus.initialize.DW_preLoaderClickDisable();
 
-    $('#form-quote-modal input, #form-quote-modal textarea').on("change paste keyup", function () {
+    $('#get-a-quote-main-form input, #get-a-quote-main-form textarea').on("change paste keyup", function () {
         let _t = $(this);
         if (_t.val()) {
             _t.next().css({
@@ -2387,24 +2387,30 @@ var concitus = {};
         }
     });
 
-    $('#form-quote-modal').submit(function (e) {
+    $('#get-a-quote-main-form').submit(function (e) {
         e.preventDefault();
         let $form = $(this);
-        let $overlay = $('#quote-modal-overlay');
+        let form = this;
+        let $overlay = $('#quote-loading-overlay');
         $overlay.addClass('showing');
 
         setTimeout(function () {
+            $overlay.removeClass('showing');
             $.ajax({
                 url: '/validate-quote-form/',
-                data: $form.serialize(),
+                data: $form.serialize().replace(/-/g, '_'),
                 success: function (json) {
+                    console.log(json);
                     $overlay.removeClass('showing');
-                    if(json.success)
-                        $('#quote-form-response').html(`<div class="text-success">${json.msg}</div>`);
+                    if(json.success){
+                        // $('#quote-form-response').html(`<div class="text-success">${json.msg}</div>`);
+                        form.submit();
+                    }
                     else
                         $('#quote-form-response').html(`Fix errors below: <div class="text-danger">${json.msg.replace("_", " ")}</div>`);
                 },
                 error: function (err) {
+                    console.log(err);
                     $overlay.removeClass('showing');
                     $('#quote-form-response').html(`Fix errors below: <div class="text-danger">${err.msg.replace("_", " ")}</div>`);
                 }

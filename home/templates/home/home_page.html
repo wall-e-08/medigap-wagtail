@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% load static wagtailcore_tags wagtailimages_tags %}
+{% load static wagtailcore_tags wagtailimages_tags extra_tags %}
 
 {% block content %}
     <!-- Start main-content -->
@@ -20,13 +20,14 @@
                                         <span class="text-theme-colored2">Get a</span>
                                         <span class="text-theme-colored">Quote</span>
                                     </h3>
-                                    <form id="home_appointment_form" class="auto-zip-form">
+                                    <form id="home_appointment_form" class="auto-zip-form" method="get" action="{% get_quote_page_url %}">
                                         <div class="input-group">
                                             <label for="banner_zip_code" class="hidden-label">Zip Code</label>
-                                            <input type="number" onKeyPress="if(this.value.length===5) return false;" placeholder="Enter Zip code"
+                                            <input type="number" onKeyPress="if(this.value.length===5) return false;"
+                                                   name="zip_code" placeholder="Enter Zip code"
                                                    class="form-control input-lg font-16" id="banner_zip_code" style="height: 45px;">
                                             <span class="input-group-btn">
-                                                <button class="btn btn-colored btn-theme-colored btn-xs m-0 font-14 pl-60 pr-60" type="button"
+                                                <button class="btn btn-colored btn-theme-colored btn-xs m-0 font-14 pl-60 pr-60" type="submit"
                                                         data-toggle="modal" data-target="#quote-modal" style="height: 45px;">Quote</button>
                                             </span>
                                         </div>
