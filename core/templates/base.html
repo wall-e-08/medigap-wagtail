@@ -209,7 +209,7 @@
                     </div>
                 </div>
                 <div class="col-sm-4">
-                    <div class="widget dark">
+                    {% comment %}<div class="widget dark">
                         <h5 class="widget-title">Latest Articles</h5>
                         <div class="latest-posts">
                             {% latest_articles count=3 as articles %}
@@ -227,7 +227,7 @@
                                 </article>
                             {% endfor %}
                         </div>
-                    </div>
+                    </div>{% endcomment %}
                     <div class="widget dark">
                         <h5 class="widget-title">{{ settings.home.PrimarySiteSettings.txt_ph_nmb_footer|default:"Call Us" }}</h5>
                         <div class="text-gray">{{ settings.home.PrimarySiteSettings.phone_number|default:"" }}</div>
