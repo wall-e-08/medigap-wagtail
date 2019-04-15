@@ -15,18 +15,23 @@
         {% endblock %}
     </title>
 
-    {# TODO: backend #}
-    <meta name="description" content="Health Insurance like medigap, stm, limited etc.">
-    <meta name="keywords" content="Health,Insurance,Medigap,STM,Limited">
+    <meta name="description" content="}{{ page.description|default:"" }}">
+    <meta name="keywords" content="{{ page.keywords|default:"" }}">
     <meta name="author" content="http://concitus.com">
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
 
+    <meta property="og:title" content="MediGapDirect || {% if page.og_title %}{{ page.og_title }}{% else %}{{ page.title }}{% endif %}">
+    <meta property="og:image" content="{{ request.scheme }}://{{ request.get_host }}{% if page.og_image.file %}{{ page.og_image.file.url }}{% endif %}">
+    <meta property="og:description" content="{{ page.og_desc|default:"" }}">
+    <meta property="og:site_name" content="MediGapDirect">
+    <meta property="og:type" content="Website">
+
     <!-- Chrome, Firefox OS and Opera -->
-    <meta name="theme-color" content="#f14e1b">
+    <meta name="theme-color" content="#f36438">
     <!-- Windows Phone -->
-    <meta name="msapplication-navbutton-color" content="#f14e1b">
+    <meta name="msapplication-navbutton-color" content="#f36438">
     <!-- iOS Safari -->
-    <meta name="apple-mobile-web-app-status-bar-style" content="#f14e1b">
+    <meta name="apple-mobile-web-app-status-bar-style" content="#f36438">
 
     <!-- Favicon & Touch Icon -->
     <link href="{% if settings.home.PrimarySiteSettings.favicon.file %}{{ settings.home.PrimarySiteSettings.favicon.file.url }}{% else %}{% static 'images/favicon.png' %}{% endif %}" rel="shortcut icon" type="image/png">
@@ -132,7 +137,7 @@
                     <i class="fa fa-phone text-theme-colored mt-0 mr-sm-0 font-25 media-middle"></i>
                     <span class="font-weight-900 text-black text-white m-0"> {{ settings.home.PrimarySiteSettings.phone_number|default:"" }}</span>
                 </a>
-                <a href="#" class="btn btn-theme-colored2 font-19 font-weight-700 hidden-xxs" data-toggle="modal" data-target="#quote-modal">Get Free Quote</a>
+                <a href="{% get_quote_page_url %}" class="btn btn-theme-colored2 font-19 font-weight-700 hidden-xxs">Get Free Quote</a>
             </div>
         </div>
         <div class="header-nav visible-md-block visible-lg-block">
@@ -146,7 +151,7 @@
                             {% main_menu template="menus/main_menu.html" apply_active_classes=True %}
                         </ul>
                         <div class="pull-right visible-lg-block mb-sm-15 text-center">
-                            <a class="btn btn-colored btn-theme-colored mt-15 mt-sm-10 pt-10 pb-10" data-toggle="modal" data-target="#quote-modal">Get Free Quote</a>
+                            <a href="{% get_quote_page_url %}" class="btn btn-colored btn-theme-colored mt-15 mt-sm-10 pt-10 pb-10">Get Free Quote</a>
                         </div>
                     </nav>
                 </div>
@@ -156,7 +161,7 @@
 {% endblock %}
 
 {% block quote_modal %}
-    {% include 'includes/quote_form_modal.html' %}
+    {#{% include 'includes/quote_form_modal.html' %}#}
 {% endblock %}
 
 {% block content %}{% endblock %}
@@ -195,21 +200,21 @@
                     </div>
                     <div class="widget dark">
                         <h5 class="widget-title">Get a Free <span class="text-theme-colored">Quote</span></h5>
-                        <form id="footer-quote-form" class="auto-zip-form">
+                        <form id="footer-quote-form" class="auto-zip-form" method="get" action="{% get_quote_page_url %}">
                             <div class="input-group">
                                 <label for="footer_zip_code" class="hidden-label">Zip Code</label>
-                                <input type="number" id="footer_zip_code" placeholder="Zip Code" class="form-control input-lg font-16" data-height="45px"
-                                    onKeyPress="if(this.value.length===5) return false;">
+                                <input type="number" id="footer_zip_code" placeholder="Zip Code" class="form-control input-lg font-16"
+                                       name="zip_code" data-height="45px" onKeyPress="if(this.value.length===5) return false;">
                                 <span class="input-group-btn">
-                                    <button class="btn btn-colored btn-theme-colored pl-30 pr-30 m-0 font-14" type="button"
-                                        data-toggle="modal" data-target="#quote-modal" data-height="45px">Quote</button>
+                                    <button class="btn btn-colored btn-theme-colored pl-30 pr-30 m-0 font-14" type="submit" 
+                                            data-height="45px">Quote</button>
                                 </span>
                             </div>
                         </form>
                     </div>
                 </div>
                 <div class="col-sm-4">
-                    <div class="widget dark">
+                    {% comment %}<div class="widget dark">
                         <h5 class="widget-title">Latest Articles</h5>
                         <div class="latest-posts">
                             {% latest_articles count=3 as articles %}
@@ -227,7 +232,7 @@
                                 </article>
                             {% endfor %}
                         </div>
-                    </div>
+                    </div>{% endcomment %}
                     <div class="widget dark">
                         <h5 class="widget-title">{{ settings.home.PrimarySiteSettings.txt_ph_nmb_footer|default:"Call Us" }}</h5>
                         <div class="text-gray">{{ settings.home.PrimarySiteSettings.phone_number|default:"" }}</div>

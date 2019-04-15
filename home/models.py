@@ -6,6 +6,8 @@ from modelcluster.models import ClusterableModel
 
 from wagtail.admin.edit_handlers import (FieldPanel, InlinePanel, TabbedInterface,
                                          ObjectList, MultiFieldPanel, StreamFieldPanel, PageChooserPanel, FieldRowPanel)
+from wagtail.contrib.forms.edit_handlers import FormSubmissionsPanel
+from wagtail.contrib.forms.models import AbstractFormField, AbstractForm
 from wagtail.core import blocks
 from wagtail.core.fields import RichTextField, StreamField
 from wagtail.core.models import Page, Orderable
@@ -15,6 +17,45 @@ from wagtail.images.blocks import ImageChooserBlock
 from wagtail.images.edit_handlers import ImageChooserPanel
 
 SPAN_TAG_HELP_TEXT = 'use <span> tag for colored text'
+
+
+class MetaTag(models.Model):
+    og_image = models.ForeignKey(
+        'wagtailimages.Image',
+        on_delete=models.SET_NULL,
+        blank=True, null=True,
+        verbose_name="Open Graph Meta Image",
+    )
+
+    og_title = models.CharField(
+        max_length=500,
+        blank=True, null=True,
+        verbose_name="Open Graph Meta Title",
+    )
+
+    og_desc = models.TextField(
+        blank=True, null=True,
+        verbose_name="Open Graph Meta Description",
+    )
+
+    keywords = models.TextField(
+        blank=True, null=True,
+        verbose_name="Meta Keywords",
+        help_text="comma separated",
+    )
+
+    description = models.TextField(
+        blank=True, null=True,
+        verbose_name="Meta Description",
+    )
+
+    class Meta:
+        abstract = True
+
+    promote_panels = Page.promote_panels + [
+        ImageChooserPanel('og_image'),  FieldPanel('og_title'), FieldPanel('og_desc'),
+        FieldPanel('keywords'), FieldPanel('description'),
+    ]
 
 
 @register_setting(icon='pick')
@@ -139,9 +180,9 @@ class FacilityBlock(blocks.StructBlock):
         label = "Insurance Facilities"
 
 
-class HomePage(Page):
+class HomePage(MetaTag, Page):
     max_count = 1
-    subpage_types = ['article.ArticleIndexPage', 'home.SimplePage']
+    subpage_types = ['article.ArticleIndexPage', 'home.SimplePage', 'home.QuoteFormPage']
     parent_page_types = ['wagtailcore.Page']
 
     # banner
@@ -208,6 +249,13 @@ class HomePage(Page):
     )
 
     # promote section
+    prom_bg = models.ForeignKey(
+        'wagtailimages.Image',
+        on_delete=models.SET_NULL,
+        blank=True, null=True,
+        verbose_name="Background Image",
+        related_name="prom_bg_img",
+    )
     prom_article = models.ForeignKey(
         'article.ArticlePage',
         on_delete=models.SET_NULL,
@@ -282,6 +330,7 @@ class HomePage(Page):
         ),
         MultiFieldPanel(
             [
+                ImageChooserPanel('prom_bg'),
                 PageChooserPanel('prom_article', 'article.ArticlePage'),
                 FieldPanel('prom_custom_heading'),
                 FieldPanel('prom_custom_desc'),
@@ -314,7 +363,7 @@ class HomePage(Page):
             }
 
 
-class SimplePage(Page):
+class SimplePage(MetaTag, Page):
     show_in_menus_default = True
     subpage_types = []  # no sub-page allowed
     parent_page_types = ['home.HomePage', ]
@@ -565,3 +614,38 @@ class ContactItem(Orderable):
         FieldPanel('contact_text'),
         FieldPanel('contact_url'),
     ]
+
+
+# quote form
+class QuoteFormField(AbstractFormField):
+    page = ParentalKey(
+        'QuoteFormPage',
+        on_delete=models.CASCADE,
+        related_name='form_fields',
+    )
+
+
+class QuoteFormPage(AbstractForm):
+    template = 'home/quote_form.html'
+    landing_page_template = 'home/quote_form_landing.html'
+    subpage_types = []
+    max_count = 1
+
+    small_desc = RichTextField(blank=True, null=True)
+    ty_text = RichTextField(blank=True, null=True)
+
+    content_panels = AbstractForm.content_panels + [
+        FormSubmissionsPanel(),
+        FieldPanel('small_desc', classname="full"),
+        InlinePanel('form_fields', label="Quote Form fields"),
+        FieldPanel('ty_text', classname="full"),
+    ]
+
+
+
+
+
+
+
+
+
