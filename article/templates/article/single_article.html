@@ -23,57 +23,12 @@
 {% block content %}
     <!-- Section: Heading -->
     <section id="article-heading" class="inner-header layer-overlay overlay-white-5">
-        <div class="container pt-60 pb-60">
-            <div class="section-content">
+        <div class="container pt-160 pb-160">
+            <div class="section-content" style="max-width:800px; margin:0 auto;">
                 <div class="row">
                     <div class="col-md-12 text-center">
-                        <h2 class="font-dois title text-uppercase">medigap - blog </h2>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section class="bg-silver-light">
-        <div class="container pt-60 pb-60">
-            <div class="row">
-                <div class="col-md-9">
-                    <div class="bg-white">
-                        <div class="blog-feature-img">
-                            <div class="blog-feature-img-overlay">
-                                <div class="blog-feature-img-overlay-text item-middle text-white">
-                                <h2 class="font-dois  text-uppercase text-white">{{ page.title|default:""|safe }}</h2>
-                                </div>
-                            </div>
-                            <img src="{{ page.feature_img.file.url }}" style="width: 100%;"
-                                 alt="{{ page.feature_img.title }}">
-
-                        </div>
-                        <div class="p-20 entry-header">
-                            <div class="pb-20 post-details">
-                                <div class="post-author-info">
-                                    <img alt="{{ all_article_page.owner }}"
-                                         src="https://secure.gravatar.com/avatar/5c35109621709af909f67c1cd0b36399?s=50&amp;d=mm&amp;r=g"
-                                         class="avatar avatar-50 photo" height="50" width="50">
-                                    <span>Author:</span> <a href="#">{{ all_article_page.owner }}</a>&nbsp;|&nbsp;
-                                </div>
-                                <div class="post-date">
-                                    <i class="fa fa-calendar mr-5 text-theme-colored-amber"></i>
-                                    <span class=>{{ all_article_page.first_published_at|date}}</span>
-                                </div>
-                                &nbsp;|&nbsp;
-                                <div class="post-comments-number">
-                                    <i class="fa fa-commenting-o mr-5 text-theme-colored-amber"></i>
-                                    <span> 10000 Comments</span>
-                                </div>
-                                &nbsp;|&nbsp;
-                                <div class="post-view">
-                                    <i class="fa fa-heart-o mr-5 text-theme-colored-amber"></i>
-                                    <span>{{ all_article_page.like_count }}10000 Likes</span>
-                                </div>
-                            </div>
-                            {% if all_tags|length > 1 %}
-                                <div class="article-tags pl-15">
+                       {% if all_tags|length > 1 %}
+                                <div class="article-tags">
                                     <span class="mb-10 text-gray-darkgray mr-10 font-13">
                                         <i class="fa fa-tags mr-5 text-theme-colored-amber"></i>
                                        {% for tag in all_tags %}
@@ -84,13 +39,72 @@
                                     </span>
                                 </div>
 
-                            {% endif %}
-                            <h1 class="entry-title text-capitalize" >{{ page.title|default:""|safe }} </h1>
-                        </div>
-                        <div class="p-20">{{ page.content|default:""|safe }}</div>
+                        {% endif %}
+                            <h1 class="entry-title text-capitalize text-white pt-20" >{{ page.title|default:""|safe }} </h1>
+                            <div class="entry-header">
+                                <div class="pb-20 pt-20 post-details">
+                                    <div class="post-author-info">
+                                        <span class="text-white">Author:</span> <a href="#" class="text-white">{{ all_article_page.owner }}</a>&nbsp;|&nbsp;
+                                    </div>
+                                    <div class="post-date">
+                                        <i class="fa fa-calendar mr-5 text-theme-colored-amber"></i>
+                                        <span class="text-white">{{ all_article_page.first_published_at|date}}</span>
+                                    </div>
+                                    &nbsp;|&nbsp;
+                                    <div class="post-comments-number">
+                                        <i class="fa fa-commenting-o mr-5 text-theme-colored-amber"></i>
+                                        <span class="text-white"> 10000 Comments</span>
+                                    </div>
+                                    &nbsp;|&nbsp;
+                                    <div class="post-view">
+                                        <i class="fa fa-heart-o mr-5 text-theme-colored-amber"></i>
+                                        <span class="text-white">{{ all_article_page.like_count }}10000 Likes</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="mt-10">
+                                <form class="auto-zip-form">
+                                    <div class="input-group">
+                                        <input type="number" onKeyPress="if(this.value.length===5) return false;" placeholder="Enter Zip code"
+                                               class="form-control input-lg font-16" style="height: 45px;">
+                                        <span class="input-group-btn">
+                                                <button class="btn btn-colored btn-theme-colored btn-xs m-0 font-14" type="button"
+                                                        data-toggle="modal" data-target="#quote-modal" style="height: 45px; width: 120px">Quote</button>
+                                            </span>
+                                    </div>
+                                </form>
+                            </div>
                     </div>
                 </div>
-                <div class="col-md-3">
+            </div>
+        </div>
+    </section>
+
+    <section class="">
+        <div class="container pt-60 pb-60">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="mx-auto" style="max-width: 900px; margin: 0 auto;">
+                        <div class="">{{ page.content|default:""|safe }}</div>
+                        <div class="entry-header">
+                            <div class="pb-40 pt-40 post-details">
+                                <div class="post-author-info">
+                                    <div>
+                                        <img alt="{{ all_article_page.owner }}"
+                                             src="https://secure.gravatar.com/avatar/5c35109621709af909f67c1cd0b36399?s=50&amp;d=mm&amp;r=g"
+                                             class="avatar avatar-50 photo" height="70" width="70">
+                                    </div>
+                                    <div class="ml-10">
+                                        <em> <a href="#" class="mb-0" style="font-size: 30px; color: #2d2727;">{{ all_article_page.owner }}</a></em>
+                                        <p style="font-size:16px">Article writer</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+               <!-- <div class="col-md-3">
                     <div class="sidebar sidebar-right mt-sm-30">
                         <div class="widget">
                             <h4 class="widget-title sidebar-widget-title-bg">{{ all_article_page.sidebar_form_main_heading|default:"Compare Insurance Plans" }}</h4>
@@ -157,8 +171,64 @@
                             </div>
                         {% endif %}
                     </div>
-                </div>
+                </div>-->
             </div>
         </div>
     </section>
+<section class="most-viewed-article" style="background: #F7F8FA">
+    <div class="container">
+        <div class="row">
+            {% if all_article_page.get_most_viewed_articles %}
+
+            <h2 class="pl-15 pr-15 mt-0">Most Viewed Articles</h2>
+
+            {% for article in all_article_page.get_most_viewed_articles %}
+            <div class="col-md-3">
+                <div class="blog-card" style="background: #fff">
+                    <a href="{% pageurl article %}" class="item pl-0">
+                        <div class="article-img-bg widget-sidebar-article-img-bg"
+                             style="background-image: url('{{ article.feature_img.file.url }}'); border-radius: 6px"></div>
+                    </a>
+                    <div class="widget-sidebar-article-text p-20">
+
+                        <h4 class=""><a href="{% pageurl article %}">{{ page.title|default:""|safe }}</a></h4>
+                        <div class="">{{ page.content|truncatewords:20|default:""|safe }}</div>
+                    </div>
+
+                </div>
+            </div>
+            {% endfor %}
+            {% endif %}
+
+        </div>
+    </div>
+</section>
+<section class="recent-article" style="background: #fff !important">
+    <div class="container">
+        <div class="row ">
+            {% if all_article_page.get_latest_articles %}
+
+            <h2 class="pl-15 pr-15 mt-0">Most Recent Articles</h2>
+
+            {% for article in all_article_page.get_latest_articles %}
+            <div class="col-md-3">
+                <div class="blog-card" style="background: #F7F8FA !important">
+                    <a href="{% pageurl article %}" class="item pl-0">
+                        <div class="article-img-bg widget-sidebar-article-img-bg"
+                             style="background-image: url('{{ article.feature_img.file.url }}'); border-radius: 6px"></div>
+                    </a>
+                    <div class="widget-sidebar-article-text p-20">
+                        <h4 class=""><a href="{% pageurl article %}">{{ page.title|default:""|safe }}</a></h4>
+                        <div class="" style="font-size: 16px">{{ page.content|truncatewords:20|default:""|safe }}</div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+
+            {% endif %}
+
+        </div>
+    </div>
+</section>
+
 {% endblock %}
