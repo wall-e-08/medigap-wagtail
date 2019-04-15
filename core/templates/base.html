@@ -15,18 +15,23 @@
         {% endblock %}
     </title>
 
-    {# TODO: backend #}
-    <meta name="description" content="Health Insurance like medigap, stm, limited etc.">
-    <meta name="keywords" content="Health,Insurance,Medigap,STM,Limited">
+    <meta name="description" content="}{{ page.description|default:"" }}">
+    <meta name="keywords" content="{{ page.keywords|default:"" }}">
     <meta name="author" content="http://concitus.com">
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
 
+    <meta property="og:title" content="MediGapDirect || {% if page.og_title %}{{ page.og_title }}{% else %}{{ page.title }}{% endif %}">
+    <meta property="og:image" content="{{ request.scheme }}://{{ request.get_host }}{% if page.og_image.file %}{{ page.og_image.file.url }}{% endif %}">
+    <meta property="og:description" content="{{ page.og_desc|default:"" }}">
+    <meta property="og:site_name" content="MediGapDirect">
+    <meta property="og:type" content="Website">
+
     <!-- Chrome, Firefox OS and Opera -->
-    <meta name="theme-color" content="#f14e1b">
+    <meta name="theme-color" content="#f36438">
     <!-- Windows Phone -->
-    <meta name="msapplication-navbutton-color" content="#f14e1b">
+    <meta name="msapplication-navbutton-color" content="#f36438">
     <!-- iOS Safari -->
-    <meta name="apple-mobile-web-app-status-bar-style" content="#f14e1b">
+    <meta name="apple-mobile-web-app-status-bar-style" content="#f36438">
 
     <!-- Favicon & Touch Icon -->
     <link href="{% if settings.home.PrimarySiteSettings.favicon.file %}{{ settings.home.PrimarySiteSettings.favicon.file.url }}{% else %}{% static 'images/favicon.png' %}{% endif %}" rel="shortcut icon" type="image/png">

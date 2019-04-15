@@ -19,6 +19,45 @@ from wagtail.images.edit_handlers import ImageChooserPanel
 SPAN_TAG_HELP_TEXT = 'use <span> tag for colored text'
 
 
+class MetaTag(models.Model):
+    og_image = models.ForeignKey(
+        'wagtailimages.Image',
+        on_delete=models.SET_NULL,
+        blank=True, null=True,
+        verbose_name="Open Graph Meta Image",
+    )
+
+    og_title = models.CharField(
+        max_length=500,
+        blank=True, null=True,
+        verbose_name="Open Graph Meta Title",
+    )
+
+    og_desc = models.TextField(
+        blank=True, null=True,
+        verbose_name="Open Graph Meta Description",
+    )
+
+    keywords = models.TextField(
+        blank=True, null=True,
+        verbose_name="Meta Keywords",
+        help_text="comma separated",
+    )
+
+    description = models.TextField(
+        blank=True, null=True,
+        verbose_name="Meta Description",
+    )
+
+    class Meta:
+        abstract = True
+
+    promote_panels = Page.promote_panels + [
+        ImageChooserPanel('og_image'),  FieldPanel('og_title'), FieldPanel('og_desc'),
+        FieldPanel('keywords'), FieldPanel('description'),
+    ]
+
+
 @register_setting(icon='pick')
 class PrimarySiteSettings(BaseSetting):
     favicon = models.ForeignKey(
@@ -141,7 +180,7 @@ class FacilityBlock(blocks.StructBlock):
         label = "Insurance Facilities"
 
 
-class HomePage(Page):
+class HomePage(MetaTag, Page):
     max_count = 1
     subpage_types = ['article.ArticleIndexPage', 'home.SimplePage', 'home.QuoteFormPage']
     parent_page_types = ['wagtailcore.Page']
@@ -324,7 +363,7 @@ class HomePage(Page):
             }
 
 
-class SimplePage(Page):
+class SimplePage(MetaTag, Page):
     show_in_menus_default = True
     subpage_types = []  # no sub-page allowed
     parent_page_types = ['home.HomePage', ]

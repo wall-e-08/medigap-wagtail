@@ -14,10 +14,10 @@ from wagtail.core.models import Page
 from wagtail.images.edit_handlers import ImageChooserPanel
 from wagtail.snippets.models import register_snippet
 
-from home.models import HomePage
+from home.models import HomePage, MetaTag
 
 
-class ArticleIndexPage(RoutablePageMixin, Page):
+class ArticleIndexPage(MetaTag, RoutablePageMixin, Page):
     max_count = 1
     parent_page_types = ['home.HomePage',]
     subpage_types = ['article.ArticlePage',]
@@ -96,7 +96,7 @@ class ArticleIndexPage(RoutablePageMixin, Page):
         return Page.serve(self, request, *args, **kwargs)
 
 
-class ArticlePage(Page):
+class ArticlePage(MetaTag, Page):
     parent_page_types = [ArticleIndexPage,]
     subpage_types = []
     template = 'article/single_article.html'
