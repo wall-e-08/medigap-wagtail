@@ -9094,3 +9094,30 @@ label.hidden-label {
     background-position: center bottom;
     background-repeat: no-repeat;
 }
+
+.testimonial-wrapper {
+    background: rgba(0,0,0, 0.51);
+    -webkit-box-shadow: 0 0 0 5px rgba(0,0,0,0.22);
+    -moz-box-shadow: 0 0 0 5px rgba(0,0,0,0.22);
+    -ms-box-shadow: 0 0 0 5px rgba(0,0,0,0.22);
+    -o-box-shadow: 0 0 0 5px rgba(0,0,0,0.22);
+    box-shadow: 0 0 0 5px rgba(0,0,0,0.22);
+}
+
+.testimonial-wrapper .img-circle-div {
+    width: 100px;
+    height: 100px;
+    margin: auto;
+    background-position: center;
+    background-repeat: no-repeat;
+    border-radius: 50%;
+}
+
+.testimonial-wrapper .img-circle {
+    border: 10px solid #1d6fba;
+    padding: 3px;
+}
+
+.owl-item .item {
+    padding: 5px;
+}
