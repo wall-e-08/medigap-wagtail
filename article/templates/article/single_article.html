@@ -80,7 +80,7 @@
         </div>
     </section>
 
-    <section class="bg-silver-light">
+    <section class="">
         <div class="container pt-60 pb-60">
             <div class="row">
                 <div class="col-md-12">
@@ -173,112 +173,62 @@
                     </div>
                 </div>-->
             </div>
-            <!--<hr style="border-color: #b9b9b9" class="mt-50">-->
-            <div class="row">
-                {% if all_article_page.get_most_viewed_articles %}
-
-                <h3 class="pl-15 pr-15 article-list-heading-bg">Most Viewed Articles</h3>
-
-                {% for article in all_article_page.get_most_viewed_articles %}
-                <div class="col-md-4">
-                    <div class="blog-card">
-                        <a href="{% pageurl article %}" class="item pl-0">
-                            <div class="article-img-bg widget-sidebar-article-img-bg"
-                                 style="background-image: url('{{ article.feature_img.file.url }}'); border-radius: 6px"></div>
-                        </a>
-                        <div class="widget-sidebar-article-text p-20">
-                            <div>
-                                {% if all_tags|length > 1 %}
-                                    <div class="article-tags">
-                                        <span class="mb-10 text-gray-darkgray mr-10 font-13">
-                                            <i class="fa fa-tags mr-5 text-theme-colored-amber"></i>
-                                           {% for tag in all_tags %}
-                                            {% if tag %}
-                                                <a href="{% routablepageurl all_article_page "article_by_tag" tag.slug %}" class="ml-0">{{ tag }}</a>
-                                            {% endif %}
-                                        {% endfor %}
-                                        </span>
-                                    </div>
-
-                                {% endif %}
-                            </div>
-                            <h3 class=""><a href="{% pageurl article %}">{{ page.title|default:""|safe }}</a></h3>
-                            <div class="pb-20 card-post-details">
-                                <div class="post-author-info">
-                                    <div>
-                                        <img alt="{{ all_article_page.owner }}"
-                                             src="https://secure.gravatar.com/avatar/5c35109621709af909f67c1cd0b36399?s=50&amp;d=mm&amp;r=g"
-                                             class="avatar avatar-50 photo" height="50" width="50">
-                                    </div>
-                                    <div class="" style="line-height: 18px">
-                                        <em> <a href="#" class="mb-0" style="font-size: 20px; color: #2d2727;">{{ all_article_page.owner }}</a></em>
-                                        <p class="text-dark font-11  font-weight-600">{{ all_article_page.first_published_at|date}}</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
-                {% endfor %}
-
-
-                {% endif %}
-
-            </div>
-           <!-- <hr style="border-color: #b9b9b9" class="mt-50">-->
-            <div class="row mt-20">
-                {% if all_article_page.get_latest_articles %}
-
-                <h3 class="pl-15 pr-15 article-list-heading-bg">Most Recent Articles</h3>
-
-                {% for article in all_article_page.get_latest_articles %}
-                <div class="col-md-4">
-                    <div class="blog-card">
-                        <a href="{% pageurl article %}" class="item pl-0">
-                            <div class="article-img-bg widget-sidebar-article-img-bg"
-                                 style="background-image: url('{{ article.feature_img.file.url }}'); border-radius: 6px"></div>
-                        </a>
-                        <div class="widget-sidebar-article-text p-20">
-                            <div>
-                                {% if all_tags|length > 1 %}
-                                    <div class="article-tags">
-                                        <span class="mb-10 text-gray-darkgray mr-10 font-13">
-                                            <i class="fa fa-tags mr-5 text-theme-colored-amber"></i>
-                                           {% for tag in all_tags %}
-                                            {% if tag %}
-                                                <a href="{% routablepageurl all_article_page "article_by_tag" tag.slug %}" class="ml-0">{{ tag }}</a>
-                                            {% endif %}
-                                        {% endfor %}
-                                        </span>
-                                    </div>
-
-                                {% endif %}
-                            </div>
-                            <h3 class=""><a href="{% pageurl article %}">{{ page.title|default:""|safe }}</a></h3>
-                            <div class="pb-20 card-post-details">
-                                <div class="post-author-info">
-                                    <div>
-                                        <img alt="{{ all_article_page.owner }}"
-                                             src="https://secure.gravatar.com/avatar/5c35109621709af909f67c1cd0b36399?s=50&amp;d=mm&amp;r=g"
-                                             class="avatar avatar-50 photo" height="50" width="50">
-                                    </div>
-                                    <div class="" style="line-height: 18px">
-                                        <em> <a href="#" class="mb-0" style="font-size: 20px; color: #2d2727;">{{ all_article_page.owner }}</a></em>
-                                        <p class="text-dark font-11  font-weight-600">{{ all_article_page.first_published_at|date}}</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
-                {% endfor %}
-
-
-                {% endif %}
-
-            </div>
         </div>
     </section>
+<section class="most-viewed-article" style="background: #F7F8FA">
+    <div class="container">
+        <div class="row">
+            {% if all_article_page.get_most_viewed_articles %}
+
+            <h2 class="pl-15 pr-15 mt-0">Most Viewed Articles</h2>
+
+            {% for article in all_article_page.get_most_viewed_articles %}
+            <div class="col-md-3">
+                <div class="blog-card" style="background: #fff">
+                    <a href="{% pageurl article %}" class="item pl-0">
+                        <div class="article-img-bg widget-sidebar-article-img-bg"
+                             style="background-image: url('{{ article.feature_img.file.url }}'); border-radius: 6px"></div>
+                    </a>
+                    <div class="widget-sidebar-article-text p-20">
+
+                        <h4 class=""><a href="{% pageurl article %}">{{ page.title|default:""|safe }}</a></h4>
+                        <div class="">{{ page.content|truncatewords:20|default:""|safe }}</div>
+                    </div>
+
+                </div>
+            </div>
+            {% endfor %}
+            {% endif %}
+
+        </div>
+    </div>
+</section>
+<section class="recent-article" style="background: #fff !important">
+    <div class="container">
+        <div class="row ">
+            {% if all_article_page.get_latest_articles %}
+
+            <h2 class="pl-15 pr-15 mt-0">Most Recent Articles</h2>
+
+            {% for article in all_article_page.get_latest_articles %}
+            <div class="col-md-3">
+                <div class="blog-card" style="background: #F7F8FA !important">
+                    <a href="{% pageurl article %}" class="item pl-0">
+                        <div class="article-img-bg widget-sidebar-article-img-bg"
+                             style="background-image: url('{{ article.feature_img.file.url }}'); border-radius: 6px"></div>
+                    </a>
+                    <div class="widget-sidebar-article-text p-20">
+                        <h4 class=""><a href="{% pageurl article %}">{{ page.title|default:""|safe }}</a></h4>
+                        <div class="" style="font-size: 16px">{{ page.content|truncatewords:20|default:""|safe }}</div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+
+            {% endif %}
+
+        </div>
+    </div>
+</section>
+
 {% endblock %}
