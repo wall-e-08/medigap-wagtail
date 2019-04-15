@@ -30,9 +30,12 @@
     border-radius: 50%;
     margin-right: 10px;
 }
-.article-tags a {
-    border: 1px solid #f36438;
-    color: #f36438;
+.article-tags a,
+.article-tags a:hover,
+.article-tags a:focus {
+    border: 1px solid #f36438 !important;
+    background-color: #f36438 !important;
+    color: #fff !important;
 }
 .blog-feature-img{
      overflow: hidden;

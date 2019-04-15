@@ -295,6 +295,24 @@ class HomePage(MetaTag, Page):
         verbose_name="Description",
     )
 
+    # testimonial heading
+    tm_heading = models.CharField(
+        blank=True, null=True, max_length=100,
+        help_text="Main Heading, " + SPAN_TAG_HELP_TEXT,
+        verbose_name="Heading",
+    )
+    tm_desc = models.CharField(
+        blank=True, null=True, max_length=250,
+        verbose_name="Description",
+    )
+    tm_img = models.ForeignKey(
+        'wagtailimages.Image',
+        on_delete=models.SET_NULL,
+        blank=True, null=True,
+        verbose_name="Background Image",
+        related_name="tm_bg_img",
+    )
+
     content_panels = Page.content_panels + [
         MultiFieldPanel(
             [
@@ -328,26 +346,34 @@ class HomePage(MetaTag, Page):
             ],
             heading="Services", classname="collapsible collapsed",
         ),
+        # MultiFieldPanel(
+        #     [
+        #         ImageChooserPanel('prom_bg'),
+        #         PageChooserPanel('prom_article', 'article.ArticlePage'),
+        #         FieldPanel('prom_custom_heading'),
+        #         FieldPanel('prom_custom_desc'),
+        #         FieldRowPanel([
+        #             FieldPanel('prom_custom_url'),
+        #             FieldPanel('prom_custom_url_text'),
+        #         ])
+        #     ],
+        #     heading="Promote", classname="collapsible collapsed",
+        # ),
+        # MultiFieldPanel(
+        #     [
+        #         FieldPanel('ins_heading'),
+        #         FieldPanel('ins_desc'),
+        #         InlinePanel('ins_policy', label="Policy"),
+        #     ],
+        #     heading="Insurance Policy", classname="collapsible collapsed",
+        # ),
         MultiFieldPanel(
             [
-                ImageChooserPanel('prom_bg'),
-                PageChooserPanel('prom_article', 'article.ArticlePage'),
-                FieldPanel('prom_custom_heading'),
-                FieldPanel('prom_custom_desc'),
-                FieldRowPanel([
-                    FieldPanel('prom_custom_url'),
-                    FieldPanel('prom_custom_url_text'),
-                ])
+                FieldPanel('tm_heading'), FieldPanel('tm_desc'),
+                ImageChooserPanel('tm_img'),
+                InlinePanel('client_testimonial', label="Client\'s Info")
             ],
-            heading="Promote", classname="collapsible collapsed",
-        ),
-        MultiFieldPanel(
-            [
-                FieldPanel('ins_heading'),
-                FieldPanel('ins_desc'),
-                InlinePanel('ins_policy', label="Policy"),
-            ],
-            heading="Insurance Policy", classname="collapsible collapsed",
+            heading="Client's Testimonials", classname="collapsible collapsed",
         ),
     ]
 
@@ -642,7 +668,41 @@ class QuoteFormPage(AbstractForm):
     ]
 
 
+class Testimonial(Orderable):
+    page = ParentalKey(
+        HomePage,
+        on_delete=models.CASCADE,
+        related_name='client_testimonial'
+    )
 
+    img = models.ForeignKey(
+        'wagtailimages.Image',
+        on_delete=models.SET_NULL,
+        blank=True, null=True,
+        help_text="Client's Photo (square image preferred)",
+        verbose_name="Photo",
+    )
+
+    msg = models.TextField(
+        blank=True, null=True
+    )
+
+    name = models.CharField(
+        max_length=150,
+        blank=True, null=True,
+    )
+
+    location = models.CharField(
+        max_length=200,
+        blank=True, null=True,
+    )
+
+    panels = [
+        FieldPanel('name'),
+        FieldPanel('msg'),
+        FieldPanel('location'),
+        ImageChooserPanel('img'),
+    ]
 
 
 
