@@ -2389,7 +2389,7 @@ body.container-970px .container {
   border-radius: 0;
   box-shadow: none;
   height: 45px;
-  border: 1px solid #111;
+  border: 1px solid #eeeeee;
 }
 label {
   font-weight: normal;
@@ -9110,6 +9110,7 @@ label.hidden-label {
     margin: auto;
     background-position: center;
     background-repeat: no-repeat;
+    background-size: cover;
     border-radius: 50%;
 }
 
@@ -9126,4 +9127,7 @@ select.form-control {
     color: #777;
     font-size: 20px;
     font-weight: 100;
+}
+#quote-form .form-control {
+    border: 1px solid #111;
 }
