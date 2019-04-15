@@ -24,7 +24,7 @@
     <!-- Section: Heading -->
     <section id="article-heading" class="inner-header layer-overlay overlay-white-5">
         <div class="container pt-160 pb-160">
-            <div class="section-content">
+            <div class="section-content" style="max-width:800px; margin:0 auto;">
                 <div class="row">
                     <div class="col-md-12 text-center">
                        {% if all_tags|length > 1 %}
@@ -61,6 +61,18 @@
                                         <span class="text-white">{{ all_article_page.like_count }}10000 Likes</span>
                                     </div>
                                 </div>
+                            </div>
+                            <div class="mt-10">
+                                <form class="auto-zip-form">
+                                    <div class="input-group">
+                                        <input type="number" onKeyPress="if(this.value.length===5) return false;" placeholder="Enter Zip code"
+                                               class="form-control input-lg font-16" style="height: 45px;">
+                                        <span class="input-group-btn">
+                                                <button class="btn btn-colored btn-theme-colored btn-xs m-0 font-14" type="button"
+                                                        data-toggle="modal" data-target="#quote-modal" style="height: 45px; width: 120px">Quote</button>
+                                            </span>
+                                    </div>
+                                </form>
                             </div>
                     </div>
                 </div>
@@ -161,11 +173,11 @@
                     </div>
                 </div>-->
             </div>
-            <hr style="border-color: #b9b9b9" class="mt-50">
+            <!--<hr style="border-color: #b9b9b9" class="mt-50">-->
             <div class="row">
                 {% if all_article_page.get_most_viewed_articles %}
 
-                <h2 class="pl-15 pb-20">Most Viewed Articles</h2>
+                <h3 class="pl-15 article-list-heading-bg">Most Viewed Articles</h3>
 
                 {% for article in all_article_page.get_most_viewed_articles %}
                 <div class="col-md-4">
@@ -218,7 +230,7 @@
             <div class="row mt-20">
                 {% if all_article_page.get_latest_articles %}
 
-                <h2 class="pl-15 pb-20">Most Recent Articles</h2>
+                <h3 class="pl-15 article-list-heading-bg">Most Recent Articles</h3>
 
                 {% for article in all_article_page.get_latest_articles %}
                 <div class="col-md-4">
