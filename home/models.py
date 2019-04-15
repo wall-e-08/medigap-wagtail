@@ -313,6 +313,13 @@ class HomePage(MetaTag, Page):
         related_name="tm_bg_img",
     )
 
+    # text_section
+    txt_heading = models.CharField(
+        blank=True, null=True, max_length=250,
+        verbose_name="Heading",
+    )
+    txt_desc = RichTextField(blank=True, null=True)
+
     content_panels = Page.content_panels + [
         MultiFieldPanel(
             [
@@ -375,6 +382,13 @@ class HomePage(MetaTag, Page):
             ],
             heading="Client's Testimonials", classname="collapsible collapsed",
         ),
+        MultiFieldPanel(
+            [
+                FieldPanel('txt_heading'),
+                FieldPanel('txt_desc'),
+            ],
+            heading="Text only Section", classname="collapsible collapsed",
+        )
     ]
 
     def get_prom_items(self):
