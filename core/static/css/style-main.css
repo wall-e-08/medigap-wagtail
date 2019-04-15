@@ -2389,7 +2389,7 @@ body.container-970px .container {
   border-radius: 0;
   box-shadow: none;
   height: 45px;
-  border: 1px solid #eeeeee;
+  border: 1px solid #111;
 }
 label {
   font-weight: normal;
@@ -9120,4 +9120,10 @@ label.hidden-label {
 
 .owl-item .item {
     padding: 5px;
+}
+
+select.form-control {
+    color: #777;
+    font-size: 20px;
+    font-weight: 100;
 }

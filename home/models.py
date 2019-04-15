@@ -440,7 +440,7 @@ class SimplePage(MetaTag, Page):
         ),
     ]
 
-    def get_context(self, request):
+    def get_context(self, request, *args, **kwargs):
         context = super(SimplePage, self).get_context(request)
         context['home_page'] = HomePage.objects.first()
         return context
@@ -657,15 +657,28 @@ class QuoteFormPage(AbstractForm):
     subpage_types = []
     max_count = 1
 
+    bg_img = models.ForeignKey(
+        'wagtailimages.Image',
+        on_delete=models.SET_NULL,
+        blank=True, null=True,
+        help_text="Quote form page Background image",
+        verbose_name="Background Image",
+    )
     small_desc = RichTextField(blank=True, null=True)
     ty_text = RichTextField(blank=True, null=True)
 
     content_panels = AbstractForm.content_panels + [
         FormSubmissionsPanel(),
+        ImageChooserPanel('bg_img'),
         FieldPanel('small_desc', classname="full"),
         InlinePanel('form_fields', label="Quote Form fields"),
         FieldPanel('ty_text', classname="full"),
     ]
+
+    def get_context(self, request, *args, **kwargs):
+        context = super(QuoteFormPage, self).get_context(request)
+        context['state_options'] = settings.US_STATES
+        return context
 
 
 class Testimonial(Orderable):

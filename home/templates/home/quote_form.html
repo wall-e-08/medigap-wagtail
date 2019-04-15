@@ -1,15 +1,55 @@
 {% extends "base.html" %}
 {% load static wagtailcore_tags wagtailimages_tags %}
 
+{% block extra_css %}
+    <style>
+        {% if page.bg_img.file %}
+        #quote-page-heading {
+            background: url('{{ page.bg_img.file.url }}') center center fixed no-repeat;
+            background-size: cover;
+        }
+        {% endif %}
+        
+        .layer-overlay.overlay-dark-5::before {
+            background-color: rgba(17, 17, 17, 0.81);
+        }
+    </style>
+{% endblock %}
+
 {% block content %}
     <div id="quote-loading-overlay">
         <img src="{% static 'images/preloaders/1.gif' %}" alt="Loading..">
     </div>
     <div class="main-content">
-        <section>
+        {% comment %}<section>
             <div class="container text-center">
                 <h1 class="text-uppercase mt-0 font-opensans themed-heading2 bordered-heading">Get a Free <span>Quote</span></h1>
                 <div class="">{{ page.small_desc|default:""|safe }}</div>
+            </div>
+        </section>{% endcomment %}
+    
+        <!-- Section: Heading -->
+        <section id="quote-page-heading" class="inner-header layer-overlay overlay-dark-5">
+            <div class="container pt-60 pb-60">
+                <!-- Section Content -->
+                <div class="section-content">
+                    <div class="row">
+                        <div class="col-md-12 text-center">
+                            <h2 class="text-white font-48 font-weight-700 mb-25 font-opensans title text-left">{{ page.title }}</h2>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <div class="container text-center">
+                <div style="border: 1px solid #0e56dd;padding: 9px 0;background: #dedede;color: #000;margin-bottom: 50px;font-size: 18px;font-weight: 600;">
+                    Please fill out the fields below to find your best rates.</div>
+                <div>
+                    {{ page.small_desc|default:"To give you the best quotes possible, we will need to contact you."|safe }}
+                </div>
+                <div style="margin-top: 40px;border: 1px solid #777;background: #f3f3f3;padding: 8px 0;color: #000;">Fields marked with an * are required</div>
             </div>
         </section>
         <section id="quote-form">
@@ -23,76 +63,29 @@
                             <div class="col-sm-6">
                                 <div class="form-group mb-10">
                                     <div>{{ field.errors }}</div>
-                                    <input class="form-control{% if field.name == 'date-of-birth' %} date-picker{% endif %}" type="{{ field.field.widget.input_type }}"
-                                           {% if field.name == 'zip-code' and request.GET.zip_code %}value="{{ request.GET.zip_code }}"{% endif %}
-                                           name="{{ field.name }}" id="{{ field.id_for_label }}"
-                                           {% if field.field.required %}required="required" aria-required="true"{% endif %}>
-                                    {{ field.label_tag }}
+                                    {% if field.name == 'state' %}
+                                        <select class="form-control" name="{{ field.name }}" id="{{ field.id_for_label }}">
+                                            <option disabled selected value>State *</option>
+                                            {% for state in state_options %}
+                                                <option value="{{ state.0 }}">{{ state.1 }}</option>
+                                            {% endfor %}
+                                        </select>
+                                    {% else %}
+                                        <input class="form-control{% if field.name == 'date-of-birth' %} date-picker{% endif %}" type="{{ field.field.widget.input_type }}"
+                                               {% if field.name == 'zip-code' and request.GET.zip_code %}value="{{ request.GET.zip_code }}"{% endif %}
+                                               name="{{ field.name }}" id="{{ field.id_for_label }}"
+                                               {% if field.field.required %}required="required" aria-required="true"{% endif %}>
+                                        {#{{ field.label_tag }}#}
+                                        <label for="{{ field.id_for_label }}">{{ field.label }}{% if field.field.required %}*{% endif %}</label>
+                                    {% endif %}
                                 </div>
                             </div>
                         {% endfor %}
                         <div class="col-sm-12 text-center mt-30">
-                            <button type="submit" class="btn btn-primary btn-lg btn-theme-colored">Submit</button>
+                            <button type="submit" class="btn btn-primary btn-block btn-lg btn-theme-colored text-capitalize" style="border-radius: 0">get quotes now</button>
                         </div>
                     </div>
                 </form>
-                {% comment %}<form class="form-animated-field" id="get-a-quote-main-form" 
-                      action="{% pageurl page %}?p={{ fields_step.number|add:"1" }}">
-                    <div class="row">
-                        <div class="col-sm-6">
-                            <div class="form-group mb-10">
-                                <input name="{{ form.first_name.name }}" id="quote_f_name" class="form-control required" type="text" required="required" aria-required="true">
-                                <label for="quote_f_name">First Name</label>
-                            </div>
-                        </div> <!--first name-->
-                        <div class="col-sm-6">
-                            <div class="form-group mb-10">
-                                <input name="{{ form.middle_name.name }}" id="quote_m_name" class="form-control" type="text">
-                                <label for="quote_m_name">Middle Name</label>
-                            </div>
-                        </div> <!--middle name-->
-                        <div class="col-sm-6">
-                            <div class="form-group mb-10">
-                                <input name="{{ form.last_name.name }}" id="quote_l_name" class="form-control required" type="text" required="required" aria-required="true">
-                                <label for="quote_l_name">Last Name</label>
-                            </div>
-                        </div> <!--last name-->
-                        <div class="col-sm-6">
-                            <div class="form-group mb-10">
-                                <input name="{{ form.email.name }}" id="quote_email" class="form-control required email" type="email" required="required" aria-required="true">
-                                <label for="quote_email">Your Email</label>
-                            </div>
-                        </div> <!--email-->
-                        <div class="col-sm-6">
-                            <div class="form-group mb-10">
-                                <input name="{{ form.phone.name }}" id="quote_phone" class="form-control required" required="required" type="tel" aria-required="true">
-                                <label for="quote_phone">Phone number</label>
-                            </div>
-                        </div> <!--phone number-->
-                        <div class="col-sm-6">
-                            <div class="form-group mb-10">
-                                <input name="{{ form.phone2.name }}" id="quote_phone2" class="form-control required" required="required" type="tel" aria-required="true">
-                                <label for="quote_phone2">Alternate Phone number</label>
-                            </div>
-                        </div> <!--phone number-->
-                        <div class="col-sm-6">
-                            <div class="form-group mb-10">
-                                <input name="{{ form.dob.name }}" id="quote_dob" class="form-control required date-picker" required="required" type="text" aria-required="true">
-                                <label for="quote_dob">Date of Birth</label>
-                            </div>
-                        </div> <!--DOB-->
-                        <div class="col-sm-6">
-                            <div class="form-group mb-10">
-                                <input name="{{ form.zip_code.name }}" id="quote_zip" class="form-control required" required="required" type="tel" aria-required="true">
-                                <label for="quote_zip">Zip code</label>
-                            </div>
-                        </div> <!--zip code-->
-    
-                        <div class="col-sm-12 text-center mt-30">
-                            <button type="submit" class="btn btn-primary btn-lg btn-theme-colored">Submit</button>
-                        </div>
-                    </div>
-                </form>{% endcomment %}
             </div>
         </section>
     </div>
