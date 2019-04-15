@@ -85,9 +85,9 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="mx-auto" style="max-width: 900px; margin: 0 auto;">
-                        <div class="p-20">{{ page.content|default:""|safe }}</div>
-                        <div class="p-20 entry-header">
-                            <div class="pb-20 post-details">
+                        <div class="">{{ page.content|default:""|safe }}</div>
+                        <div class="entry-header">
+                            <div class="pb-40 pt-40 post-details">
                                 <div class="post-author-info">
                                     <div>
                                         <img alt="{{ all_article_page.owner }}"
@@ -177,7 +177,7 @@
             <div class="row">
                 {% if all_article_page.get_most_viewed_articles %}
 
-                <h3 class="pl-15 article-list-heading-bg">Most Viewed Articles</h3>
+                <h3 class="pl-15 pr-15 article-list-heading-bg">Most Viewed Articles</h3>
 
                 {% for article in all_article_page.get_most_viewed_articles %}
                 <div class="col-md-4">
@@ -230,7 +230,7 @@
             <div class="row mt-20">
                 {% if all_article_page.get_latest_articles %}
 
-                <h3 class="pl-15 article-list-heading-bg">Most Recent Articles</h3>
+                <h3 class="pl-15 pr-15 article-list-heading-bg">Most Recent Articles</h3>
 
                 {% for article in all_article_page.get_latest_articles %}
                 <div class="col-md-4">
