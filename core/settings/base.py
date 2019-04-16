@@ -221,3 +221,7 @@ US_STATES = (
     ('WA', 'Washington'), ('WV', 'West Virginia'), ('WI', 'Wisconsin'), ('WY', 'Wyoming'),
 )
 
+
+LEAD_GATEWAY_ADDRESS = os.environ.get('LEAD_GATEWAY_ADDRESS')
+LEAD_CAMPAIGN_ID = os.environ.get('LEAD_CAMPAIGN_ID')
+IS_LEAD_TEST = False

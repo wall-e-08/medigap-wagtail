@@ -345,6 +345,7 @@ html a {
 body {
   max-width: 100%;
   overflow-x: hidden;
+  position: relative;
 }
 img {
   max-width: 100%;
