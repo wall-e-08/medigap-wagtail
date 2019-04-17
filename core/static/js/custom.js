@@ -2400,14 +2400,22 @@ var concitus = {};
                 url: '/validate-quote-form/',
                 data: $form.serialize().replace(/-/g, '_'),
                 success: function (json) {
-                    console.log(json);
-                    $overlay.removeClass('showing');
+                    // console.log(json);
                     if(json.success){
-                        // $('#quote-form-response').html(`<div class="text-success">${json.msg}</div>`);
-                        form.submit();
+                        if(!json.lead_id) {
+                            $('#quote-form-response').html(`<div class="text-danger">${json.msg.replace("_", " ")}</div>`);
+                            $overlay.removeClass('showing');
+                        } else {
+                            // console.log(json.lead_id)
+                            $form.append(`<input type="hidden" name="lead-id" id="id_lead-id" value="${json.lead_id}"/>`);
+                            form.submit();
+                            $overlay.removeClass('showing');
+                        }
                     }
-                    else
+                    else {
                         $('#quote-form-response').html(`Fix errors below: <div class="text-danger">${json.msg.replace("_", " ")}</div>`);
+                        $overlay.removeClass('showing');
+                    }
                 },
                 error: function (err) {
                     console.log(err);

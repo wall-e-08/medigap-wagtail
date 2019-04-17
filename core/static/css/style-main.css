@@ -345,6 +345,7 @@ html a {
 body {
   max-width: 100%;
   overflow-x: hidden;
+  position: relative;
 }
 img {
   max-width: 100%;
@@ -986,7 +987,7 @@ section > .container-fluid {
     margin: 40px 30px 0 0;
 }
 .menuzord-brand img {
-  max-height: 38px;
+  max-height: 60px;
 }
 @media (max-width: 991px) {
     .menuzord-brand {
@@ -8651,9 +8652,31 @@ body.has-fixed-footer .main-content {
 .head-call-btn-bg {
     background: url('../images/phone-icon.png') no-repeat right;
     background-size: contain;
+    background-position-y: -20px;
     height: 100%;
     padding: 20px 50px 20px 0;
     margin-bottom: 15px;
+    position: relative;
+}
+.head-call-btn-bg:before,
+.head-call-btn-bg:after {
+    content: '';
+    display: block;
+    position: absolute;
+    right: 0;
+}
+.head-call-btn-bg:before {
+    top: 11px;
+    border-bottom: 12px solid transparent;
+    border-right: 19px solid #f7f7f7;
+    border-left: 19px solid #f7f7f7;
+}
+
+.head-call-btn-bg:after {
+    top: 0;
+    background: #f7f7f7;
+    width: 37px;
+    height: 11px;
 }
 
 @media (min-width: 480px) {
