@@ -158,14 +158,14 @@ class ContactSettings(BaseSetting, ClusterableModel):
         verbose_name = 'Contact Info'
 
 
-@register_setting(icon='image')
-class PartnerImgSettings(BaseSetting, ClusterableModel):
-    panels = [
-        InlinePanel('partner_img_panel', label="New Partner")
-    ]
-
-    class Meta:
-        verbose_name = 'Partner Logo'
+# @register_setting(icon='image')
+# class PartnerImgSettings(BaseSetting, ClusterableModel):
+#     panels = [
+#         InlinePanel('partner_img_panel', label="New Partner")
+#     ]
+# 
+#     class Meta:
+#         verbose_name = 'Partner Logo'
 
 
 # Blocks
@@ -320,6 +320,11 @@ class HomePage(MetaTag, Page):
     )
     txt_desc = RichTextField(blank=True, null=True)
 
+    disclaimer = models.CharField(
+        blank=True, null=True,
+        max_length=255,
+    )
+
     content_panels = Page.content_panels + [
         MultiFieldPanel(
             [
@@ -388,6 +393,13 @@ class HomePage(MetaTag, Page):
                 FieldPanel('txt_desc'),
             ],
             heading="Text only Section", classname="collapsible collapsed",
+        ),
+        MultiFieldPanel(
+            [
+                InlinePanel('benefit_text', label="Benefit"),
+                FieldPanel('disclaimer'),
+            ],
+            heading="Benefits & Disclaimer", classname="collapsible collapsed",
         )
     ]
 
@@ -492,35 +504,17 @@ class AchievementCount(Orderable):
     ]
 
 
-class PartnerItem(Orderable):
-    main_settings = ParentalKey(
-        PartnerImgSettings,
+class BenefitText(Orderable):
+    page = ParentalKey(
+        HomePage,
         on_delete=models.CASCADE,
-        related_name='partner_img_panel'
+        related_name='benefit_text'
     )
 
-    logo = models.ForeignKey(
-        'wagtailimages.Image',
-        on_delete=models.SET_NULL,
-        blank=True, null=True,
-        help_text="Business partner's Logo"
-    )
-
-    alt_text = models.CharField(
-        max_length=250,
-        blank=True, null=True,
-    )
-
-    ptnr_url =  models.URLField(
-        max_length=255,
-        blank=True, null=True,
-        verbose_name="Pertner's website",
-    )
+    text = models.CharField(max_length=255)
 
     panels = [
-        ImageChooserPanel('logo'),
-        FieldPanel('alt_text'),
-        FieldPanel('ptnr_url'),
+        FieldPanel('text'),
     ]
 
 

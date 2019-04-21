@@ -9154,3 +9154,50 @@ select.form-control {
 #quote-form .form-control {
     border: 1px solid #111;
 }
+
+#benefits-disclaimer .owl-carousel .owl-stage {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+}
+#benefits-disclaimer .owl-item .item {
+    height: 100%;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+}
+#benefits-disclaimer .benefit-card {
+    color: rgba(255, 255, 255, 0.75);
+    background: rgba(0,0,0, 0.65);
+    -webkit-box-shadow: 0 0 0 5px rgba(0,0,0,0.22);
+    -moz-box-shadow: 0 0 0 5px rgba(0,0,0,0.22);
+    -ms-box-shadow: 0 0 0 5px rgba(0,0,0,0.22);
+    -o-box-shadow: 0 0 0 5px rgba(0,0,0,0.22);
+    box-shadow: 0 0 0 5px rgba(0,0,0,0.22);
+    padding: 13px 10px;
+    font-size: 13px;
+    font-weight: bold;
+}
+#benefits-disclaimer .benefit-card span {
+    color: #f36438;
+    font-size: 28px;
+    line-height: 30px;
+    display: block;
+}
+#benefits-disclaimer .home-disclaimer {
+    margin-top: 70px;
+    font-size: 12px;
+    color: rgba(255, 255, 255, 0.67);
+}
+@media (max-width: 768px) {
+    #benefits-disclaimer .home-disclaimer {
+        margin-top: 30px;
+    }
+}
