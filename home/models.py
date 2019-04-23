@@ -617,7 +617,7 @@ class SocialItem(Orderable):
 
 
 class ContactItem(Orderable):
-    SOCIAL_CHOICES = (
+    CONTACT_CHOICES = (
         ('fa fa-map-marker', 'Location'),
         ('fa fa-phone', 'Phone'),
         ('fa fa-envelope-o', 'E-mail'),
@@ -630,7 +630,7 @@ class ContactItem(Orderable):
         related_name='contact_settings_panel'
     )
     contact_icon = models.CharField(
-        choices=SOCIAL_CHOICES,
+        choices=CONTACT_CHOICES,
         max_length=50,
         verbose_name="Type",
     )
@@ -638,7 +638,7 @@ class ContactItem(Orderable):
         max_length=255,
         verbose_name="Details",
     )
-    contact_url = models.URLField(
+    contact_url = models.CharField(
         max_length=255,
         verbose_name="Link/Url",
     )
