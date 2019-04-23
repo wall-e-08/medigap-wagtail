@@ -51,8 +51,6 @@
                             <img class="mb-10" src="{% static 'images/title-icon.png' %}" alt="">
                         </div>
                     </div>
-                </div>
-                <div class="row same-height-row">
                     <div class="col-md-8 wow fadeInLeft animation-delay1 pt-80">
                         <div>{{ page.why_choose_desc |default:""|safe }}</div>
                         <div class="row same-height-row-by-js mt-20 mb-sm-30">
@@ -73,7 +71,7 @@
                             {% endfor %}
                         </div>
                     </div>
-                    <div class="col-md-4 wow fadeInRight animation-delay4 align-self-end">
+                    <div class="col-md-4 wow fadeInRight animation-delay4">
                         <img src="{% if page.why_choose_img.file %}{{ page.why_choose_img.file.url }}{% endif %}" alt="{{ page.why_choose_img.title|default:"Happy Customer" }}">
                     </div>
                 </div>
