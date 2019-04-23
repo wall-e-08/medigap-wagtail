@@ -175,7 +175,7 @@
                     <div class="widget dark">
                         <img class="mt-10 mb-20" alt="" src="{% if settings.home.PrimarySiteSettings.footer_logo.file %}{{ settings.home.PrimarySiteSettings.footer_logo.file.url }}{% else %}{% static 'images/logo-wide-white.png' %}{% endif %}">
                         <p>{{ settings.home.ContactSettings.contact_desc|default:"" }}</p>
-                        <ul class="pl-0 mt-5">
+                        <ul class="pl-0 mt-5 non-styled-ul">
                             {% for each_contact in settings.home.ContactSettings.contact_settings_panel.all %}
                                 <li class="m-0 pl-10 pr-10">
                                     <i class="{{ each_contact.contact_icon }} text-theme-colored mr-5"></i>
@@ -186,7 +186,7 @@
                     </div>
                     <div class="widget dark">
                         <h5 class="widget-title mb-10">Connect With Us</h5>
-                        <ul class="styled-icons icon-dark icon-circled icon-sm">
+                        <ul class="styled-icons icon-dark icon-circled icon-sm non-styled-ul">
                             {% for social_media in settings.home.SocialMediaSettings.sm_settings_panel.all %}
                                 <li><a href="{{ social_media.sm_url }}" aria-label="Social media {{ social_media.sm_url }}"><i class="{{ social_media.sm_icon }}"></i></a></li>
                             {% endfor %}
