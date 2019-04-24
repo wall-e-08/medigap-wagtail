@@ -51,9 +51,11 @@
                             <img class="mb-10" src="{% static 'images/title-icon.png' %}" alt="">
                         </div>
                     </div>
+                </div>
+                <div class="bootstrap4-row">
                     <div class="col-md-8 wow fadeInLeft animation-delay1 pt-80">
                         <div>{{ page.why_choose_desc |default:""|safe }}</div>
-                        <div class="row same-height-row-by-js mt-20 mb-sm-30">
+                        <div class="bootstrap4-row mt-20 mb-sm-30">
                             {% for wcit in page.whychoose_icontext.all %}
                                 <div class="col-sm-6">
                                     <div class="service-icon-box">
@@ -71,7 +73,7 @@
                             {% endfor %}
                         </div>
                     </div>
-                    <div class="col-md-4 wow fadeInRight animation-delay4">
+                    <div class="col-md-4 wow fadeInRight animation-delay4 align-self-end">
                         <img src="{% if page.why_choose_img.file %}{{ page.why_choose_img.file.url }}{% endif %}" alt="{{ page.why_choose_img.title|default:"Happy Customer" }}">
                     </div>
                 </div>
@@ -110,9 +112,9 @@
                     </div>
                 </div>
                 <div class="section-content">
-                    <div class="row same-height-row-by-js">
+                    <div class="bootstrap4-row">
                         {% for svcit in page.services_icontext.all %}
-                            <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4 pb-30">
+                            <div class="col-sm-6 col-md-4 pb-30">
                                 <div class="icon-box text-center bg-white bg-hover-theme-colored2 p-30 h-100">
                                     <i class="{{ svcit.icon|default:"" }} font-weight-600 text-theme-colored{% if forloop.counter|divisibleby:2 %}2{% endif %} font-38"></i>
                                     <h3 class="mt-20">{{ svcit.name|default:"" }}</h3>
@@ -342,18 +344,3 @@
     </div>
 {% endblock content %}
 
-{% block extra_js %}
-    {# hack for same height for now #}
-    <script>
-        $(document).ready(function(){
-            $('.same-height-row-by-js').each(function () {
-                var highestBox = 0;
-                $('.col-sm-6', this).each(function () {
-                    if ($(this).height() > highestBox)
-                        highestBox = $(this).height();
-                });
-                $('.col-sm-6', this).height(highestBox);
-            });
-        });
-    </script>
-{% endblock %}
