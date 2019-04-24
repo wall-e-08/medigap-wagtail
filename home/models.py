@@ -16,6 +16,8 @@ from wagtail.contrib.settings.registry import register_setting
 from wagtail.images.blocks import ImageChooserBlock
 from wagtail.images.edit_handlers import ImageChooserPanel
 
+from .mixins import SitemapUrlMixin
+
 SPAN_TAG_HELP_TEXT = 'use <span> tag for colored text'
 
 
@@ -414,8 +416,18 @@ class HomePage(MetaTag, Page):
                 "url_text": self.prom_custom_url_text,
             }
 
+    def get_sitemap_urls(self, request=None):
+        return [
+            {
+                'location': self.get_full_url(request),
+                'priority': '1.0',
+                'changefreq': 'monthly',
+                'lastmod': (self.last_published_at or self.latest_revision_created_at),
+            }
+        ]
 
-class SimplePage(MetaTag, Page):
+
+class SimplePage(SitemapUrlMixin, MetaTag, Page):
     show_in_menus_default = True
     subpage_types = []  # no sub-page allowed
     parent_page_types = ['home.HomePage', ]
