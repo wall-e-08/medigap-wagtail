@@ -344,3 +344,12 @@
     </div>
 {% endblock content %}
 
+
+{% block extra_js %}
+    <script>
+    $(document).ready(function () {
+        $('.owl-dot').attr('aria-labelledby', 'carousel selector');
+    });
+    </script>
+{% endblock %}
+
