@@ -100,14 +100,14 @@ class PrimarySiteSettings(BaseSetting):
         verbose_name="Text below Phone No.(bottom)"
     )
 
-    qt_heading = models.CharField(
+    qt_btn_txt = models.CharField(
         blank=True, null=True, max_length=250,
-        help_text="QUOTE Heading in Pop-up form",
-        verbose_name="Quote Heading",
+        help_text="QUOTE button text in quote form page",
+        verbose_name="Quote Button Text",
     )
     qt_disclaimer = RichTextField(
         blank=True, null=True,
-        help_text="Quote Disclaimer in pop-up form (<span> & <a> tags are colored)",
+        help_text="Quote Disclaimer in quote form page",
         verbose_name="Quote Disclaimer"
     )
 
@@ -115,7 +115,7 @@ class PrimarySiteSettings(BaseSetting):
 
     base_panel = [ FieldPanel('copyright_text'), ]
     phone_panel = [FieldPanel('phone_number'), FieldPanel('txt_ph_nmb'),  FieldPanel('txt_ph_nmb_footer'), ]
-    quote_panel = [FieldPanel('qt_heading'), FieldPanel('qt_disclaimer'), ]
+    quote_panel = [FieldPanel('qt_btn_txt'), FieldPanel('qt_disclaimer'), ]
 
     img_panel = [
         ImageChooserPanel('favicon'),

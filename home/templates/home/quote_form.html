@@ -82,16 +82,15 @@
                             </div>
                         {% endfor %}
                         <div class="col-sm-12 text-center mt-30">
-                            <button type="submit" class="btn btn-primary btn-block btn-lg btn-theme-colored text-capitalize" style="border-radius: 0">get quotes now</button>
+                            <button type="submit" class="btn btn-primary btn-block btn-lg btn-theme-colored text-capitalize" style="border-radius: 0">
+                                {{ settings.home.PrimarySiteSettings.qt_btn_txt|default:"Get a quote"|safe }}
+                            </button>
                         </div>
                     </div>
                 </form>
             
                 <div class="mt-40">
-                    <div class="font-12">By submitting your information and clicking below, you represent that you are at least 18 years old and agree to be contacted by 
-                        eAgentDirect Inc. and/or its partner companies and any of their commercial partners for various insurance products through the use of automated 
-                        telephone dialing systems, pre-recorded messages, and/or text messages. Message and data rates may apply. Your consent is not a condition of purchase.
-                        This program is subject to our Privacy Policy and Terms of Use.</div>
+                    <div class="font-12">{{ settings.home.PrimarySiteSettings.qt_disclaimer|default:""|safe }}</div>
                 </div>
             </div>
         </section>
