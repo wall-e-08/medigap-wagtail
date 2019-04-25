@@ -17,9 +17,7 @@
             line-height: 1.4;
             color: #000;
         }
-        section > .container, section > .container-fluid{
-            padding-top: 30px;
-        }
+
         #content {
             font-size: 17px;
             line-height: 1.4;
@@ -33,10 +31,17 @@
          h4,
          h5,
          h6{
-            margin-bottom: 6px;
+            margin-bottom: 10px;
             margin-top: 30px;
             font-weight: normal;
             line-height: normal;
+        }
+        #content h2{
+            text-align: center;
+            color: #5398f3;
+        }
+        #content h3{
+            color: #db5f1d;
         }
         #content ul{
             padding: 0;
@@ -116,7 +121,7 @@
 
     <section id="content" class="bg-silver-light">
         <div class="container ">
-            <div class="bg-white shadow rounded" style="max-width: 980px; margin: 0 auto; padding: 30px;border: 1px solid #dadada">
+            <div class="bg-white shadow rounded" style="max-width: 980px; margin: 0 auto; padding: 0 30px 30px 30px;border: 1px solid #dadada">
                 {{ page.content|default:page.title|safe }}
             </div>
         </div>
