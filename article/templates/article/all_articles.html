@@ -2,20 +2,67 @@
 {% load static wagtailcore_tags wagtailimages_tags wagtailroutablepage_tags extra_tags %}
 
 {% block extra_css %}
-    <style>
-        #article-heading {
-            {% if page.feature_bg.file %}background-image: url('{{ page.feature_bg.file.url }}'){% endif %};
-        }
+<style>
 
-        {% if page.sidebar_form_bg.file %}
-            .sidebar-bg-over-form {
-                background: url('{{ page.sidebar_form_bg.file.url }}') no-repeat top center;
-                width: 100%;
-                height: 200px;
-                background-size: contain;
-            }
-        {% endif %}
-    </style>
+    /*sidebar style start*/
+    .article-sidebar-form{
+        display: flex;
+        flex-direction: column;
+        max-width: 300px;
+    }
+    .widget .widget-title {
+        margin-top: 0;
+        margin-bottom: 0;
+        text-align: center;
+        font-family: 'lato', sans-serif;
+        font-size: 18px;
+        font-weight: bold;
+    }
+    .sidebar-widget-title-bg{
+        padding: 10px;
+        border-radius: 3px;
+
+     }
+     .widget-sidebar-article{
+        background: #a9dff3;
+        padding: 25px;
+        border-radius: 6px;
+     }
+
+    .widget-sidebar-article a {
+        display: flex;
+        height: 80px;
+        padding: 8px 10px 8px 0;
+    }
+
+    .widget-sidebar-article a>.widget-sidebar-article-img-bg {
+        height: 100%;
+        width: 80px;
+        border-radius: 6px;
+    }
+
+    .widget-sidebar-article a>.widget-sidebar-article-text {
+        overflow: hidden;
+    }
+    .widget-sidebar-article a>.widget-sidebar-article-text:not(:first-child) {
+        padding-left: 10px;
+    }
+
+    /*sidebar style end*/
+
+    #article-heading {
+        {% if page.feature_bg.file %}background-image: url('{{ page.feature_bg.file.url }}'){% endif %};
+    }
+
+    {% if page.sidebar_form_bg.file %}
+        .sidebar-bg-over-form {
+            background: url('{{ page.sidebar_form_bg.file.url }}') no-repeat top center;
+            width: 100%;
+            height: 200px;
+            background-size: contain;
+        }
+    {% endif %}
+</style>
 {% endblock %}
 
 {% block content %}
@@ -123,7 +170,7 @@
                         <div class="widget">
                             <h4 class="widget-title">{{ page.sidebar_form_main_heading|default:"Compare Insurance Plans" }}</h4>
                             <div>
-                                <h5>{{ page.sidebar_form_heading|default:"Find the best plan suit for you" }}</h5>
+                                <h5 class="text-center" style="color:#f36438">{{ page.sidebar_form_heading|default:"Find the best plan suit for you" }}</h5>
                                 <form class="auto-zip-form" method="get" action="{% get_quote_page_url %}">
                                     <div class="sidebar-bg-over-form"></div>
                                     <div class="input-group">
@@ -148,7 +195,8 @@
                                         <a href="{% pageurl article %}" class="item">
                                             <div class="article-img-bg widget-sidebar-article-img-bg" style="background-image: url('{{ article.feature_img.file.url }}');"></div>
                                             <div class="widget-sidebar-article-text">
-                                                <h4 class="mt-0 mb-0">This is a Recent Title</h4>
+                                                <h5 class="mt-0 mb-0">This is a Recent Title</h5>
+                                                <p class="font-12" style="color:#f36438">{{ article.first_published_at|date}}</p>
                                             </div>
                                         </a>
                                     {% endfor %}
@@ -164,7 +212,8 @@
                                         <a href="{% pageurl article %}" class="item">
                                             <div class="article-img-bg widget-sidebar-article-img-bg" style="background-image: url('{{ article.feature_img.file.url }}');"></div>
                                             <div class="widget-sidebar-article-text">
-                                                <h4 class="mt-0 mb-0">This is a Recent Title</h4>
+                                                <h5 class="mt-0 mb-0">This is a Recent Title</h5>
+                                                <p class="font-12" style="color:#f36438">{{ article.first_published_at|date}}</p>
                                             </div>
                                         </a>
                                     {% endfor %}
@@ -175,7 +224,7 @@
                         {% if all_tags|default:""|length > 1 %}
                             <div class="widget">
                                 <h5 class="widget-title">Tags</h5>
-                                <div class="tags">
+                                <div class="tags text-center">
                                     {% for tag in all_tags %}
                                         {% if tag %}
                                             <a href="{% routablepageurl article_index_page "article_by_tag" tag.slug %}">{{ tag }}</a>
