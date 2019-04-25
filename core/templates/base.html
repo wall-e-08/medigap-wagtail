@@ -173,7 +173,7 @@
             <div class="row border-bottom-black">
                 <div class="col-sm-4">
                     <div class="widget dark">
-                        <img class="mt-10 mb-20" alt="" src="{% if settings.home.PrimarySiteSettings.footer_logo.file %}{{ settings.home.PrimarySiteSettings.footer_logo.file.url }}{% else %}{% static 'images/logo-wide-white.png' %}{% endif %}">
+                        <img class="mt-10 mb-20" alt="" src="{% if settings.home.PrimarySiteSettings.footer_logo.file %}{{ settings.home.PrimarySiteSettings.footer_logo.file.url }}{% else %}{% static 'images/logo-wide-white.png' %}{% endif %}" style="max-width: 250px">
                         <p>{{ settings.home.ContactSettings.contact_desc|default:"" }}</p>
                         <ul class="pl-0 mt-5 non-styled-ul">
                             {% for each_contact in settings.home.ContactSettings.contact_settings_panel.all %}
@@ -184,21 +184,21 @@
                             {% endfor %}
                         </ul>
                     </div>
-                    <div class="widget dark">
+                    <!--<div class="widget dark">
                         <h5 class="widget-title mb-10">Connect With Us</h5>
                         <ul class="styled-icons icon-dark icon-circled icon-sm non-styled-ul">
                             {% for social_media in settings.home.SocialMediaSettings.sm_settings_panel.all %}
                                 <li><a href="{{ social_media.sm_url }}" aria-label="Social media {{ social_media.sm_url }}"><i class="{{ social_media.sm_icon }}"></i></a></li>
                             {% endfor %}
                         </ul>
-                    </div>
+                    </div>-->
                 </div>
                 <div class="col-sm-4">
                     <div class="widget dark">
                         <h5 class="widget-title">Quick Links</h5>
                         {% flat_menu 'footer_menu' template="menus/footer_menu.html" %}
                     </div>
-                    <div class="widget dark">
+                    <!--<div class="widget dark">
                         <h5 class="widget-title">Get a Free <span class="text-theme-colored">Quote</span></h5>
                         <form id="footer-quote-form" class="auto-zip-form" method="get" action="{% get_quote_page_url %}">
                             <div class="input-group">
@@ -211,7 +211,7 @@
                                 </span>
                             </div>
                         </form>
-                    </div>
+                    </div>-->
                 </div>
                 <div class="col-sm-4">
                     {% comment %}<div class="widget dark">
@@ -233,11 +233,31 @@
                             {% endfor %}
                         </div>
                     </div>{% endcomment %}
-                    <div class="widget dark">
+                    <!--<div class="widget dark">
                         <a href="tel:{{ settings.home.PrimarySiteSettings.phone_number|default:"#"|cut:" " }}">
                             <h5 class="widget-title">{{ settings.home.PrimarySiteSettings.txt_ph_nmb_footer|default:"Call Us" }}</h5>
                             <div class="text-gray">{{ settings.home.PrimarySiteSettings.phone_number|default:"-" }}</div>
                         </a>
+                    </div>-->
+                    <div class="widget dark">
+                        <h5 class="widget-title">Get a Free <span class="text-theme-colored">Quote</span></h5>
+                        <form id="footer-quote-form" class="auto-zip-form" method="get" action="{% get_quote_page_url %}">
+                            <div class="input-group">
+                                <label for="footer_zip_code" class="hidden-label">Zip Code</label>
+                                <input type="number" id="footer_zip_code" placeholder="Zip Code" class="form-control input-lg font-16"
+                                       name="zip_code" data-height="45px" onKeyPress="if(this.value.length===5) return false;">
+                                <span class="input-group-btn">
+                                    <button class="btn btn-colored btn-theme-colored pl-30 pr-30 m-0 font-14" type="submit"
+                                            data-height="45px">Quote</button>
+                                </span>
+                            </div>
+                        </form>
+                        <!--<h5 class="widget-title mb-10">Connect With Us</h5>
+                        <ul class="styled-icons icon-dark icon-circled icon-sm non-styled-ul">
+                            {% for social_media in settings.home.SocialMediaSettings.sm_settings_panel.all %}
+                                <li><a href="{{ social_media.sm_url }}" aria-label="Social media {{ social_media.sm_url }}"><i class="{{ social_media.sm_icon }}"></i></a></li>
+                            {% endfor %}
+                        </ul>-->
                     </div>
                 </div>
             </div>
