@@ -17,9 +17,52 @@
             line-height: 1.4;
             color: #000;
         }
+        section > .container, section > .container-fluid{
+            padding-top: 30px;
+        }
         #content {
-            font-size: 18px;
+            font-size: 17px;
             line-height: 1.4;
+        }
+        p{
+            margin-bottom: 5px;
+        }
+         h1,
+         h2,
+         h3,
+         h4,
+         h5,
+         h6{
+            margin-bottom: 6px;
+            margin-top: 30px;
+            font-weight: normal;
+            line-height: normal;
+        }
+        #content ul{
+            padding: 0;
+            margin-left: 80px;
+            margin-top: 30px;
+            margin-bottom: 30px;
+        }
+        #content ul li{
+            list-style-image: url("{% static 'images/l-icon.png' %}");
+            line-height: 22px;
+            margin-bottom: 15px;
+        }
+        .shadow {
+            box-shadow: 0 .5rem 1rem rgba(0,0,0,.15)!important;
+        }
+        .shadow-sm {
+            box-shadow: 0 .125rem .25rem rgba(0,0,0,.075)!important;
+        }
+        .rounded {
+            border-radius: .25rem!important;
+        }
+
+        @media (max-width: 425px) {
+            #content ul {
+                margin-left: 30px;
+            }
         }
     </style>
 {% endblock %}
@@ -71,7 +114,11 @@
         </div>
     </section>
 
-    <section id="content">
-        <div class="container">{{ page.content|default:page.title|safe }}</div>
+    <section id="content" class="bg-silver-light">
+        <div class="container ">
+            <div class="bg-white shadow rounded" style="max-width: 980px; margin: 0 auto; padding: 30px;border: 1px solid #dadada">
+                {{ page.content|default:page.title|safe }}
+            </div>
+        </div>
     </section>
 {% endblock %}
