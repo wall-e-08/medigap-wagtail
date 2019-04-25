@@ -15,8 +15,8 @@
         {% endblock %}
     </title>
 
-    <meta name="description" content="}{{ page.description|default:"" }}">
-    <meta name="keywords" content="{{ page.keywords|default:"" }}">
+    <meta name="description" content="{{ page.description|default:'' }}">
+    <meta name="keywords" content="{{ page.keywords|default:'' }}">
     <meta name="author" content="http://concitus.com">
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
 
@@ -106,7 +106,7 @@
                     <div class="hidden-xs hidden-sm col-md-offset-4 col-md-5 text-right" id="head-call-btn">
                         <div class="head-call-btn-bg">
                             <p class="mb-0 line-height-1">Call us now</p>
-                            <a href="tel:{{ settings.home.PrimarySiteSettings.phone_number|default:""|cut:" " }}" class="widget no-border sm-text-center mt-10 mb-10 m-0 line-height-1">
+                            <a href="tel:{{ settings.home.PrimarySiteSettings.phone_number|default:"#"|cut:" " }}" class="widget no-border sm-text-center mt-10 mb-10 m-0 line-height-1">
                                 <!--<i class="fa fa-phone text-theme-colored2 mt-5 mr-sm-0"></i>-->
                                 <span class="font-weight-700 text-theme-colored m-0"> {{ settings.home.PrimarySiteSettings.phone_number|default:"" }}</span>
                             </a>
@@ -133,7 +133,7 @@
         </div>
         <div class="bg-theme-colored-darker6 text-white text-center visible-xs-block visible-sm-block mt-0 pt-15 pb-15 pl-20 pr-20">
             <div class="btn-stack-top">
-                <a href="tel:{{ settings.home.PrimarySiteSettings.phone_number|default:"" }}" class="btn btn-theme-colored2">
+                <a href="tel:{{ settings.home.PrimarySiteSettings.phone_number|default:""|cut:" " }}" class="btn btn-theme-colored2">
                     <i class="fa fa-phone text-theme-colored mt-0 mr-sm-0 font-25 media-middle"></i>
                     <span class="font-weight-900 text-black text-white m-0"> {{ settings.home.PrimarySiteSettings.phone_number|default:"" }}</span>
                 </a>
@@ -175,7 +175,7 @@
                     <div class="widget dark">
                         <img class="mt-10 mb-20" alt="" src="{% if settings.home.PrimarySiteSettings.footer_logo.file %}{{ settings.home.PrimarySiteSettings.footer_logo.file.url }}{% else %}{% static 'images/logo-wide-white.png' %}{% endif %}">
                         <p>{{ settings.home.ContactSettings.contact_desc|default:"" }}</p>
-                        <ul class="pl-0 mt-5">
+                        <ul class="pl-0 mt-5 non-styled-ul">
                             {% for each_contact in settings.home.ContactSettings.contact_settings_panel.all %}
                                 <li class="m-0 pl-10 pr-10">
                                     <i class="{{ each_contact.contact_icon }} text-theme-colored mr-5"></i>
@@ -186,7 +186,7 @@
                     </div>
                     <div class="widget dark">
                         <h5 class="widget-title mb-10">Connect With Us</h5>
-                        <ul class="styled-icons icon-dark icon-circled icon-sm">
+                        <ul class="styled-icons icon-dark icon-circled icon-sm non-styled-ul">
                             {% for social_media in settings.home.SocialMediaSettings.sm_settings_panel.all %}
                                 <li><a href="{{ social_media.sm_url }}" aria-label="Social media {{ social_media.sm_url }}"><i class="{{ social_media.sm_icon }}"></i></a></li>
                             {% endfor %}
@@ -234,8 +234,10 @@
                         </div>
                     </div>{% endcomment %}
                     <div class="widget dark">
-                        <h5 class="widget-title">{{ settings.home.PrimarySiteSettings.txt_ph_nmb_footer|default:"Call Us" }}</h5>
-                        <div class="text-gray">{{ settings.home.PrimarySiteSettings.phone_number|default:"" }}</div>
+                        <a href="tel:{{ settings.home.PrimarySiteSettings.phone_number|default:"#"|cut:" " }}">
+                            <h5 class="widget-title">{{ settings.home.PrimarySiteSettings.txt_ph_nmb_footer|default:"Call Us" }}</h5>
+                            <div class="text-gray">{{ settings.home.PrimarySiteSettings.phone_number|default:"-" }}</div>
+                        </a>
                     </div>
                 </div>
             </div>
@@ -244,7 +246,7 @@
             <div class="container pt-20 pb-20">
                 <div class="row">
                     <div class="col-md-12 text-center">
-                        <p class="font-13 text-black-777 m-0">{{ settings.home.PrimarySiteSettings.copyright_text|default:"Copyright ©2018" }}</p>
+                        <p class="font-13 text-black-777 m-0">{{ settings.home.PrimarySiteSettings.copyright_text|default:"Copyright ©2019" }}</p>
                     </div>
                 </div>
             </div>

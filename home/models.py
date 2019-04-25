@@ -16,6 +16,8 @@ from wagtail.contrib.settings.registry import register_setting
 from wagtail.images.blocks import ImageChooserBlock
 from wagtail.images.edit_handlers import ImageChooserPanel
 
+from .mixins import SitemapUrlMixin
+
 SPAN_TAG_HELP_TEXT = 'use <span> tag for colored text'
 
 
@@ -98,14 +100,14 @@ class PrimarySiteSettings(BaseSetting):
         verbose_name="Text below Phone No.(bottom)"
     )
 
-    qt_heading = models.CharField(
+    qt_btn_txt = models.CharField(
         blank=True, null=True, max_length=250,
-        help_text="QUOTE Heading in Pop-up form",
-        verbose_name="Quote Heading",
+        help_text="QUOTE button text in quote form page",
+        verbose_name="Quote Button Text",
     )
     qt_disclaimer = RichTextField(
         blank=True, null=True,
-        help_text="Quote Disclaimer in pop-up form (<span> & <a> tags are colored)",
+        help_text="Quote Disclaimer in quote form page",
         verbose_name="Quote Disclaimer"
     )
 
@@ -113,7 +115,7 @@ class PrimarySiteSettings(BaseSetting):
 
     base_panel = [ FieldPanel('copyright_text'), ]
     phone_panel = [FieldPanel('phone_number'), FieldPanel('txt_ph_nmb'),  FieldPanel('txt_ph_nmb_footer'), ]
-    quote_panel = [FieldPanel('qt_heading'), FieldPanel('qt_disclaimer'), ]
+    quote_panel = [FieldPanel('qt_btn_txt'), FieldPanel('qt_disclaimer'), ]
 
     img_panel = [
         ImageChooserPanel('favicon'),
@@ -158,14 +160,14 @@ class ContactSettings(BaseSetting, ClusterableModel):
         verbose_name = 'Contact Info'
 
 
-@register_setting(icon='image')
-class PartnerImgSettings(BaseSetting, ClusterableModel):
-    panels = [
-        InlinePanel('partner_img_panel', label="New Partner")
-    ]
-
-    class Meta:
-        verbose_name = 'Partner Logo'
+# @register_setting(icon='image')
+# class PartnerImgSettings(BaseSetting, ClusterableModel):
+#     panels = [
+#         InlinePanel('partner_img_panel', label="New Partner")
+#     ]
+# 
+#     class Meta:
+#         verbose_name = 'Partner Logo'
 
 
 # Blocks
@@ -320,6 +322,11 @@ class HomePage(MetaTag, Page):
     )
     txt_desc = RichTextField(blank=True, null=True)
 
+    disclaimer = models.CharField(
+        blank=True, null=True,
+        max_length=255,
+    )
+
     content_panels = Page.content_panels + [
         MultiFieldPanel(
             [
@@ -388,6 +395,13 @@ class HomePage(MetaTag, Page):
                 FieldPanel('txt_desc'),
             ],
             heading="Text only Section", classname="collapsible collapsed",
+        ),
+        MultiFieldPanel(
+            [
+                InlinePanel('benefit_text', label="Benefit"),
+                FieldPanel('disclaimer'),
+            ],
+            heading="Benefits & Disclaimer", classname="collapsible collapsed",
         )
     ]
 
@@ -402,8 +416,18 @@ class HomePage(MetaTag, Page):
                 "url_text": self.prom_custom_url_text,
             }
 
+    def get_sitemap_urls(self, request=None):
+        return [
+            {
+                'location': self.get_full_url(request),
+                'priority': '1.0',
+                'changefreq': 'monthly',
+                'lastmod': (self.last_published_at or self.latest_revision_created_at),
+            }
+        ]
 
-class SimplePage(MetaTag, Page):
+
+class SimplePage(SitemapUrlMixin, MetaTag, Page):
     show_in_menus_default = True
     subpage_types = []  # no sub-page allowed
     parent_page_types = ['home.HomePage', ]
@@ -492,35 +516,17 @@ class AchievementCount(Orderable):
     ]
 
 
-class PartnerItem(Orderable):
-    main_settings = ParentalKey(
-        PartnerImgSettings,
+class BenefitText(Orderable):
+    page = ParentalKey(
+        HomePage,
         on_delete=models.CASCADE,
-        related_name='partner_img_panel'
+        related_name='benefit_text'
     )
 
-    logo = models.ForeignKey(
-        'wagtailimages.Image',
-        on_delete=models.SET_NULL,
-        blank=True, null=True,
-        help_text="Business partner's Logo"
-    )
-
-    alt_text = models.CharField(
-        max_length=250,
-        blank=True, null=True,
-    )
-
-    ptnr_url =  models.URLField(
-        max_length=255,
-        blank=True, null=True,
-        verbose_name="Pertner's website",
-    )
+    text = models.CharField(max_length=255)
 
     panels = [
-        ImageChooserPanel('logo'),
-        FieldPanel('alt_text'),
-        FieldPanel('ptnr_url'),
+        FieldPanel('text'),
     ]
 
 
@@ -623,7 +629,7 @@ class SocialItem(Orderable):
 
 
 class ContactItem(Orderable):
-    SOCIAL_CHOICES = (
+    CONTACT_CHOICES = (
         ('fa fa-map-marker', 'Location'),
         ('fa fa-phone', 'Phone'),
         ('fa fa-envelope-o', 'E-mail'),
@@ -636,7 +642,7 @@ class ContactItem(Orderable):
         related_name='contact_settings_panel'
     )
     contact_icon = models.CharField(
-        choices=SOCIAL_CHOICES,
+        choices=CONTACT_CHOICES,
         max_length=50,
         verbose_name="Type",
     )
@@ -644,7 +650,7 @@ class ContactItem(Orderable):
         max_length=255,
         verbose_name="Details",
     )
-    contact_url = models.URLField(
+    contact_url = models.CharField(
         max_length=255,
         verbose_name="Link/Url",
     )
