@@ -486,12 +486,12 @@ class SimplePage(SitemapUrlMixin, MetaTag, Page):
 
 class BaseIconText(models.Model):
     icon = models.CharField(
-        max_length=50,
+        max_length=100,
         help_text="Font awesome(mainly) or Flat icon CSS class name",
         verbose_name='Icon CSS Class name',
     )
-    name = models.CharField(max_length=80, help_text="Option's name")
-    desc = models.CharField(max_length=200, help_text="Option's description", verbose_name='Description')
+    name = models.CharField(max_length=250, help_text="Option's name")
+    desc = models.TextField(help_text="Option's description", verbose_name='Description')
 
 
 class AchievementCount(Orderable):
