@@ -434,6 +434,7 @@ class SimplePage(SitemapUrlMixin, MetaTag, Page):
     template_string = models.CharField(
         max_length=255, default='home/simple_page.html',
         choices=(
+            ("home/simple_page.html", "Default"),
             ("home/simple_single_pages/medicare_advantage.html", "Medicare Advantage"),
             ("home/simple_single_pages/medigap.html", "Medigap"),
             ("home/simple_single_pages/critical_illness.html", "Critical Illness"),
