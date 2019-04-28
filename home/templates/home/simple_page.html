@@ -19,6 +19,12 @@
         }
 
         #content {
+            padding-top: 25px;
+        }
+    </style>
+    {% block simple_page_css %}
+    <style>
+        #content {
             font-size: 17px;
             line-height: 1.4;
         }
@@ -70,6 +76,7 @@
             }
         }
     </style>
+    {% endblock %}
 {% endblock %}
 
 {% block content %}
@@ -120,12 +127,14 @@
     </section>
 
     <section id="content" class="bg-silver-light">
-        <div class="container" style="padding-top: 20px">
-            <div class="" style="max-width: 980px; margin: 0 auto;">
-                {% block main_page_content %}
-                    {{ page.content|default:page.title|safe }}
-                {% endblock %}
+        {% block main_page_content %}
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-8 col-md-offset-2">
+                        {{ page.content|default:page.title|safe }}
+                    </div>
+                </div>
             </div>
-        </div>
+        {% endblock %}
     </section>
 {% endblock %}

@@ -1,5 +1,213 @@
 {% extends "home/simple_page.html" %}
+{% load static %}
+
+{% block simple_page_css %}
+    <style>
+        #content ul li {
+            list-style-image: url("{% static 'images/l-icon.png' %}");
+            line-height: 22px;
+            margin-bottom: 15px;
+        }
+    </style>
+{% endblock %}
 
 {% block main_page_content %}
-    testing
+    <section>
+        <div class="container pb-0">
+            <div class="row">
+                <div class="col-xs-12 text-center">
+                    <h2 class="text-uppercase mt-0 mb-0 font-opensans themed-heading2"><span>Medicare</span> Extra Help Eligibility</h2>
+                    <div class="title-icon mb-20">
+                        <img class="mb-10" src="{% static 'images/title-icon.png' %}" alt="Icon Under Title">
+                    </div>
+                </div>
+            </div>
+            <div class="bootstrap4-row">
+                <div class="col-md-4 wow fadeInRight animation-delay4 align-self-end hidden-xs hidden-sm">
+                    <img src="{% if home_page.why_choose_img.file %}{{ home_page.why_choose_img.file.url }}{% endif %}" alt="{{ home_page.why_choose_img.title|default:"Happy Customer" }}">
+                </div>
+                <div class="col-md-8 wow fadeInLeft animation-delay1 pt-20">
+                    <div>
+                        People with limited income yet eligible for benefits may qualify for LIS, which helps in paying for Medicare Part D prescription drug costs.
+                        Beneficiaries of Medicare on low-income subsidy (LIS) are assisted with payments for their Part D monthly premium, coinsurance, deductible, 
+                        and copayment. Also, for people enrolled in the Extra Help program, there is no gap existing in their prescription drug coverage—which is also called Medicare 
+                        “donut hole.” The individual’s income when compared to the Federal Poverty Level and resource limitation dictates the amount of subsidy.
+                    </div>
+                    <div class="pt-10 font-weight-700 font-20">
+                        You may be eligible for low-income subsidy under the Medicare part D if:
+                    </div>
+                    <div class="bootstrap4-row mt-20 mb-sm-30">
+                        <div class="col-sm-12">
+                            <div class="service-icon-box">
+                                <div>
+                                    <span class="icon pull-left mr-10 full-centered">
+                                        <i class="fa fa-dollar"></i>
+                                    </span>
+                                </div>
+                                <div>
+                                    <h4 class="mt-0 mb-0">Annual Income</h4>
+                                    <p>
+                                        Your annual income including your asset is not up to the eligibility thresholds. The limit for Medicare Extra Help program may vary from one year to another.
+                                        Your annual income is more than the eligibility thresholds. However, you’ll provide support for other members of your family living under your roof.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="service-icon-box">
+                                <div>
+                                    <span class="icon pull-left mr-10 full-centered">
+                                        <i class="fa fa-university"></i>
+                                    </span>
+                                </div>
+                                <div>
+                                    <h4 class="mt-0 mb-0">Accounts</h4>
+                                    <p>Cash and bank accounts, as well as savings, checking, and certificates of deposit</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="service-icon-box">
+                                <div>
+                                    <span class="icon pull-left mr-10 full-centered">
+                                        <i class="fa fa-home"></i>
+                                    </span>
+                                </div>
+                                <div>
+                                    <h4 class="mt-0 mb-0">Primary Residence</h4>
+                                    <p>Real estate not within your primary residence.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="service-icon-box">
+                                <div>
+                                    <span class="icon pull-left mr-10 full-centered">
+                                        <i class="fa fa-stack-exchange"></i>
+                                    </span>
+                                </div>
+                                <div>
+                                    <h4 class="mt-0 mb-0">Stocks & Bonds</h4>
+                                    <p>Stocks and bonds, including U.S. savings bonds</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="service-icon-box">
+                                <div>
+                                    <span class="icon pull-left mr-10 full-centered">
+                                        <i class="fa fa-money"></i>
+                                    </span>
+                                </div>
+                                <div>
+                                    <h4 class="mt-0 mb-0">Fund</h4>
+                                    <p>Mutual funds and IRAs</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <p>In calculating eligibility for the low-income subsidy, Medicare will not include resources like your home, car or insurance policies. A lot of people are eligible for 
+                            Medicare Extra Help savings without their knowledge. If you want to know whether you qualify, apply!</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section>
+        <div class="container-fluid pt-0 pb-0">
+            <div class="row equal-height">
+                <div class="col-md-6 sm-height-auto" style="background-color: #f31">
+                    <div class="p-50 p-sm-0 p-sm-0 pt-sm-30 pb-sm-30 text-white">
+                        <h2 class="text-left text-white">How to apply for Medicare Extra Help</h2>
+                        <p>If you want to apply for the Medicare low-income subsidy, you’re required to fill out an Application for Extra Help with Medicare Prescription Drug Plan Cost form with
+                            Social Security. The
+                            application and submission can be achieved:</p>
+                        <ul>
+                            <li>When you apply online at www.socialsecurity.gov/extrahelp.</li>
+                            <li>When you call Social Security at 1-800-771-1213 (TTY 1-800-325-0778) and request that the application is mailed to you, or apply over the phone. The representatives of
+                                Social Security
+                                are always available via phone, Monday to Friday—7AM to 7 pm.
+                            </li>
+                            <li>When you apply at your local Social Security office—in person.</li>
+                            <li>When Social Security has reviewed it, and you receive a notification in your mail that you’re eligible. If that is the case and you’re not enrolled in Medicare Part D
+                                Prescription Drug
+                                Plan, you may enroll in a plan at that time.
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-md-6 bg-theme-colored2 sm-height-auto">
+                    <div class="p-50 p-sm-0 p-sm-0 pt-sm-30 pb-sm-30 text-white">
+                        <h2 class="text-left text-white">Medicare Savings Program</h2>
+                        <p>With Medicare Savings Programs, low-income earners can pay out-of-pocket costs for Medicare, as well as Medicare Part A and Part B premiums, copayment, deductibles, and
+                            coinsurance. Because
+                            an individual is eligible for some Medicare Savings Programs, they automatically qualify for Extra Help program too—and provide help for beneficiaries to pay for
+                            prescription drugs.</p>
+                        <p>Four types of Medicare Savings Programs exist:</p>
+                        <ul>
+                            <li>Qualified Medicare Beneficiary (QMB</li>
+                            <li>Qualifying Individual (QI) Program</li>
+                            <li>Specified Low-Income Medicare Beneficiary (SLMB)</li>
+                            <li>Qualified Disabled and Working Individuals (QDWI) Program</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="pb-60">
+        <div class="container pb-0">
+            <div class="row">
+                <div class="col-xs-12 text-center">
+                    <h2 class="text-uppercase mt-0 mb-0 font-opensans themed-heading"><span>Medicare</span> Savings Programs</h2>
+                    <div class="title-icon mb-20">
+                        <img class="mb-10" src="{% static 'images/title-icon.png' %}" alt="Icon Under Title">
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <p>With Medicare Savings Programs, low-income earners can pay out-of-pocket costs for Medicare, as well as Medicare Part A and Part B premiums, 
+                        copayment, deductibles, and coinsurance. Because an individual is eligible for some Medicare Savings Programs, they automatically qualify for Extra Help program
+                        too—and provide help for beneficiaries to pay for prescription drugs.
+                    </p>
+                    <p>Four types of Medicare Savings Programs exist:</p>
+                    <ul>
+                        <li>Qualified Medicare Beneficiary (QMB</li>
+                        <li>Qualifying Individual (QI) Program</li>
+                        <li>Specified Low-Income Medicare Beneficiary (SLMB)</li>
+                        <li>Qualified Disabled and Working Individuals (QDWI) Program</li>
+                    </ul>
+                    <p>They all have unique benefits and support payment of Medicare Part B premium except QDWI.</p>
+                </div>
+                <div class="col-md-6">
+                    <p>To be considered, you must be eligible for Medicare Part A, and your income must be lower than a particular threshold. For each of the four Medicare Savings Programs, the income
+                        and
+                        resource requirements differ and may change over the years.</p>
+                    <p>The following resources will be vital to determine eligibility:</p>
+                    <ul>
+                        <li>Checking accounts</li>
+                        <li>Savings accounts</li>
+                        <li>Bonds</li>
+                        <li>Mutual funds</li>
+                        <li>Stocks</li>
+                        <li>Individual Retirement Accounts (IRAs)</li>
+                    </ul>
+                    <p>The following resources are irrelevant to determine eligibility:</p>
+                    <ul>
+                        <li>Your home</li>
+                        <li>Burial plot</li>
+                        <li>Burial expenses (Up to $1,500, as long as you have the money)</li>
+                        <li>One car</li>
+                        <li>Furniture</li>
+                        <li>Personal items</li>
+                        <li>Household items</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
 {% endblock %}
