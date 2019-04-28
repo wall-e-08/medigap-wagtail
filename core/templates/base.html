@@ -179,7 +179,7 @@
                             {% for each_contact in settings.home.ContactSettings.contact_settings_panel.all %}
                                 <li class="m-0 pl-10 pr-10">
                                     <i class="{{ each_contact.contact_icon }} text-theme-colored mr-5"></i>
-                                    <a class="text-gray" href="{{ each_contact.contact_url }}">{{ each_contact.contact_text }}</a>
+                                    <a class="text-gray" href="{{ each_contact.contact_url }}">{{ each_contact.contact_text|safe }}</a>
                                 </li>
                             {% endfor %}
                         </ul>
