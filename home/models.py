@@ -431,7 +431,17 @@ class SimplePage(SitemapUrlMixin, MetaTag, Page):
     show_in_menus_default = True
     subpage_types = []  # no sub-page allowed
     parent_page_types = ['home.HomePage', ]
-    template = 'home/simple_page.html'
+    template_string = models.CharField(
+        max_length=255, default='home/simple_page.html',
+        choices=(
+            ("home/simple_single_pages/medicare_advantage.html", "Medicare Advantage"),
+            ("home/simple_single_pages/medigap.html", "Medigap"),
+            ("home/simple_single_pages/critical_illness.html", "Critical Illness"),
+            ("home/simple_single_pages/dental_vision.html", "Dental Vision"),
+            ("home/simple_single_pages/social_security.html", "Social Security"),
+            ("home/simple_single_pages/low_income.html", "Low Income"),
+        )
+    )
 
     heading_bg = models.ForeignKey(
         'wagtailimages.Image',
@@ -460,6 +470,10 @@ class SimplePage(SitemapUrlMixin, MetaTag, Page):
         verbose_name="Main Content",
     )
 
+    @property
+    def template(self):
+        return self.template_string
+
     content_panels = [
         MultiFieldPanel(
             [
@@ -477,6 +491,10 @@ class SimplePage(SitemapUrlMixin, MetaTag, Page):
             heading="Slogan", classname="collapsible collapsed",
         ),
     ]
+
+    settings_panels = [
+        FieldPanel('template_string')
+    ] + Page.settings_panels
 
     def get_context(self, request, *args, **kwargs):
         context = super(SimplePage, self).get_context(request)

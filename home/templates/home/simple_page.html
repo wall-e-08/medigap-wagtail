@@ -122,7 +122,9 @@
     <section id="content" class="bg-silver-light">
         <div class="container" style="padding-top: 20px">
             <div class="" style="max-width: 980px; margin: 0 auto;">
-                {{ page.content|default:page.title|safe }}
+                {% block main_page_content %}
+                    {{ page.content|default:page.title|safe }}
+                {% endblock %}
             </div>
         </div>
     </section>
