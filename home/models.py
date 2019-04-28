@@ -245,8 +245,8 @@ class HomePage(MetaTag, Page):
         help_text="Main Heading, " + SPAN_TAG_HELP_TEXT,
         verbose_name="Heading",
     )
-    srvc_desc = models.CharField(
-        blank=True, null=True, max_length=250,
+    srvc_desc = models.TextField(
+        blank=True, null=True,
         verbose_name="Description",
     )
 
