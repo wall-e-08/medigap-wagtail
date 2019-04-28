@@ -13,6 +13,17 @@
         .layer-overlay.overlay-dark-5::before {
             background-color: rgba(17, 17, 17, 0.81);
         }
+        .w-950{
+            max-width: 950px;
+            margin: 0 auto;
+        }
+        #quote-form .form-control {
+            border: 1px solid #ababab;
+        }
+        #quote-form .form-control:focus,active {
+            border: 1px solid #2D79C5;
+        }
+
     </style>
 {% endblock %}
 
@@ -43,17 +54,17 @@
         </section>
 
         <section>
-            <div class="container text-center">
-                <div style="border: 1px solid #0e56dd;padding: 9px 0;background: #dedede;color: #000;margin-bottom: 50px;font-size: 18px;font-weight: 600;">
+            <div class="container text-center w-950">
+                <div  style="border: 1px solid #0e56dd;border-radius: 4px;padding: 9px 0;background: #dedede;color: #f36438;margin-bottom: 50px;font-size: 18px;font-weight: 600;">
                     Please fill out the fields below to find your best rates.</div>
                 <div>
                     {{ page.small_desc|default:"To give you the best quotes possible, we will need to contact you."|safe }}
                 </div>
-                <div style="margin-top: 40px;border: 1px solid #777;background: #f3f3f3;padding: 8px 0;color: #000;">Fields marked with an * are required</div>
+                <div style="margin-top: 40px;border: 1px solid #ababab;border-radius: 4px;background: #f3f3f3;padding: 8px 0;color: #000;font-size: 18px;">Fields marked with an <span style="color: #f36438"> * </span>are required</div>
             </div>
         </section>
         <section id="quote-form">
-            <div class="container pt-0">
+            <div class="container pt-0 w-950">
                 <div id="quote-form-response" class="pl-15 pr-15 text-capitalize"></div>
                 <form class="form-animated-field" id="get-a-quote-main-form" method="post"
                       action="{% pageurl page %}">
@@ -61,7 +72,7 @@
                     <div class="row">
                         {% for field in form.visible_fields %}
                             <div class="col-sm-6">
-                                <div class="form-group mb-10">
+                                <div class="form-group mb-20">
                                     <div>{{ field.errors }}</div>
                                     {% if field.name == 'state' %}
                                         <select class="form-control" name="{{ field.name }}" id="{{ field.id_for_label }}">
@@ -75,7 +86,7 @@
                                         <input class="form-control{% if field.name == 'date-of-birth' %} date-picker{% endif %}" type="{{ field.field.widget.input_type }}"
                                                {% if field.name == 'zip-code' and request.GET.zip_code %}value="{{ request.GET.zip_code }}"{% endif %}
                                                name="{{ field.name }}" id="{{ field.id_for_label }}"
-                                               {% if field.field.required %}required="required" aria-required="true"{% endif %}>
+                                               {% if field.field.required %}required="required" aria-required="true"{% endif %} style="border-radius: 4px;">
                                         {#{{ field.label_tag }}#}
                                         <label for="{{ field.id_for_label }}">{{ field.label }}{% if field.field.required %}*{% endif %}</label>
                                     {% endif %}
@@ -83,7 +94,7 @@
                             </div>
                         {% endfor %}
                         <div class="col-sm-12 text-center mt-30">
-                            <button type="submit" class="btn btn-primary btn-block btn-lg btn-theme-colored text-capitalize" style="border-radius: 0">
+                            <button type="submit" class="btn btn-primary btn-block btn-lg btn-theme-colored text-capitalize" style="border-radius: 4px; max-width: 500px; margin: 0 auto;font-size: 18px">
                                 {{ settings.home.PrimarySiteSettings.qt_btn_txt|default:"Get a quote"|safe }}
                             </button>
                         </div>
