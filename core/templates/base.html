@@ -173,7 +173,8 @@
             <div class="row border-bottom-black">
                 <div class="col-sm-4">
                     <div class="widget dark">
-                        <img class="mt-10 mb-20" alt="" src="{% if settings.home.PrimarySiteSettings.footer_logo.file %}{{ settings.home.PrimarySiteSettings.footer_logo.file.url }}{% else %}{% static 'images/logo-wide-white.png' %}{% endif %}" style="max-width: 250px">
+                        <img class="mt-10 mb-20" alt="{{ settings.home.PrimarySiteSettings.footer_logo.title|default:'Medigap Direct (footer)' }}"
+                             src="{% if settings.home.PrimarySiteSettings.footer_logo.file %}{{ settings.home.PrimarySiteSettings.footer_logo.file.url }}{% else %}{% static 'images/logo-wide-white.png' %}{% endif %}" style="width: 250px">
                         <p>{{ settings.home.ContactSettings.contact_desc|default:"" }}</p>
                         <ul class="pl-0 mt-5 non-styled-ul">
                             {% for each_contact in settings.home.ContactSettings.contact_settings_panel.all %}
