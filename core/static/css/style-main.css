@@ -9051,7 +9051,10 @@ form.form-animated-field textarea[required="required"]:valid ~ label {
     display: -ms-flexbox;
     display: flex;
 }
-
+.service-icon-box h4 {
+    line-height: 1;
+    margin-bottom: 8px !important;
+}
 .service-icon-box .icon > img {
     width: 60%;
     height: auto;
@@ -9396,7 +9399,7 @@ select.form-control {
     }
 }
 
-@media (min-width: 768px) {
+@media (min-width: 991px) {
     .bootstrap4-row .col-md-8 {
         -ms-flex: 0 0 66.666667%;
         -webkit-box-flex: 0;

@@ -17,7 +17,7 @@
 
 
 #unzip -o media.zip -d /var/dokku_apps/medigap/media/benefits/
-unzip -o media.zip -d media/
+#unzip -o media.zip -d media/
 #./manage.py loaddata db/fixtures/feature.json
 #./manage.py loaddata db/fixtures/benefits.json
 #./manage.py loaddata db/fixtures/disclaimers.json
