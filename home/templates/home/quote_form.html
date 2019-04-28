@@ -81,6 +81,7 @@
                                                 <option value="{{ state.0 }}">{{ state.1 }}</option>
                                             {% endfor %}
                                         </select>
+                                        <label for="{{ field.id_for_label }}" class="hidden-label">{{ field.label }}</label>
                                     {% else %}
                                         <input class="form-control{% if field.name == 'date-of-birth' %} date-picker{% endif %}" type="{{ field.field.widget.input_type }}"
                                                {% if field.name == 'zip-code' and request.GET.zip_code %}value="{{ request.GET.zip_code }}"{% endif %}
