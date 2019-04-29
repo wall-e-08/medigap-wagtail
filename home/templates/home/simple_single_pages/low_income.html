@@ -3,7 +3,7 @@
 
 {% block simple_page_css %}
     <style>
-        #content ul li {
+        #content ul:not(.non-styled-ul) li {
             list-style-image: url("{% static 'images/l-icon.png' %}");
             line-height: 22px;
             margin-bottom: 15px;
@@ -174,9 +174,9 @@
                         copayment, deductibles, and coinsurance. Because an individual is eligible for some Medicare Savings Programs, they automatically qualify for Extra Help program
                         too—and provide help for beneficiaries to pay for prescription drugs.
                     </p>
-                    <p>Four types of Medicare Savings Programs exist:</p>
+                    <p class="font-weight-700">Four types of Medicare Savings Programs exist:</p>
                     <ul>
-                        <li>Qualified Medicare Beneficiary (QMB</li>
+                        <li>Qualified Medicare Beneficiary (QMB)</li>
                         <li>Qualifying Individual (QI) Program</li>
                         <li>Specified Low-Income Medicare Beneficiary (SLMB)</li>
                         <li>Qualified Disabled and Working Individuals (QDWI) Program</li>
@@ -187,8 +187,8 @@
                     <p>To be considered, you must be eligible for Medicare Part A, and your income must be lower than a particular threshold. For each of the four Medicare Savings Programs, the income
                         and
                         resource requirements differ and may change over the years.</p>
-                    <p>The following resources will be vital to determine eligibility:</p>
-                    <ul>
+                    <p class="text-center font-weight-700">The following resources will be vital to determine eligibility:</p>
+                    <ul class="boxed-list">
                         <li>Checking accounts</li>
                         <li>Savings accounts</li>
                         <li>Bonds</li>
@@ -196,16 +196,135 @@
                         <li>Stocks</li>
                         <li>Individual Retirement Accounts (IRAs)</li>
                     </ul>
-                    <p>The following resources are irrelevant to determine eligibility:</p>
-                    <ul>
+                    <hr>
+                    <p class="text-center font-weight-700">The following resources are irrelevant to determine eligibility:</p>
+                    <ul class="boxed-list">
                         <li>Your home</li>
                         <li>Burial plot</li>
-                        <li>Burial expenses (Up to $1,500, as long as you have the money)</li>
+                        <li>Burial expenses <span style="display: block;font-size: 9px;line-height: 1.3;">(Up to $1,500, as long as you have the money)</span></li>
                         <li>One car</li>
                         <li>Furniture</li>
                         <li>Personal items</li>
                         <li>Household items</li>
                     </ul>
+                </div>
+                <div class="col-md-12">
+                    <p>Income and asset calculation may be done differently. What that means is that even if income and resources are higher than the listed limit, you may still be eligible. Get in touch with
+                        your State Health Insurance Assistance Program to know if you’re eligible or not.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="pb-60">
+        <div class="bg-theme-colored-orange-f31">
+            <div class="container">
+                <ul id="tabbed-ul-menu" class="nav nav-tabs flex non-styled-ul">
+                    <li role="presentation" class="flex-1 text-uppercase text-center active">
+                        <a id="qmb-tab" href="#qmb" role="tab" data-toggle="tab" aria-controls="qmb" aria-expanded="true">
+                            <i class="fa fa-h-square"></i>QMB</a>
+                    </li>
+                    <li role="presentation" class="flex-1 text-uppercase text-center">
+                        <a id="slmb-tab" href="#slmb" role="tab" data-toggle="tab" aria-controls="slmb" aria-expanded="false">
+                            <i class="fa fa-money"></i>SLMB</a>
+                    </li>
+                    <li role="presentation" class="flex-1 text-uppercase text-center">
+                        <a id="qi-tab" href="#qi" role="tab" data-toggle="tab" aria-controls="qi" aria-expanded="false">
+                            <i class="fa fa-male"></i>QI</a>
+                    </li>
+                    <li role="presentation" class="flex-1 text-uppercase text-center">
+                        <a id="qdwi-tab" href="#qdwi" role="tab" data-toggle="tab" aria-controls="qdwi" aria-expanded="false">
+                            <i class="fa fa-heartbeat"></i>QDWI</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="container pt-20 pb-20">
+            <div class="tab-content">
+                <div id="qmb" role="tabpanel" aria-labelledby="qmb-tab" class="tab-pane fade row active in">
+                    <div class="col-md-3 text-right">
+                        {#<img src="{% static 'images/bg/bg3.jpg' %}" class="circle-img">#}
+                        <div class="tab-bg-img" style="background-image:url('{% static 'images/bg/bg3.jpg' %}');"></div>
+                        <h2 class="fashion-border">QMB Program</h2>
+                    </div>
+                    <div class="col-md-9 pl-40 font-18">
+                        <h3 class="font-23">Qualified Medicare Beneficiary Program</h3>
+                        <p>It assists in paying for Medicare Part A (hospital insurance) premium and also Medicare Part B (medical insurance) premium. It might interest you to note that the program
+                            also takes care of
+                            Medicare cost-sharing expenses and deductibles as well as coinsurance and copayments.</p>
+                        <p>If you’re eligible for QMB, you’re immediately considered for Extra Help prescription drug program so you can save on out-of-pocket expenses as regards medications. You must
+                            have been
+                            enrolled in Medicare Part A for you to apply for QMB Medicare Savings Program.</p>
+                    </div>
+                </div>
+                <div id="slmb" role="tabpanel" aria-labelledby="slmb-tab" class="tab-pane fade row">
+                    <div class="col-md-3 text-right">
+                        {#<img src="{% static 'images/bg/bg3.jpg' %}" class="circle-img">#}
+                        <div class="tab-bg-img" style="background-image:url('{% static 'images/about/dc2.png' %}');"></div>
+                        <h2 class="fashion-border">SLMB Program</h2>
+                    </div>
+                    <div class="col-md-9 pl-40 font-18">
+                        <h3 class="font-23">Specified Low-Income Medicare Beneficiary Program</h3>
+                        <p>If earnings are a little above the maximum QMB income criteria, you may qualify for SLMB program. It takes care of Medicare Part B premiums. It will not pay other
+                            cost-sharing expenses or
+                            even Medicare Part A premiums. However, you can have a higher income. Similar to QMB, if you’re eligible for SLMB Program, you’re immediately considered for the Extra Help
+                            Prescription
+                            drug program too.</p>
+                        <p>You’ll have to meet income and asset requirements to qualify. Criteria for eligibility vary from one year to another.</p>
+                    </div>
+                </div>
+                <div id="qi" role="tabpanel" aria-labelledby="qi-tab" class="tab-pane fade row">
+                    <div class="col-md-3 text-right">
+                        {#<img src="{% static 'images/bg/bg3.jpg' %}" class="circle-img">#}
+                        <div class="tab-bg-img" style="background-image:url('{% static 'images/about/dc3.png' %}');"></div>
+                        <h2 class="fashion-border">QI Program</h2>
+                    </div>
+                    <div class="col-md-9 pl-40 font-18">
+                        <h3 class="font-23">Qualifying Individual Program</h3>
+                        <p>This is yet another level of the Medicare Saving Programs. Even if you’re not eligible for QMB or SLMB, you can still apply for QI Medicare Savings program. This program is
+                            responsible for
+                            the Medicare Part B premium payment, and the individual will automatically qualify for Extra Help prescription drug program. Take note, reapplication will be carried out
+                            yearly for these
+                            benefits. Benefits are given out on first-come, first served basis because of the limited funds available. Individual who had QI benefit the previous year will be given
+                            attention.</p>
+                    </div>
+                </div>
+                <div id="qdwi" role="tabpanel" aria-labelledby="qdwi-tab" class="tab-pane fade row">
+                    <div class="col-md-3 text-right">
+                        {#<img src="{% static 'images/bg/bg3.jpg' %}" class="circle-img">#}
+                        <div class="tab-bg-img" style="background-image:url('{% static 'images/about/dc4.png' %}');"></div>
+                        <h2 class="fashion-border">QDWI Program</h2>
+                    </div>
+                    <div class="col-md-9 pl-40 font-18">
+                        <h3 class="font-23">Qualified Disabled and Working Individuals Program</h3>
+                        <p>This program is not the same as the other three Medicare Savings Programs. QDWI will pay for Medicare Part A premiums. You will be considered eligible for this program if
+                            :</p>
+                        <ul>
+                            <li>You lost premium-free Medicare Part A after returning to work.</li>
+                            <li>You’re under 65 and disabled, and working at the moment.</li>
+                            <li>You are not receiving state medical assistance.</li>
+                            <li>You fulfill the income and resource criteria for your state.</li>
+                        </ul>
+                        <p>You can contact Medicare for more information to know if you’re eligible.</p>
+                        <p>Need help?</p>
+                        <p>You’re only a call away to speak with our licensed insurance agent.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="divider parallax layer-overlay overlay-theme-colored2-9" data-bg-img="{% static 'images/bg/bg3.jpg' %}" data-parallax-ratio="0.7">
+        <div class="container pt-40 pb-40">
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="funfact text-center">
+                        <h4 class="text-white font-36">Need Help? You’re only a call away to speak with our licensed insurance agent</h4>
+                        <a href="tel:{{ settings.home.PrimarySiteSettings.phone_number|default:""|cut:" " }}" class="btn btn-theme-colored">
+                            <i class="fa fa-phone font-20 mr-10"></i>
+                            <span class="font-weight-900 text-uppercase font-22 text-white m-0">Call Us</span>
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>
