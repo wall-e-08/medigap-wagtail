@@ -23,6 +23,10 @@
         #quote-form .form-control:focus,active {
             border: 1px solid #2D79C5;
         }
+        .main-img{
+            background: url({% static "images/bg/bg29.jpg" %});
+            background-position: top;
+        }
 
         @media (max-width: 992px) {
             .form-img {
@@ -37,16 +41,10 @@
     <div id="quote-loading-overlay">
         <img src="{% static 'images/preloaders/1.gif' %}" alt="Loading..">
     </div>
-    <div class="main-content">
-        {% comment %}<section>
-            <div class="container text-center">
-                <h1 class="text-uppercase mt-0 font-opensans themed-heading2 bordered-heading">Get a Free <span>Quote</span></h1>
-                <div class="">{{ page.small_desc|default:""|safe }}</div>
-            </div>
-        </section>{% endcomment %}
+
     
         <!-- Section: Heading -->
-        <section id="quote-page-heading" class="inner-header layer-overlay overlay-dark-5">
+    <section id="quote-page-heading" class="inner-header layer-overlay overlay-dark-5">
             <div class="container pt-60 pb-60">
                 <!-- Section Content -->
                 <div class="section-content">
@@ -59,74 +57,29 @@
             </div>
         </section>
 
-        <section>
-            <div class="container text-center">
-                <div class="">
-                    <div  style="border: 1px solid #0e56dd;border-radius: 4px;padding: 9px 0;background: #dedede;color: #f36438;margin-bottom: 50px;font-size: 18px;font-weight: 600;">
-                        Please fill out the fields below to find your best rates.</div>
-                    <div>
-                        {{ page.small_desc|default:"To give you the best quotes possible, we will need to contact you."|safe }}
-                    </div>
-<!--                    <div style="margin-top: 40px;border: 1px solid #ababab;border-radius: 4px;background: #f3f3f3;padding: 8px 0;color: #000;font-size: 18px;">Fields marked with an <span style="color: #f36438"> * </span>are required</div>-->
-                </div>
-                </div>
-        </section>
-        <!--<section id="quote-form">
-            <div class="container pt-0 w-950">
-                <div id="quote-form-response" class="pl-15 pr-15 text-capitalize"></div>
-                <form class="form-animated-field" id="get-a-quote-main-form" method="post"
-                      action="{% pageurl page %}">
-                    {% csrf_token %}
-                    <div class="row">
-                        {% for field in form.visible_fields %}
-                            <div class="col-sm-6">
-                                <div class="form-group mb-20">
-                                    <div>{{ field.errors }}</div>
-                                    {% if field.name == 'state' %}
-                                        <select class="form-control" name="{{ field.name }}" id="{{ field.id_for_label }}">
-                                            <option disabled selected value>State *</option>
-                                            {% for state in state_options %}
-                                                <option value="{{ state.0 }}">{{ state.1 }}</option>
-                                            {% endfor %}
-                                        </select>
-                                        <label for="{{ field.id_for_label }}" class="hidden-label">{{ field.label }}</label>
-                                    {% else %}
-                                        <input class="form-control{% if field.name == 'date-of-birth' %} date-picker{% endif %}" type="{{ field.field.widget.input_type }}"
-                                               {% if field.name == 'zip-code' and request.GET.zip_code %}value="{{ request.GET.zip_code }}"{% endif %}
-                                               name="{{ field.name }}" id="{{ field.id_for_label }}"
-                                               {% if field.field.required %}required="required" aria-required="true"{% endif %} style="border-radius: 4px;">
-                                        {#{{ field.label_tag }}#}
-                                        <label for="{{ field.id_for_label }}">{{ field.label }}{% if field.field.required %}*{% endif %}</label>
-                                    {% endif %}
-                                </div>
-                            </div>
-                        {% endfor %}
-                        <div class="col-sm-12 text-center mt-30">
-                            <button type="submit" class="btn btn-primary btn-block btn-lg btn-theme-colored text-capitalize" style="border-radius: 4px; max-width: 500px; margin: 0 auto;font-size: 18px">
-                                {{ settings.home.PrimarySiteSettings.qt_btn_txt|default:"Get a quote"|safe }}
-                            </button>
-                        </div>
-                    </div>
-                </form>
-            
-                <div class="mt-40">
-                    <div class="font-12">{{ settings.home.PrimarySiteSettings.qt_disclaimer|default:""|safe }}</div>
-                </div>
-            </div>
-        </section>-->
-        <section id="quote-form" style="background: #dedede">
-            <div class="container pb-0">
-                <div class="">
+    <section class="bg-img-cover sm-height-auto overlay-img-bg overlay-img-bg-theme2 main-img">
+    <div class="container-fluid pb-0">
+        <div class="row">
+            <div class="col-md-5"></div>
+            <div class="col-md-7 p-lg-50">
                 <div class="quote-form-content ">
                     <div id="quote-form-response" class="pl-15 pr-15 text-capitalize"></div>
-                    <div class="col-md-8">
-                        <h2 style="color: #f36438" class="text-uppercase">Find an agent</h2>
-                        <h4 style="color: #757575">Fields marked with an <span style="color: #f36438"> * </span>are required</h4>
-                        <h5 style="color: #757575">Select your agent</h5>
-                        <div style="width: 80px">
-                            <hr style="border:2px solid #f36438;">
+                    <div class="">
+                        <div style="font-size: 18px;font-weight: 600;">
+                            Please fill out the fields below to find your best rates.
                         </div>
-                        <form class="form-animated-field" id="get-a-quote-main-form" method="post"
+                        <!--<div>
+                            {{ page.small_desc|default:"To give you the best quotes possible, we will need to contact you."|safe }}
+                        </div>-->
+                        <div style="font-size: 18px;">Fields marked with an <span
+                                style="color: #f36438"> * </span>are required
+                        </div>
+
+                    </div>
+                    <div style="width: 80px">
+                        <hr style="border:2px solid #f36438;">
+                    </div>
+                    <form class="form-animated-field" id="get-a-quote-main-form" method="post"
                       action="{% pageurl page %}">
                     {% csrf_token %}
                     <div class="row">
@@ -160,21 +113,16 @@
                         </div>
                     </div>
                 </form>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="form-img ">
-                            <img src="{% static 'images/about/dc4.png' %}" alt="Get an agent">
-                        </div>
-                    </div>
-
                 </div>
-                    </div>
+                <div id="disclaimer">
+                    <div class="font-12">{{ settings.home.PrimarySiteSettings.qt_disclaimer|default:""|safe }}</div>
+                </div>
             </div>
-        </section>
-        <section id="disclaimer">
-            <div class="container">
-                <div class="font-12">{{ settings.home.PrimarySiteSettings.qt_disclaimer|default:""|safe }}</div>
-            </div>
-        </section>
+        </div>
+    </div>
+
+</section>
+
+
     </div>
 {% endblock %}
