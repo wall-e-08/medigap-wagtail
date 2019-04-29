@@ -64,7 +64,7 @@
 
         <section>
             <div class="container text-center">
-                <div class="pl-15 pr-15">
+                <div class="">
                     <div  style="border: 1px solid #0e56dd;border-radius: 4px;padding: 9px 0;background: #dedede;color: #f36438;margin-bottom: 50px;font-size: 18px;font-weight: 600;">
                         Please fill out the fields below to find your best rates.</div>
                     <div>
@@ -118,10 +118,11 @@
             </div>
         </section>-->
         <section id="new-quote-form">
-            <div class="container">
+            <div class="container pb-0">
+                <div class="">
                 <div class="quote-form-content ">
                     <div id="quote-form-response" class="pl-15 pr-15 text-capitalize"></div>
-                    <div class="col-md-8 ">
+                    <div class="col-md-8">
                         <h2 style="color: #f36438" class="text-uppercase">Find an agent</h2>
                         <h4 style="color: #757575">Fields marked with an <span style="color: #f36438"> * </span>are required</h4>
                         <h5 style="color: #757575">Select your agent</h5>
@@ -155,7 +156,7 @@
                                 </div>
                             </div>
                         {% endfor %}
-                        <div class="col-sm-12 text-center mt-20">
+                        <div class="col-sm-12 text-center mt-20 mb-20">
                             <button type="submit" class="btn btn-primary btn-block btn-lg btn-theme-colored text-capitalize" style="border-radius: 4px; max-width: 180px;font-size: 18px">
                                 {{ settings.home.PrimarySiteSettings.qt_btn_txt|default:"Get a quote"|safe }}
                             </button>
@@ -164,12 +165,13 @@
                 </form>
                     </div>
                     <div class="col-md-4">
-                        <div class="form-img pl-50">
+                        <div class="form-img ">
                             <img src="{% static 'images/about/dc4.png' %}" alt="">
                         </div>
                     </div>
 
                 </div>
+                    </div>
             </div>
         </section>
         <section id="disclaimer">
