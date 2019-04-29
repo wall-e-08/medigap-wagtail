@@ -85,7 +85,7 @@
                     <div class="row">
                         {% for field in form.visible_fields %}
                             <div class="col-sm-6">
-                                <div class="form-group mb-20">
+                                <div class="form-group mb-10">
                                     <div>{{ field.errors }}</div>
                                     {% if field.name == 'state' %}
                                         <select class="form-control" name="{{ field.name }}" id="{{ field.id_for_label }}" style="border: 1px solid #b9b9b9; border-radius: 4px">
@@ -115,7 +115,7 @@
                 </form>
                 </div>
                 <div id="disclaimer">
-                    <div class="font-12">{{ settings.home.PrimarySiteSettings.qt_disclaimer|default:""|safe }}</div>
+                    <div class="font-12 pb-10">{{ settings.home.PrimarySiteSettings.qt_disclaimer|default:""|safe }}</div>
                 </div>
             </div>
         </div>
